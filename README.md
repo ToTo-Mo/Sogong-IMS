@@ -20,6 +20,7 @@ WAS : Tomcat(Servlet/Jsp)
 대부분 VScode에서 코드를 해본 경험이 있으시다고 했으므로
 다음과 같은 extension이 필요합니다.
 
+- jsp
 - lombok annotation support
 - gradle extension pack
 - java extension pack

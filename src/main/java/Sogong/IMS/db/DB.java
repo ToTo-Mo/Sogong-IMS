@@ -12,9 +12,9 @@ public class DB {
             conn = null;
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url= "jdbc:mysql://reldn.ipdisk.co.kr/wt?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            String id= "admin";
-            String pwd= "1q2w3e4r!!";
+            String url;
+            String id;
+            String pwd;
 
             conn = DriverManager.getConnection(url, id, pwd);
         } catch (ClassNotFoundException e) {

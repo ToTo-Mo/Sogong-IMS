@@ -5,4 +5,16 @@ xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
  
+<!-- 프런트 컨트롤러 서블릿 등록 -->
+<servlet>
+    <servlet-name>AuthorityController</servlet-name>
+    <servlet-class>Sogong.IMS.controller.AuthorityManagement.AuthorityController</servlet-class>
+</servlet>
+ 
+<!-- URL패턴 맵핑-->
+<servlet-mapping>
+    <servlet-name>AuthorityController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+</servlet-mapping>
+
 </web-app>

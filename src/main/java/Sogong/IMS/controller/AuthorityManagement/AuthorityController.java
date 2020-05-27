@@ -1,6 +1,5 @@
-package Sogong.IMS.controller.AuthorityManagement;
+package Sogong.IMS.controller.authorityManagement;
 
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
@@ -11,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
+import Sogong.IMS.model.Member;
 
-@WebServlet("/authority")
+@WebServlet("/authorityManageView")
 public class AuthorityController extends HttpServlet{
 
     private static final long serialVersionUID = 8559171819500212874L;
@@ -35,5 +35,9 @@ public class AuthorityController extends HttpServlet{
 
         Action action = list.get(path);
         action.excute(request, response);
+    }
+
+    public boolean hasAuthority(Member member, String authorityName){
+        return false;
     }
 }
