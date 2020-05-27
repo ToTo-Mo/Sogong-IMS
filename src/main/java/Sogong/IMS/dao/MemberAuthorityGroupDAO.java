@@ -2,6 +2,7 @@ package Sogong.IMS.dao;
 
 import java.util.HashMap;
 
+import Sogong.IMS.model.Member;
 import Sogong.IMS.model.MemberAuthorityGroup;
 
 public class MemberAuthorityGroupDAO {
