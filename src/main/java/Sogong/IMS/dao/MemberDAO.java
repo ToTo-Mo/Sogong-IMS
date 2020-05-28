@@ -6,6 +6,7 @@ import Sogong.IMS.model.Member;
 
 public class MemberDAO {
 	public boolean enroll(Member m) {
+		
 		return false;
 	}
 	

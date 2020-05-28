@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Member {
-    private String memberID;
+	private String memberID;
 	private String memberPW;
 	private String name;
 	private String phoneNumber;

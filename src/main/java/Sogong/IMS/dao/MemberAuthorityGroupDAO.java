@@ -42,9 +42,6 @@ public class MemberAuthorityGroupDAO {
             e.printStackTrace();
         }
 
-        return false;
-    }
-
     public Member[] lookup(HashMap<String, String> condition){
 
         try {
