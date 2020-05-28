@@ -1,5 +1,15 @@
 package Sogong.IMS.controller.RefundHistoryManagement;
 
-public class RefundHistoryEnrollAction {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Sogong.IMS.controller.Action;
+
+public class RefundHistoryEnrollAction implements Action {
+   
+    @Override
+    public void excute(HttpServletRequest request, HttpServletResponse response) 
+    {
     
+    }
 }
