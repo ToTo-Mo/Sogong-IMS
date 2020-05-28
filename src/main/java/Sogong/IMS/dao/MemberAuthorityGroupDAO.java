@@ -111,36 +111,4 @@ public class MemberAuthorityGroupDAO {
     public boolean delete(MemberAuthorityGroup memberAuthorityGroup){
         return false;
     }
-
-    public static void main(String[] args){
-        // Member[] members = new MemberAuthorityGroupDAO().lookup(null);
-
-        HashMap<String, String> condition = new HashMap<String,String>();
-
-        condition.put("memberID", "totomo");
-        condition.put("memberPW", "hello");
-
-
-        StringBuilder builder = new StringBuilder();
-
-        builder
-            .append("SELECT * FROM ")
-            .append("memberauthoritygroup ");
-
-        if(condition != null){
-            builder.append("WHERE ");
-
-            Iterator<String> iter = condition.keySet().iterator();
-
-            while(iter.hasNext()){
-                String key = iter.next();
-                builder.append(String.format("`%s`=`%s` ", key,condition.get(key)));
-
-                if(iter.hasNext())
-                    builder.append("AND ");
-            }
-        }
-
-        System.out.println(builder.toString());
-    }
 }

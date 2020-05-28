@@ -5,23 +5,23 @@ import java.util.HashMap;
 import Sogong.IMS.model.Member;
 
 public class MemberDAO {
-	boolean enroll(Member m) {
-		
+	public boolean enroll(Member m) {
+		return false;
 	}
 	
 	public Member[] lookup(HashMap<String, String> condition) {
-		
+		return null;
 	}
 	
-	boolean delete(Member m) {
-		
+	public boolean delete(Member m) {
+		return false;
 	}
 	
-	boolean modify(Member m) {
-		
+	public boolean modify(Member m) {
+		return false;
 	}
 	
 	public Member login(String id, String pw) {
-		
+		return null;
 	}
 }
