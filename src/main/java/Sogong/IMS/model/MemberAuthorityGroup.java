@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-
 public class MemberAuthorityGroup {
-    
+    AuthorityGroup authorityGroup;
+    String memberID;
 }

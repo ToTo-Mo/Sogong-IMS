@@ -7,14 +7,6 @@ import Sogong.IMS.model.MemberAuthorityGroup;
 
 public class MemberAuthorityGroupDAO {
 
-    // Singleton - lazy holder
-    private static class LazyHolder{
-        private static final MemberAuthorityGroupDAO dao = new MemberAuthorityGroupDAO();
-    }
-    public static MemberAuthorityGroupDAO getInstance(){
-        return LazyHolder.dao;
-    }
-    
     public boolean enroll(MemberAuthorityGroup memberAuthorityGroup){
         return false;
     }
