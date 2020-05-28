@@ -1,4 +1,4 @@
-package Sogong.IMS.controller.authorityManagement;
+package Sogong.IMS.controller.AuthorityManagement;
 
 import java.util.HashMap;
 
@@ -23,7 +23,7 @@ public class AuthorityController extends HttpServlet{
     public void init(ServletConfig sc) throws ServletException{
         list = new HashMap<>();
 
-        list.put("/enroll.do", new AuthorityEnrollAction());
+        list.put("/enroll.do", new Sogong.IMS.controller.authorityManagement.AuthorityEnrollAction());
     }
 
     @Override
