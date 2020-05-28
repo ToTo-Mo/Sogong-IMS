@@ -18,7 +18,7 @@ public class FacilityChargeDAO {
         return false;
     }
 
-    public FacilityChargep[] lookup(HashMap<String, String> condition) {
+    public FacilityCharge[] lookup(HashMap<String, String> condition) {
         return null;
     }
 
