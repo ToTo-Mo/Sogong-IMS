@@ -11,7 +11,18 @@ public class MemberDAO {
 	}
 	
 	public Member[] lookup(HashMap<String, String> condition) {
+		return null;
+	}
 	
+	public boolean delete(Member m) {
+		return false;
+	}
+	
+	public boolean modify(Member m) {
+		return false;
+	}
+	
+	public Member login(String id, String pw) {
 		return null;
 	}
 }
