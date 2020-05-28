@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import Sogong.IMS.model.Member;
 import Sogong.IMS.model.MemberAuthorityGroup;
 
@@ -18,26 +23,26 @@ public class MemberAuthorityGroupDAO {
 
         try {
             Connection conn = null;
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            PreparedStatement stmt = null;
 
-            String url = "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            String user = "admin";
-            String password = "k^rEmQwG2c6=bvPC";
+            //META-INF아래 context.xml
+            Context context = new InitialContext();
+            //DB Connection
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            conn = DriverManager.getConnection(url, user, password);
-        
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO `memberauthoritygroup` VALUES (?,?)");
+            String sql = "INSERT INTO `memberauthoritygroup` VALUES (?,?)";
+            stmt = conn.prepareStatement(sql);
+
             stmt.setString(1, memberAuthorityGroup.getMemberID());
             stmt.setNull(2, memberAuthorityGroup.getAuthorityGroup().getAuthorityGroupSequence());
 
             stmt.execute();
 
             return true;
-        
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (NamingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -45,17 +50,17 @@ public class MemberAuthorityGroupDAO {
         return false;
     }
 
-    public Member[] lookup(HashMap<String, String> condition){
+    public Member[] lookup(HashMap<String, String> condition) {
 
         try {
             Connection conn = null;
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
 
-            String url = "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            String user = "admin";
-            String password = "k^rEmQwG2c6=bvPC";
-
-            conn = DriverManager.getConnection(url, user, password);
+            //META-INF아래 context.xml
+            Context context = new InitialContext();
+            //DB Connection
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             StringBuilder builder = new StringBuilder();
 
@@ -63,36 +68,40 @@ public class MemberAuthorityGroupDAO {
                 .append("SELECT * FROM ")
                 .append("memberauthoritygroup ");
 
-            if(condition != null){
+
+            // 조건 검색
+            if (condition != null) {
                 builder.append("WHERE ");
 
+                // condition은 속성과 값으로 구성되어있다.
+                // key : memberName,  value : 소공도 
                 Iterator<String> iter = condition.keySet().iterator();
 
-                while(iter.hasNext()){
+                while (iter.hasNext()) {
                     String key = iter.next();
-                    builder.append(String.format("`%s`=%s ", key,condition.get(key)));
-    
-                    if(iter.hasNext())
+                    builder.append(String.format("`%s`=%s ", key, condition.get(key)));
+
+                    if (iter.hasNext())
                         builder.append("AND ");
                 }
             }
-            
+
             String sql = builder.toString();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             ArrayList<Member> members = new ArrayList<>();
 
-            while(rs.next()){
+            while (rs.next()) {
 
             }
 
             return members.toArray(new Member[members.size()]);
-        
-        } catch (ClassNotFoundException e) {
+
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (NamingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
