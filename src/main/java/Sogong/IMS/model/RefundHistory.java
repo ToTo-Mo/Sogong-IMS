@@ -1,5 +1,10 @@
 package Sogong.IMS.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class RefundHistory {
     private String refundHistoryID;
     private String PaymentHistoryID;
