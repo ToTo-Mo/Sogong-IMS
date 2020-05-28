@@ -27,6 +27,8 @@ public class AuthorityGroupDAO {
             stmt = conn.prepareStatement("SELECT * FROM authoritygroup");
             rs = stmt.executeQuery();
 
+            conn.close();
+
             ArrayList<AuthorityGroup> authorityGroups = new ArrayList<>();
 
             while (rs.next()) {

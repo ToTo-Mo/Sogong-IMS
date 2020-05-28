@@ -90,12 +90,14 @@ public class MemberAuthorityGroupDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
+            conn.close();
+
             ArrayList<Member> members = new ArrayList<>();
 
             while (rs.next()) {
 
             }
-
+        
             return members.toArray(new Member[members.size()]);
 
         } catch (SQLException e) {
