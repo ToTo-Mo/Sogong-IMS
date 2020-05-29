@@ -2,6 +2,8 @@ apply plugin: 'java'
 apply plugin: 'war' 
 apply plugin: 'gretty' 
 
+
+
 buildscript { 
     repositories { 
         jcenter() 
@@ -36,4 +38,11 @@ dependencies {
 
     // StringUtils
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+}
+
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile){
+    options.encoding = 'UTF-8'
 }
