@@ -23,9 +23,11 @@ public class AuthorityController extends HttpServlet{
     public void init(ServletConfig sc) throws ServletException{
         list = new HashMap<>();
 
-        list.put("/enroll.do", new AuthorityEnrollAction());
+        list.put("AuthorityManage/enroll.do", new AuthorityEnrollAction());
     }
 
+    // get이나 post 요청에 대한 처리를 수행합니다.
+    // 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response){
         String url = request.getRequestURI();

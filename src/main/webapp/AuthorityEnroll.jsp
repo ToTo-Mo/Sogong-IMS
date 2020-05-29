@@ -16,30 +16,27 @@
 <body>
 <script>
     function closeAndSubmit() {
-        var pkg = {
-            packageName : "",
-            packageRegistrant : "",
-            packageCompany : "",
-            packagePrice : ""
+        var member = {
+            memberID : "",
+            department : "",
+            type : ""
+            authority : []
         }
-        pkg.packageName = document.getElementById("packageName").value;
-        pkg.packagePrice = document.getElementById("packagePrice").value;;
-        pkg.packageCompany = document.getElementById("packageCompany").value;;
-        pkg.packageRegistrant = document.getElementById("packageRegistrant").value;;
+        member.memberID = document.getElementById("memberID").value;
+        member.department = document.getElementById("department").value;
+        member.type = document.getElementById("type").value;
         window.opener.enrollAndSubmit(pkg);
         window.close()
     }
 </script>
 
     <form action="">
-    <label for="packageName">상품명</label>
-    <input type="text" id="packageName" required/><br>
-    <label for="packagePrice" >최대가격</label>
-    <input type="text" id="packagePrice" required/><br>
-    <label for="packageCompany">납품처</label>
-    <input type="text" id="packageCompany" required/><br>
-    <label for="packageRegistrant">등록자</label>
-    <input type="text" id="packageRegistrant" required/><br>
+    <label for="memberID">ID</label>
+    <input type="text" id="memberID" required/><br>
+    <label for="department" >부서</label>
+    <input type="text" id="department"/><br>
+    <label for="type">유형</label>
+    <input type="text" id="type"/><br>
     <input type="submit" onclick="self.closeAndSubmit()" value="추가"/>
     <input type="button" onclick="window.close()" value="취소"/>
     </form>
