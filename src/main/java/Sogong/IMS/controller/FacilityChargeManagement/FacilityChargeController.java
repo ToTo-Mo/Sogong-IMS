@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
+import Sogong.IMS.model.Member;
 
 @WebServlet("/facilityChargeMangeView")
 public class FacilityChargeController extends HttpServlet {
