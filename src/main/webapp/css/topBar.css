@@ -1,0 +1,18 @@
+#topBar{
+    display: flex;
+    justify-content: space-between;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: black;
+    width: 98vw;
+    margin-bottom: 0;
+}
+#title{
+    align-self: flex-start;
+    font-size: 40px;
+}
+#loginForm{
+    align-self: flex-end;
+    float: right;
+    margin: 0 10px 10px 0;
+}
