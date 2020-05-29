@@ -22,7 +22,7 @@
     <Resource maxWait="-1"
             maxIdle="10"
             maxActive="100"
-            password="k^rEmQwG2c6=bvPC"
+            password="tejava"
             username="admin"
             url="jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC"
             driverClassName="com.mysql.jdbc.Driver"
