@@ -5,6 +5,12 @@ xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
  
+<welcome-file-list>
+    <welcome-file>PackageManage.jsp</welcome-file>
+</welcome-file-list>
+
+
+
 <!-- 프런트 컨트롤러 서블릿 등록 -->
 <servlet>
     <servlet-name>AuthorityController</servlet-name>
@@ -17,4 +23,21 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>*.do</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>AuthorityManage</servlet-name>
+    <jsp-file>/AuthorityManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>AuthorityManage</servlet-name>
+    <url-pattern>/AuthorityManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>packageManage</servlet-name>
+    <jsp-file>/PackageManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>packageManage</servlet-name>
+    <url-pattern>/PackageManage</url-pattern>
+</servlet-mapping>
 </web-app>
