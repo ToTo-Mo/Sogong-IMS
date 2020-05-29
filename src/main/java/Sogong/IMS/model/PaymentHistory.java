@@ -1,7 +1,10 @@
 package Sogong.IMS.model;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class PaymentHistory {
     private String paymentHistoryID;
     private String accomodationBookHistoryID;
