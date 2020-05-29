@@ -41,7 +41,7 @@ public class PackageController extends HttpServlet {
 //        else if(request.getParameter("delete") != null)
 //            new PackageDeleteAction().execute(request,response);
 
-        if(request.getParameter("login") != null)
+        if((request.getParameter("login") != null) ||(request.getParameter("logout") != null))
             new LoginAction().execute(request,response);
 
         dispatcher.forward(request, response);

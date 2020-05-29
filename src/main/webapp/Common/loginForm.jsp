@@ -4,7 +4,6 @@
 <%@ page import="Sogong.IMS.model.Member" %>
 
 <%
-    PrintWriter writer = response.getWriter();
     if(request.getSession().getAttribute("member") == null){
         request.setAttribute("form", "    <form method='post'>\n" +
                 "    <input type=\"text\" name=\"id\" placeholder=\"아이디\" style=\"text-align: center; width: 80px;\">\n" +
@@ -14,7 +13,11 @@
     }
     else{
         Member member = (Member) request.getSession().getAttribute("member");
-        request.setAttribute("form", member.getName() + "님 반갑습니다");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<form method='post'><span style='margin-right=2px;'>" +  member.getName() + "님 반갑습니다 </span>");
+        stringBuilder.append("<button type='button' onclick = \"location.href = 'myInfo'\">내 정보</button>\n");
+        stringBuilder.append("<button type='submit' name='logout'>로그아웃</button></form>\n");
+        request.setAttribute("form",stringBuilder.toString());
     }
 %>
     ${form}

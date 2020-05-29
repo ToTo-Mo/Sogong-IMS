@@ -21,6 +21,12 @@ public class Member {
         this.department = department;
     }
 
+    public Member(String memberID, String memberPW, String name) {
+        this.memberID = memberID;
+        this.memberPW = memberPW;
+        this.name = name;
+    }
+
     public String getMemberID() {
         return memberID;
     }
