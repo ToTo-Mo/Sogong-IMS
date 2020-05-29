@@ -18,10 +18,10 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 </servlet>
  
 <!-- URL패턴 맵핑-->
-<servlet-mapping>
+<!-- <servlet-mapping>
     <servlet-name>AuthorityController</servlet-name>
-    <url-pattern>*.do</url-pattern>
-</servlet-mapping>
+    <url-pattern>/AuthorityManage/*.do</url-pattern>
+</servlet-mapping> -->
 
 <servlet>
     <servlet-name>AuthorityManage</servlet-name>

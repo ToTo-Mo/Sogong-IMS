@@ -35,6 +35,9 @@ public class AuthorityController extends HttpServlet{
 
         String path = url.substring(contextPath.length());
 
+        System.out.printf("ContextPath : %s",contextPath);
+        System.out.printf("path : %s",path);
+
         Action action = list.get(path);
         action.excute(request, response);
     }

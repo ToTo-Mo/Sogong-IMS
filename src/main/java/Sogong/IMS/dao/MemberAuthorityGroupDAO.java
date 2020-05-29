@@ -22,6 +22,8 @@ public class MemberAuthorityGroupDAO {
     public boolean enroll(MemberAuthorityGroup memberAuthorityGroup) {
 
         try {
+
+            //DB 연결
             Connection conn = null;
             PreparedStatement stmt = null;
 
@@ -30,6 +32,7 @@ public class MemberAuthorityGroupDAO {
             //DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
+            
             String sql = "INSERT INTO `memberauthoritygroup` VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
 

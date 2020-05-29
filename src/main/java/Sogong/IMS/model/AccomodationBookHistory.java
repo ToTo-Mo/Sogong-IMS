@@ -6,6 +6,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AccomodationBookHistory {
+
+
+
     String accomodationBookHistoryID;
     int numOfPeople;
     String name;
