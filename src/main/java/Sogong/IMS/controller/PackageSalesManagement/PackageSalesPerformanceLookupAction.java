@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PackageSalesPerformanceLookupAction implements Action {
     @Override
-    public void excute(HttpServletRequest request, HttpServletResponse response) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) {
 
     }
 }

@@ -1,0 +1,32 @@
+
+#list{
+    padding: 0.5vh 0.5vw 0.5vh 0.5vw;
+    border-width: 0 2px 0 0;
+    border-style: solid;
+    margin-top: 0px;
+    height: 100%;
+}
+.item{
+    display: table;
+    vertical-align: middle;
+    list-style: none;
+    border-width: 1;
+    border-style: solid;
+    width: 15vw;
+    height: 5.5vh;
+    font-size: 15px;
+    margin-bottom: 0.5vh;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #1bc29f;
+    color: white;
+    box-shadow: 0 2px 2px 0 black;
+}
+.item p{
+    display: table-cell;
+    vertical-align: middle;
+}
+.item:hover{
+    background-color: #15574a;
+    cursor: pointer;
+}

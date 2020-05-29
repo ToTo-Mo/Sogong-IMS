@@ -1,6 +1,5 @@
 package Sogong.IMS.dao;
 
-import Sogong.IMS.model.PackagePurchaseHistoryByMember;
 import Sogong.IMS.model.PackagePurchaseHistoryByNonMember;
 
 import java.util.HashMap;

@@ -1,0 +1,29 @@
+#topBar{
+    display: flex;
+    justify-content: space-between;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: black;
+    width: 100%;
+    margin-bottom: 0;
+}
+#title{
+    align-self: flex-start;
+    font-size: 40px;
+}
+#loginForm{
+     align-self: flex-end;
+     float: right;
+     margin: 0 2.5vw 1.5vh 0;
+ }
+
+#loginForm  Button{
+    background: #1bc29f;
+    border-width: 0;
+    border-radius: 2px;
+    color: white;
+}
+
+#loginForm  Button:hover{
+    cursor: pointer;
+}
