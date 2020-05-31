@@ -8,6 +8,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page import="Sogong.IMS.model.Member"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.lang.reflect.Array" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -37,14 +40,21 @@
     </form>
     <table>
         <table border="1">
-            <tr>
+            <thead>
                 <th>no<th>
                 <th>부서</th>
                 <th>ID</th>
                 <th>유형</th>
                 <th>권한</th>
-            <tr>
-            ${data}
+            </thead>
+
+            <%
+                List<Member> memberList = (ArrayList<Member>) request.getAttribute("memeberList");
+
+                for(Member m : memberList){
+                    pageContext.setAttribute("memberList",memberList);
+                }
+            %>
 
         </table>
         <input type="button" onclick="enrollPopup()" value="추가">

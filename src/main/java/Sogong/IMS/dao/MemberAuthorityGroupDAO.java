@@ -21,14 +21,12 @@ import Sogong.IMS.model.MemberAuthorityGroup;
 
 public class MemberAuthorityGroupDAO {
 
-    public boolean enroll(MemberAuthorityGroup memberAuthorityGroup) {
+    public boolean enroll(MemberAuthorityGroup memberAuthorityGroup) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
 
         try {
-
-            // DB 연결
-            Connection conn = null;
-            PreparedStatement stmt = null;
-
             // META-INF아래 context.xml
             Context context = new InitialContext();
             // DB Connection
@@ -40,7 +38,7 @@ public class MemberAuthorityGroupDAO {
             stmt.setString(1, memberAuthorityGroup.getMemberID());
             stmt.setNull(2, memberAuthorityGroup.getAuthorityGroup().getAuthorityGroupSequence());
 
-            stmt.execute();
+            stmt.executeUpdate();
 
             return true;
         } catch (SQLException e) {
@@ -49,12 +47,16 @@ public class MemberAuthorityGroupDAO {
         } catch (NamingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }finally{
+            if(stmt != null) stmt.close();
+            if(conn != null) conn.close();
         }
 
         return false;
     }
 
-    public Member[] lookup(HashMap<String, String> condition) {
+    public Member[] lookup(HashMap<String, String> condition) throws SQLException {
+
 
         try {
             Connection conn = null;
@@ -147,6 +149,7 @@ public class MemberAuthorityGroupDAO {
     }
 
     public boolean hasAuthority(Member member, String authorityGroupName) {
+
         try {
             Connection conn = null;
             PreparedStatement stmt = null;

@@ -2,7 +2,11 @@ package Sogong.IMS.controller.authorityManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -34,33 +38,18 @@ public class AuthorityLookupAction implements Action {
         if(department != null) condition.put("department", department);
         if(authorityGroupName != null) condition.put("authorityGroupName", authorityGroupName);
 
-        Member[] members = new MemberAuthorityGroupDAO().lookup(condition);
+        List<Member> memberList = null;
 
-        StringBuilder data = new StringBuilder();
-
-        if(members != null){
-            int seq = 1;
-
-            for(Member m : members){
-
-                String authorityGroups = "";
-
-                for(MemberAuthorityGroup mag : m.getMemberAuthorityGroups())
-                    authorityGroups += mag.getAuthorityGroup().getAuthorityGroupName() +" ";
-
-                data.append("<tr>")
-                    .append(String.format("<td>%s</td>", seq++))
-                    .append(String.format("<td>%s</td>", m.getDepartment()))
-                    .append(String.format("<td>%s</td>", m.getMemberID()))
-                    .append(String.format("<td>%s</td>", m.getMemberType()))
-                    .append(String.format("<td>%s</td>", authorityGroups))
-                    .append("<tr>");
-            }
+        try {
+            memberList = new ArrayList<>(Arrays.asList(new MemberAuthorityGroupDAO().lookup(condition)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        request.setAttribute("data", data.toString());
+
+        request.setAttribute("memberList", memberList);
 
         ServletContext context = request.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/AuthorityManage.jsp"); // 넘길 페이지 주소
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/AuthorityManage"); // 넘길 페이지 주소
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
