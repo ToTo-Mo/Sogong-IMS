@@ -1,8 +1,12 @@
 apply plugin: 'java' 
 apply plugin: 'war' 
-apply plugin: 'gretty' 
+apply plugin: 'gretty'
 
+compileJava.options.encoding = 'UTF-8'
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 buildscript { 
     repositories { 
