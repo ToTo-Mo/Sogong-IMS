@@ -2,8 +2,10 @@ package Sogong.IMS.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -47,6 +49,40 @@ public class FacilityChargeDAO {
     }
 
     public FacilityCharge[] lookup(HashMap<String, String> condition) {
+        try {
+            
+            // DB연결
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            // META-INF아래 context.xml
+            Context context  = new InitialContext();
+            // DB Connection
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+
+            StringBuilder builder = new StringBuilder();
+
+            builder
+                .append("")
+                .append("");
+
+            // 조건 검색
+            if (condition != null) {
+                builder.append("");
+
+                // condition은 속성과 값으로 이루어져 있다.
+                Iterator<String> iter = condition.keySet().iterator();
+
+                while
+            }
+
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
