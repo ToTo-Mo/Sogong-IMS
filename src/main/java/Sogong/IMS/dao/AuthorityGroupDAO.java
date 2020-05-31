@@ -1,6 +1,7 @@
 package Sogong.IMS.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,13 +22,20 @@ public class AuthorityGroupDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            Context context = new InitialContext();
-            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+            // 기존 코드
+            // Context context = new InitialContext();
+            // conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+
+            // db 연결 코드
+            String url= "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
+            String id= "admin";
+            String pwd= "tejava";
+
+            conn = DriverManager.getConnection(url, id, pwd);
+
 
             stmt = conn.prepareStatement("SELECT * FROM authoritygroup");
             rs = stmt.executeQuery();
-
-            conn.close();
 
             ArrayList<AuthorityGroup> authorityGroups = new ArrayList<>();
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Context docBase="" path="/" reloadable="true">
+<Context docBase="webapp" path="/" reloadable="true">
 
 <!--
     docBase : 
@@ -19,9 +19,9 @@
 
 <!-- &zeroDateTimeBehavior=convertToNull -->
 
-    <Resource maxWait="-1"
+    <Resource maxWaitMillis="-1"
             maxIdle="10"
-            maxActive="100"
+            maxTotal="100"
             password="tejava"
             username="admin"
             url="jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC"
