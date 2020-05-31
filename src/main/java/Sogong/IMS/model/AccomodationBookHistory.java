@@ -1,26 +1,31 @@
 package Sogong.IMS.model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
 public class AccomodationBookHistory {
 
+    private String accomodationBookHistoryID;
+    private int numOfPeople;
+    private String name;
+    private String phoneNum;
+    private LocalDate bookDate;
+    private String bookState;
+    private int paymentPrice;
+    private LocalDateTime checkInTime;
+    private LocalDateTime checkOutTiem;
+    private String enteringState;
+    private String memberID;
+    private String registrantID;
+    private String accomodationID;
+    private int roomNum;
 
-
-    String accomodationBookHistoryID;
-    int numOfPeople;
-    String name;
-    String phoneNum;
-    //DATE bookDate
-    String bookState;
-    int paymentPrice;
-    //DATETIME checkInTime
-    //DATETIME checkOutTiem
-    String enteringState;
-    String memberID;
-    String registrantID;
-    String accomodationID;
-    int roomNum;
+    
 }
