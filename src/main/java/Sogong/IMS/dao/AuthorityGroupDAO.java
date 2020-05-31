@@ -23,15 +23,15 @@ public class AuthorityGroupDAO {
             ResultSet rs = null;
 
             // 기존 코드
-            // Context context = new InitialContext();
-            // conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+            Context context = new InitialContext();
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             // db 연결 코드
-            String url= "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            String id= "admin";
-            String pwd= "tejava";
+            // String url= "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
+            // String id= "admin";
+            // String pwd= "tejava";
 
-            conn = DriverManager.getConnection(url, id, pwd);
+            // conn = DriverManager.getConnection(url, id, pwd);
 
 
             stmt = conn.prepareStatement("SELECT * FROM authoritygroup");

@@ -19,7 +19,7 @@ import Sogong.IMS.model.AuthorityGroup;
 import Sogong.IMS.model.Member;
 import Sogong.IMS.model.MemberAuthorityGroup;
 
-public class MemberAuthorityGroupDAO {
+public class exampleDAO {
 
     public boolean enroll(MemberAuthorityGroup memberAuthorityGroup) {
 
@@ -66,39 +66,21 @@ public class MemberAuthorityGroupDAO {
 
             StringBuilder builder = new StringBuilder();
 
-            builder.append("SELECT * FROM (").append(
-                    "SELECT `M`.`department`,`M`.`memberID`,`M`.`memberType`, `AG`.`authorityGroupSequence`, `AG`.`authorityGroupName` ")
-                    .append("FROM `member` AS `M` ")
-                    .append("LEFT OUTER JOIN `memberauthoritygroup` AS `MG` ON `M`.`memberID`=`MG`.`memberID`")
-                    .append("LEFT OUTER JOIN `authoritygroup` AS `AG` ON `AG`.`authorityGroupSequence`=`MG`.`authorityGroupSequence`")
-                    .append(") AS `result`");
-
-                    // SELECT * FROM (SELECT M.department,M.memberID,M.memberType,
-                    // AG.authorityGroupName FROM member AS M LEFT OUTER JOIN memberauthoritygroup
-                    // AS MG ON M.memberID=MG.memberID LEFT OUTER JOIN authoritygroup AS AG ON
-                    // AG.authorityGroupSequence=MG.authorityGroupSequence) AS result
-                    
-                    // WHERE result.memberID 
-                    // IN(SELECT memberID FROM memberauthoritygroup 
-                    // JOIN authoritygroup ON memberauthoritygroup.authorityGroupSequence=authoritygroup.authorityGroupSequence 
-                    // WHERE authoritygroupName LIKE '%회원%') AND memberID='apple'
+            builder.append("SELECT * FROM ")
+                    .append("테이블명");
 
             // 조건 검색
             if (condition.size()>0) {
                 builder.append("WHERE ");
 
                 // condition은 속성과 값으로 구성되어있다.
-                // key : memberName, value : 소공도
+                // key는 테이블 column명 , value는 값
                 Iterator<String> iter = condition.keySet().iterator();
 
                 while (iter.hasNext()) {
                     String key = iter.next();
 
-                    if(key.equals("authorityGroupName")){
-                        builder.append(String.format("`result`.`memberID` IN(SELECT memberID FROM `memberauthoritygroup` JOIN `authoritygroup` ON `memberauthoritygroup`.`authorityGroupSequence`=`authoritygroup`.`authorityGroupSequence` WHERE `authoritygroupName` LIKE '%%%s%%')", condition.get(key)));
-                    }else{
-                        builder.append(String.format("`result`.`%s` = '%s' ", key, condition.get(key)));
-                    }
+                    builder.append(String.format("`result`.`%s` = '%s' ", key, condition.get(key)));
 
                     if (iter.hasNext())
                         builder.append("AND ");
@@ -109,31 +91,12 @@ public class MemberAuthorityGroupDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
-            HashMap<String, Member> memberAuthorityGroups = new HashMap<>();
-
             while (rs.next()) {
-                String memberID = rs.getString("memberID");
-
-                if(memberAuthorityGroups.get(memberID) == null){
-                    memberAuthorityGroups.put(memberID,
-                        Member.builder().department(rs.getString("department")).memberID(memberID)
-                                .memberType(rs.getString("memberType")).memberAuthorityGroups(new ArrayList<>())
-                                .build());
-                }
-
-                if (rs.getString("authorityGroupName") != null && rs.getInt("authorityGroupSequence") != Types.NULL) {
-
-                    AuthorityGroup authorityGroup = AuthorityGroup.builder()
-                            .authorityGroupName(rs.getString("authorityGroupName"))
-                            .authorityGroupSequence(rs.getInt("authorityGroupSequence")).build();
-
-                    memberAuthorityGroups.get(memberID).getMemberAuthorityGroups()
-                            .add(new MemberAuthorityGroup(authorityGroup, memberID));
-                }
-
+                // 코드 처리부
             }
 
-            return memberAuthorityGroups.values().toArray(new Member[memberAuthorityGroups.size()]);
+            // 반환할 자료형을 넣어주세요;
+            return null;
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -231,28 +194,5 @@ public class MemberAuthorityGroupDAO {
         }
 
         return false;
-    }
-
-    public static void main(String[] args) {
-        // HashMap<String,String> condition = new HashMap<>();
-
-        // // condition.put("memberID", "apple");
-        // // condition.put("memberType", "관리자");
-        // // condition.put("department","전산실");
-        // condition.put("authorityGroupName", "회원");
-
-        // Member[] members = new MemberAuthorityGroupDAO().lookup(condition);
-
-        // for (Member member : members) {
-        //     System.out.println(member.toString());
-
-        //     if(!member.getMemberAuthorityGroups().isEmpty())
-        //         for(MemberAuthorityGroup m : member.getMemberAuthorityGroups()){
-        //             System.out.println(m.getAuthorityGroup().getAuthorityGroupName());
-        //         }   
-        // }
-
-        MemberAuthorityGroup memberAuthorityGroup = new MemberAuthorityGroup(new AuthorityGroup(4,"",""), "apple");
-        new MemberAuthorityGroupDAO().delete(memberAuthorityGroup);
     }
 }
