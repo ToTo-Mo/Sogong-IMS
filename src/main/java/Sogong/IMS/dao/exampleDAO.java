@@ -80,7 +80,7 @@ public class exampleDAO {
                 while (iter.hasNext()) {
                     String key = iter.next();
 
-                    builder.append(String.format("`result`.`%s` = '%s' ", key, condition.get(key)));
+                    builder.append(String.format("`%s` = '%s' ", key, condition.get(key)));
 
                     if (iter.hasNext())
                         builder.append("AND ");
