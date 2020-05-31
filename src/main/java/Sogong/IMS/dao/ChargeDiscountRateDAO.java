@@ -5,15 +5,6 @@ import java.util.HashMap;
 import Sogong.IMS.model.ChargeDiscountRate;
 
 public class ChargeDiscountRateDAO {
-    
-    // Singleton - lazy holder
-    private static class LazyHolder{
-        private static final ChargeDiscountRateDAO dao = new ChargeDiscountRateDAO();
-    }
-    public static ChargeDiscountRateDAO getInstance() {
-        return LazyHolder.dao;
-    }
-
     public boolean enroll(ChargeDiscountRate chargeDiscountRate) {
         return false;
     }
