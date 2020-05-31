@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page import="Sogong.IMS.model.Member"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -20,27 +21,29 @@
             border-width: 0;
         }
     </style>
-    <form action="Authority/lookup.do" method="post">
+    <form action="/AuthorityManage/lookup.do" method="post">
         <div>
-            <label for="minPrice">최소가격</label>
-            <input type="text" id="minPrice" name="minPrice" />
-            <label for="maxPrice">최대가격</label>
-            <input type="text" id="maxPrice" name="maxPrice" />
-            <label for="maxPrice">최대가격</label>
-            <input type="text" id="maxPrice" name="maxPrice" />
-            <label for="maxPrice">최대가격</label>
-            <input type="text" id="maxPrice" name="maxPrice" />
-            <button type="submit" name="lookup"> 검색 </button>
+            <label for="department">부서</label>
+            <input type="text" id="department" name="department" />
+            <label for="memberID">ID</label>
+            <input type="text" id="memberID" name="memberID" />
+            <label for="memberType">유형</label>
+            <input type="text" id="memberType" name="memberType" />
+            <label for="authorityGroupName">권한</label>
+            <input type="text" id="authorityGroupName" name="authorityGroupName" />
+
+            <button type="submit" name="lookup"> 조회 </button>
         </div>
     </form>
     <table>
         <table border="1">
-            <th>상품명</th>
-            <th>가격</th>
-            <th>납품사</th>
-            <th>등록자</th>
-            <th></th>
-            <th></th>
+            <tr>
+                <th>no<th>
+                <th>부서</th>
+                <th>ID</th>
+                <th>유형</th>
+                <th>권한</th>
+            <tr>
             ${data}
 
         </table>

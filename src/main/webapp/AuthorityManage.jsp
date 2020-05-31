@@ -10,11 +10,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="EUC-KR">
   </head>
   <body>
   <%@ include file="topBar.jsp" %>
-
 <%--<p>상품패키지 관리화면</p>--%>
   <section style="float: left;">
     <%@ include file="menu.jsp" %>
