@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+ 
+<welcome-file-list>
+    <welcome-file>/exampleManage.jsp</welcome-file>
+</welcome-file-list>
+
+
+<servlet>
+    <servlet-name>AuthorityManage</servlet-name>
+    <jsp-file>/AuthorityManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>AuthorityManage</servlet-name>
+    <url-pattern>/AuthorityManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>packageManage</servlet-name>
+    <jsp-file>/PackageManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>packageManage</servlet-name>
+    <url-pattern>/PackageManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>exampleManage</servlet-name>
+    <jsp-file>/exampleManage.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>exampleManage</servlet-name>
+    <url-pattern>/exampleManage</url-pattern>
+</servlet-mapping>
+</web-app>
