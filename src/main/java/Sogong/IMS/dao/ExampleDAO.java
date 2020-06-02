@@ -1,7 +1,9 @@
 package Sogong.IMS.dao;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,9 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import Sogong.IMS.model.AuthorityGroup;
 import Sogong.IMS.model.Example;
-import Sogong.IMS.model.Member;
 import Sogong.IMS.model.MemberAuthorityGroup;
 
 public class ExampleDAO {
@@ -28,14 +28,14 @@ public class ExampleDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "INSERT INTO `example`(`id`,`title`,`createDate`) VALUES (?,?,?)";
+            String sql = "INSERT INTO `example`(`title`,`createDate`) VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setInt(1,Types.INTEGER);   //id는 autoincrement이므로 Types.INTEGER로 합니다.
-            stmt.setString(2, example.getTitle());
-            stmt.setDate(3, Date.valueOf(example.getCreateDate()));
+            //id는 autoincrement이므로 추가하지 않습니다.
+            stmt.setString(1, example.getTitle());
+            stmt.setDate(2, Date.valueOf(LocalDate.now()));
 
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
             return true;
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class ExampleDAO {
         return false;
     }
 
-    public Example[] lookup(HashMap<String, String> condition) {
+    public Example[] lookup(HashMap<String, Object> condition) {
 
         try {
             Connection conn = null;
@@ -59,10 +59,12 @@ public class ExampleDAO {
             Context context = new InitialContext();
             conn = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
+            // conn = DriverManager.getConnection("jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC", "admin", "tejava");
+
             StringBuilder sqlBuilder = new StringBuilder();
 
             sqlBuilder.append("SELECT * FROM ")
-                    .append("`example`");
+                        .append("`example` ");
 
             // 조건 검색
             if (condition.size()>0) {
@@ -73,9 +75,20 @@ public class ExampleDAO {
                 Iterator<String> iter = condition.keySet().iterator();
 
                 while (iter.hasNext()) {
-                    String columnName = iter.next();
+                    String columnName = iter.next();            //테이블의 속성명
 
-                    sqlBuilder.append(String.format("`%s` = '%s' ", columnName, condition.get(columnName)));
+                    Object value = condition.get(columnName);   //그 속성의 값
+
+                    // 자료형이 String이나 Integer라면
+                    if(value instanceof String || value instanceof Integer){
+                        sqlBuilder.append(String.format("`%s` LIKE '%%%s%%' ", columnName, (String)value));
+                    }
+
+                    // 자료형이 LocalDate[]   여기에는 시작일과 종료일 둘다 있으므로 배열이 됩니다.
+                    if(value instanceof LocalDate[]){
+                        LocalDate[] dateRange = (LocalDate[])value;
+                        sqlBuilder.append(String.format("`%s` BETWEEN '%s' AND  '%s'",columnName, dateRange[0].toString(),dateRange[1].toString()));
+                    }
 
                     if (iter.hasNext())
                         sqlBuilder.append("AND ");
@@ -86,7 +99,7 @@ public class ExampleDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
-            List<Example> exampleList = new ArrayList<>();
+            ArrayList<Example> exampleList = new ArrayList<>();
 
             while (rs.next()) {
                 // 코드 처리부
@@ -125,20 +138,13 @@ public class ExampleDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-
-            String sql = "UPDATE `sogongdo`.`example` SET `id` =?, `title` = ?, `createDate` = ? WHERE `id` = ?;";
-
-            // 이런 방식도 가능합니다.
-
-            StringBuilder sqlBuilder = new StringBuilder();
-
-            sqlBuilder.append("")
+            String sql = "UPDATE `sogongdo`.`example` SET `title` = ?, `createDate` = ? WHERE `id` = ?;";
 
             stmt = conn.prepareStatement(sql);
 
-            stmt.setInt(1,example.getId());
-            stmt.setString(2,example.getTitle());
-            stmt.setDate(3,Date.valueOf(example.getCreateDate()));
+            stmt.setString(1,example.getTitle());
+            stmt.setDate(2,Date.valueOf(LocalDate.now()));
+            stmt.setInt(3,example.getId());
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -178,5 +184,22 @@ public class ExampleDAO {
         }
 
         return false;
+    }
+
+    public static void main(String[] args){
+
+        LocalDate date = LocalDate.parse("2016-12-13");
+
+        System.out.println(date);
+
+        // HashMap<String, String> condition = new HashMap<>();
+
+        // condition.put("title", "가나");
+
+        // ArrayList<Example> examples = new ArrayList<Example>(Arrays.asList(new ExampleDAO().lookup(condition)));
+
+        // for(Example e : examples){
+        //     System.out.println(e.toString());
+        // }
     }
 }

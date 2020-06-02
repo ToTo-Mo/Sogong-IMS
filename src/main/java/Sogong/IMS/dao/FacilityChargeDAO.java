@@ -74,7 +74,6 @@ public class FacilityChargeDAO {
                 // condition은 속성과 값으로 이루어져 있다.
                 Iterator<String> iter = condition.keySet().iterator();
 
-                while
             }
 
             
