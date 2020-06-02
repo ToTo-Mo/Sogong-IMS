@@ -118,48 +118,6 @@
 
     <!-- 등록 팝업창 -->
     <script>
-        function enrollPopup() {
-            var url = "enroll.html"
-            var name ="enroll popup"
-            var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=400,left=100,top=100"
-
-            var child = window.open(url, name, option);
-            child.focus();
-
-            child.onload = function(){
-                var wid = child.document.body.offsetWidth + 30;
-                var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
-                child.resizeTo(wid, hei);
-            };
-        }
-
-        function enrollAndSubmit(data){
-            var form = document.createElement("form");
-            var packageName = document.createElement("input");
-            packageName.setAttribute("name", "packageName");
-            packageName.setAttribute("value", data.packageName);
-            var packagePrice = document.createElement("input");
-            packagePrice.setAttribute("name", "packagePrice");
-            packagePrice.setAttribute("value", data.packagePrice);
-            var packageCompany = document.createElement("input");
-            packageCompany.setAttribute("name", "packageCompany");
-            packageCompany.setAttribute("value", data.packageCompany);
-            var packageRegistrant = document.createElement("input");
-            packageRegistrant.setAttribute("name", "packageRegistrant");
-            packageRegistrant.setAttribute("value", data.packageRegistrant);
-            var button = document.createElement("input");
-            button.setAttribute("name", "enroll");
-            button.setAttribute("value", "enroll");
-            form.appendChild(packageName);
-            form.appendChild(packagePrice);
-            form.appendChild(packageCompany);
-            form.appendChild(packageRegistrant);
-            form.appendChild(button);
-            document.body.appendChild(form);
-            form.submit();
-        }
-
         // Add active class to the current button (highlight it)
         var btns = document.getElementsByClassName("nav-link");
         for (var i = 0; i < btns.length; i++) {

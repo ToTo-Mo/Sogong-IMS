@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class PaymentHistoryDAO {
             stmt.setString(3,paymentHistory.getRegistrantID());
             stmt.setInt(4,paymentHistory.getPrice());
             stmt.setString(5,paymentHistory.getPaymentMethod());
-            stmt.setDate(6, Date.valueOf(PaymentHistory.getPaymentTime()));
+            stmt.setTimestamp(6, Timestamp.valueOf(paymentHistory.getPaymentTime()));
             
             stmt.executeQuery();
 
@@ -122,7 +123,7 @@ public class PaymentHistoryDAO {
                                         .registrantID(rs.getString("registrantID"))
                                         .price(rs.getInt("price"))
                                         .paymentMethod(rs.getString("paymentMethod"))
-                                        .paymentTime(rs.getLocalDateTime("paymentTime").toLocalDateTime())
+                                        .paymentTime(rs.getTimestamp("paymentTime").toLocalDateTime())
                                         .build()
                 );
 
@@ -187,7 +188,7 @@ public class PaymentHistoryDAO {
             stmt.setString(3,paymentHistory.getRegistrantID());
             stmt.setInt(4,paymentHistory.getPrice());
             stmt.setString(5,paymentHistory.getPaymentMethod());
-            stmt.setLocalDatetime(6, LocalDateTime.valueOf(LocalDateTime.now()));
+            stmt.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
 
 
         } catch (SQLException e) {

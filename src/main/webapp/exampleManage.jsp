@@ -32,6 +32,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 
@@ -43,26 +45,6 @@
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 <script>
-
-    $(function () {
-
-        $('input[name="inputDateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="inputDateRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD') + '~' + picker.endDate.format('YYYY-MM-DD'));
-        });
-
-        $('input[name="inputDateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
-    });
-
     function enrollPopup() {
         var url = "${pageContext.request.contextPath}/exampleEnroll.jsp"
         var name = "enroll popup"
@@ -77,16 +59,6 @@
 
             child.resizeTo(wid, hei);
         };
-    }
-
-    // Add active class to the current button (highlight it)
-    var btns = document.getElementsByClassName("nav-link");
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
     }
 </script>
 </body>

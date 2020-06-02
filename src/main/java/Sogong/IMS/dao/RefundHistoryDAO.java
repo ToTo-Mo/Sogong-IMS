@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class RefundHistoryDAO {
             stmt.setString(3,refundHistory.getRegistrantID());
             stmt.setString(4,refundHistory.getResonsRefund());
             stmt.setInt(5,refundHistory.getRefundPrice());
-            stmt.setLocalDateTime(6, refundHistory.getRefundTime());
+            // stmt.setLocalDateTime(6, refundHistory.getRefundTime());
             stmt.setString(7,refundHistory.getRefundMethod());
             
             stmt.executeQuery();
@@ -100,7 +101,7 @@ public class RefundHistoryDAO {
             stmt.setString(3,refundHistory.getRegistrantID());
             stmt.setString(4,refundHistory.getResonsRefund());
             stmt.setInt(5,refundHistory.getRefundPrice());
-            stmt.setLocalDateTime(6, refundHistory.getRefundTime());
+            stmt.setTimestamp(6, Timestamp.valueOf(refundHistory.getRefundTime()));
             stmt.setString(7,refundHistory.getRefundMethod());
 
         } catch (SQLException e) {
