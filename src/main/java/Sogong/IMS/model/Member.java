@@ -1,7 +1,5 @@
 package Sogong.IMS.model;
 
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +16,4 @@ public class Member {
 	private String email;
 	private String memberType;
 	private String department;
-
-	private List<MemberAuthorityGroup> memberAuthorityGroups;
 }

@@ -8,8 +8,9 @@ import Sogong.IMS.controller.Action;
 public class MemberDeleteAction implements Action{
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) {
+	public void excute(HttpServletRequest rq, HttpServletResponse rs) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
 }

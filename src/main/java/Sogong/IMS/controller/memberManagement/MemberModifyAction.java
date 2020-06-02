@@ -5,12 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 
-public class MemberEnrollAction implements Action{
+public class MemberModifyAction implements Action{
 
 	@Override
 	public void excute(HttpServletRequest rq, HttpServletResponse rs) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
