@@ -1,5 +1,7 @@
 package Sogong.IMS.model;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +13,6 @@ public class RefundHistory {
     private String registrantID;
     private String resonsRefund;
     private int refundPrice;
-    //private Datetime refundTime;
+    private LocalDateTime refundTime;
     private String refundMethod;
 }

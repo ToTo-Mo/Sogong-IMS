@@ -1,5 +1,7 @@
 package Sogong.IMS.model;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,5 +13,5 @@ public class PaymentHistory {
     private String registrantID;
     private int price;
     private String paymentMethod;
-    //private Datetime paymentTime;
+    private LocalDateTime paymentTime;
 }
