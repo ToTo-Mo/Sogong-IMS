@@ -40,7 +40,7 @@ public class AuthorityGroupDAO {
             ArrayList<AuthorityGroup> authorityGroups = new ArrayList<>();
 
             while (rs.next()) {
-                authorityGroups.add(AuthorityGroup.builder().authorityGroupSequence(rs.getInt("authorityGroupSequence"))
+                authorityGroups.add(AuthorityGroup.builder().authorityGroupID(rs.getInt("authorityGroupID"))
                         .authorityGroupName(rs.getString("authorityGroupName")).description(rs.getString("description"))
                         .build());
             }

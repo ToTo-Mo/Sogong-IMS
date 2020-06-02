@@ -1,96 +1,134 @@
+<%@ page import="Sogong.IMS.model.Member" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Sogong.IMS.model.AuthorityGroup" %>
+<%@ page import="Sogong.IMS.model.MemberAuthorityGroup" %>
 <%--
   Created by IntelliJ IDEA.
-  User: djh20
-  Date: 2020-05-15
-  Time: 오후 10:02
+  User: bum44
+  Date: 2020-06-01
+  Time: 오후 5:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ page import="Sogong.IMS.model.Member"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.lang.reflect.Array" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
-    <title></title>
+    <title>Title</title>
 </head>
-
 <body>
-    <style>
-        data {
-            border-width: 0;
-        }
-    </style>
-    <form action="/AuthorityManage/lookup.do" method="post">
-        <div>
-            <label for="department">부서</label>
-            <input type="text" id="department" name="department" />
-            <label for="memberID">ID</label>
-            <input type="text" id="memberID" name="memberID" />
-            <label for="memberType">유형</label>
-            <input type="text" id="memberType" name="memberType" />
-            <label for="authorityGroupName">권한</label>
-            <input type="text" id="authorityGroupName" name="authorityGroupName" />
+<!-- 작업 화면 -->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
+    </div>
 
-            <button type="submit" name="lookup"> 조회 </button>
+    <%-- 화면 이름 --%>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">권한 관리</h1>
+    </div>
+
+    <%-- 조회 필드 --%>
+    <form action="${pageContext.request.servletPath}/lookup.do" method="POST">
+        <div class="form-inline">
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">부서명</span>
+                </div>
+                <input type="text" class="form-control" placeholder="부서명" name="inputDepartment" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">ID</span>
+                </div>
+                <input type="text" class="form-control" placeholder="ID" name="inputMemberID" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">유형</span>
+                </div>
+                <input type="text" class="form-control" placeholder="유형" name="inputMemberType" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon4">권한</span>
+                </div>
+                <input type="text" class="form-control" placeholder="권한명" name="inputAuthorityGroupName" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-dark">조회</button>
+
+            <div class="col-md-1 ml-5"></div>
+
+            <button type="button" class="btn btn-primary btn-dark" onclick="enrollPopup()">추가</button>
         </div>
     </form>
-    <table>
-        <table border="1">
+    <%-- 조회 필드 끝 --%>
+
+    <div class="col-md-1 mt-5"></div>
+
+    <%-- 테이블 --%>
+    <div style="width: 100%; height : 600px; overflow: auto">
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
             <thead>
-                <th>no<th>
+            <tr>
                 <th>부서</th>
                 <th>ID</th>
                 <th>유형</th>
                 <th>권한</th>
+            </tr>
             </thead>
-
+            <tbody>
             <%
-                List<Member> memberList = (ArrayList<Member>) request.getAttribute("memeberList");
+                ArrayList<Member> members = (ArrayList<Member>) request.getAttribute("members");
 
-                for(Member m : memberList){
-                    pageContext.setAttribute("memberList",memberList);
+                if (members != null) {
+                    for (Member m : members) {%>
+
+            <tr>
+                <td><%= m.getDepartment() %></td>
+                <td><%= m.getMemberID() %></td>
+                <td><%= m.getMemberType() %></td>
+
+                <%
+                    String authorityGroups = "";
+                    ArrayList<MemberAuthorityGroup> mag = (ArrayList<MemberAuthorityGroup>) m.getMemberAuthorityGroups();
+
+                    for(int i=0; i<m.getMemberAuthorityGroups().size() && i<5; i++){
+                        authorityGroups += mag.get(i).getAuthorityGroup().getAuthorityGroupName() + " ";
+                    }
+                %>
+
+                <td><%=authorityGroups%></td>
+
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary">수정</button>
+                        <button type="button" class="btn btn-secondary">삭제</button>
+                    </div>
+                </td>
+            </tr>
+            <%
+                    }
                 }
             %>
-
+            </tbody>
         </table>
-        <input type="button" onclick="enrollPopup()" value="추가">
-        <script>
-            function enrollAndSubmit(data) {
-                var form = document.createElement("form");
-                var packageName = document.createElement("input");
-                packageName.setAttribute("name", "packageName");
-                packageName.setAttribute("value", data.packageName);
-                var packagePrice = document.createElement("input");
-                packagePrice.setAttribute("name", "packagePrice");
-                packagePrice.setAttribute("value", data.packagePrice);
-                var packageCompany = document.createElement("input");
-                packageCompany.setAttribute("name", "packageCompany");
-                packageCompany.setAttribute("value", data.packageCompany);
-                var packageRegistrant = document.createElement("input");
-                packageRegistrant.setAttribute("name", "packageRegistrant");
-                packageRegistrant.setAttribute("value", data.packageRegistrant);
-                var button = document.createElement("input");
-                button.setAttribute("name", "enroll");
-                button.setAttribute("value", "enroll");
-                form.appendChild(packageName);
-                form.appendChild(packagePrice);
-                form.appendChild(packageCompany);
-                form.appendChild(packageRegistrant);
-                form.appendChild(button);
-                document.body.appendChild(form);
-                form.submit();
-            }
-            function enrollPopup() {
-                var wintype = "toolbar=no,width=500,height=300,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
-                var child = window.open("AuthorityEnroll.jsp", "childWin", wintype);
-                child.focus();
-            }
-        </script>
-    </table>
-</body>
+    </div>
+    </div>
+    <%-- 테이블 끝 --%>
 
+</main>
+</body>
 </html>

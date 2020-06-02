@@ -14,10 +14,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Sogong.IMS.model.AuthorityGroup;
+import org.apache.commons.lang3.StringUtils;
+
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
-import Sogong.IMS.model.MemberAuthorityGroup;
 
 public class AuthorityLookupAction implements Action {
 
@@ -27,26 +29,27 @@ public class AuthorityLookupAction implements Action {
 
         response.setCharacterEncoding("UTF-8");
 
-        String memberID = (String)request.getAttribute("memberID");
-        String memberType = (String)request.getAttribute("memberType");
-        String department = (String)request.getAttribute("department");
-        String authorityGroupName = (String)request.getAttribute("authorityGroupName");
+        String memberID = StringUtils.defaultIfBlank(request.getParameter("inputMemberID"), null);
+        String memberType = StringUtils.defaultIfBlank(request.getParameter("inputMemberType"), null);
+        String department = StringUtils.defaultIfBlank(request.getParameter("inputDepartment"), null);
+        String authorityGroupName = StringUtils.defaultIfBlank(request.getParameter("inputAuthorityGroupName"), null);
 
-        HashMap<String,String> condition = new HashMap<>();
+        AuthorityGroup authorityGroup = null;
+
+        if(authorityGroupName != null){
+            authorityGroup = AuthorityGroup.builder().authorityGroupName(authorityGroupName).build();
+        }
+
+        HashMap<String,Object> condition = new HashMap<>();
+
         if(memberID != null) condition.put("memberID", memberID);
         if(memberType != null) condition.put("memberType", memberType);
         if(department != null) condition.put("department", department);
-        if(authorityGroupName != null) condition.put("authorityGroupName", authorityGroupName);
+        if(authorityGroup != null) condition.put("authorityGroupName", authorityGroup);
 
-        List<Member> memberList = null;
+        ArrayList<Member> members = new ArrayList<>(Arrays.asList(new MemberAuthorityGroupDAO().lookup(condition)));
 
-        try {
-            memberList = new ArrayList<>(Arrays.asList(new MemberAuthorityGroupDAO().lookup(condition)));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        request.setAttribute("memberList", memberList);
+        request.setAttribute("members", members);
 
         ServletContext context = request.getServletContext();
         RequestDispatcher dispatcher = context.getRequestDispatcher("/AuthorityManage"); // 넘길 페이지 주소

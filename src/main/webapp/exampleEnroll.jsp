@@ -26,9 +26,13 @@
             <form action="/exampleManage/enroll.do" method="POST" id="enrollForm">
                 
                 <!-- 하나의 입력 창 입니다. -->
-                <div class="form-group form-inline">
-                    <label for="inputTitle">제목</label>
-                    <input type="text" class="form-control" id="inputTitle" name="inputTitle">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">제목</span>
+                        </div>
+                        <input type="text" class="form-control" name="inputTitle">
+                    </div>
                 </div>
 
                 <button type="submit" id="btn-enroll" class="btn btn-primary">등록</button>

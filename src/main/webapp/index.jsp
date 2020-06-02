@@ -14,13 +14,15 @@
     <link href="${pageContext.request.contextPath}/css/dashboard.css" property='stylesheet' rel='stylesheet' type="text/css" media="screen" />
 </head>
 
-<body>
+<body class="pt-5">
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">소공도 통합관리 시스템</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <!-- 로그인 -->
-                <a class="nav-link bg-dark" href="#">login?</a>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <%@ include file="loginForm2.jsp" %>
+                </div>
             </li>
         </ul>
     </nav>
@@ -40,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/AuthorityManage">
                                 권한 관리
                             </a>
                         </li>
@@ -133,9 +135,6 @@
         }
 
         function enrollAndSubmit(data){
-
-            
-
             var form = document.createElement("form");
             var packageName = document.createElement("input");
             packageName.setAttribute("name", "packageName");

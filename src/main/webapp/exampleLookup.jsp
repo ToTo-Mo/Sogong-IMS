@@ -69,42 +69,44 @@
     <div class="col-md-1 mt-5"></div>
 
     <%-- 테이블 --%>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>title</th>
-                <th>생성일</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%
-                ArrayList<Example> examples = (ArrayList<Example>) request.getAttribute("examples");
+    <div style="width: 100%; height : 600px; overflow: auto">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>title</th>
+                    <th>생성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    ArrayList<Example> examples = (ArrayList<Example>) request.getAttribute("examples");
 
-                if (examples != null) {
-                    for (Example e : examples) {%>
+                    if (examples != null) {
+                        for (Example e : examples) {%>
 
-            <tr>
-                <td><%= e.getId() %>
-                </td>
-                <td><%= e.getTitle() %>
-                </td>
-                <td><%= e.getCreateDate() %>
-                </td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary">수정</button>
-                        <button type="button" class="btn btn-secondary">삭제</button>
-                    </div>
-                </td>
-            </tr>
-            <%
+                <tr>
+                    <td><%= e.getId() %>
+                    </td>
+                    <td><%= e.getTitle() %>
+                    </td>
+                    <td><%= e.getCreateDate() %>
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-secondary">수정</button>
+                            <button type="button" class="btn btn-secondary">삭제</button>
+                        </div>
+                    </td>
+                </tr>
+                <%
+                        }
                     }
-                }
-            %>
-            </tbody>
-        </table>
+                %>
+                </tbody>
+            </table>
+        </div>
     </div>
     <%-- 테이블 끝 --%>
 

@@ -2,6 +2,7 @@ package Sogong.IMS.dao;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,12 +29,11 @@ public class ExampleDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "INSERT INTO `example`(`title`,`createDate`) VALUES (?,?)";
+            String sql = "INSERT INTO `example`(`title`,`createDate`) VALUES (?,CURRENT_TIMESTAMP)";
             stmt = conn.prepareStatement(sql);
 
             //id는 autoincrement이므로 추가하지 않습니다.
             stmt.setString(1, example.getTitle());
-            stmt.setDate(2, Date.valueOf(LocalDate.now()));
 
             stmt.executeUpdate();
 
@@ -159,47 +159,6 @@ public class ExampleDAO {
 
     public boolean delete(MemberAuthorityGroup memberAuthorityGroup) {
 
-        try {
-            Connection conn = null;
-            PreparedStatement stmt = null;
-
-            // META-INF아래 context.xml
-            Context context = new InitialContext();
-            // DB Connection
-            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-
-            stmt = conn.prepareStatement(
-                    "DELETE FROM `memberauthoritygroup` WHERE `memberID`=? AND `authorityGroupSequence`=?");
-            stmt.setString(1, memberAuthorityGroup.getMemberID());
-            stmt.setInt(2, memberAuthorityGroup.getAuthorityGroup().getAuthorityGroupSequence());
-
-            return stmt.execute();
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NamingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
         return false;
-    }
-
-    public static void main(String[] args){
-
-        LocalDate date = LocalDate.parse("2016-12-13");
-
-        System.out.println(date);
-
-        // HashMap<String, String> condition = new HashMap<>();
-
-        // condition.put("title", "가나");
-
-        // ArrayList<Example> examples = new ArrayList<Example>(Arrays.asList(new ExampleDAO().lookup(condition)));
-
-        // for(Example e : examples){
-        //     System.out.println(e.toString());
-        // }
     }
 }

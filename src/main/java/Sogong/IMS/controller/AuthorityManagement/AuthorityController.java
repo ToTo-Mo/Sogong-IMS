@@ -1,7 +1,5 @@
 package Sogong.IMS.controller.authorityManagement;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletConfig;

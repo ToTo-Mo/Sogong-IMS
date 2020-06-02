@@ -12,7 +12,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 public class AuthorityGroup {
-    int authorityGroupSequence;
+    int authorityGroupID;
     String authorityGroupName;
     String description;
 

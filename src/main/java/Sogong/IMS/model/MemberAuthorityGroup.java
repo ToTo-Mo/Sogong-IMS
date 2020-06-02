@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberAuthorityGroup {
+    int memberAuthorityGroupID;
     AuthorityGroup authorityGroup;
     String memberID;
 }
