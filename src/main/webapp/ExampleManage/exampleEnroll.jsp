@@ -118,11 +118,13 @@
             </div>
 
             <%-- 등록과 취소 버튼입니다. 등록 버튼을 누르게 되면, form태그의  action에 기술된 url대로 요청이 가게 됩니다. --%>
+            <%-- justify-content-center는 요소들을 중간에 위치시키겠다는 의미입니다. --%>
             <div class="row justify-content-center">
-                <div class="col justify-content-center">
+                <div class="col-3">
                     <button type="submit" class="btn btn-secondary bg-dark">등록</button>
                 </div>
-                <div class="col">
+                <div class="col-1"></div>
+                <div class="col-3">
                     <button type="button" class="btn btn-secondary bg-dark" onclick='self.close()'>취소</button>
                 </div>
             </div>
@@ -131,12 +133,8 @@
     </div>
     <!-- 행으로 구분된 영역 끝 -->
 
-
     <!-- mb-5 는 spacing 요소이며 margin-buttom-5의 약자입니다. 자세한 내용은 아래 링크를 참고하세요.
     https://getbootstrap.com/docs/4.5/utilities/spacing/-->
     <div class="mb-5"></div>
-
-
 </body>
-
 </html>

@@ -9,9 +9,21 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <title>Page Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datepicker.css">
 
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" property='stylesheet' rel='stylesheet' type="text/css" media="screen" />
-    <link href="${pageContext.request.contextPath}/css/dashboard.css" property='stylesheet' rel='stylesheet' type="text/css" media="screen" />
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
+
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" property='stylesheet' rel='stylesheet'
+          type="text/css" media="screen"/>
+    <link href="${pageContext.request.contextPath}/css/dashboard.css" property='stylesheet' rel='stylesheet'
+          type="text/css" media="screen"/>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 </head>
 
 <body class="pt-5">
@@ -104,7 +116,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="/exampleManage">
+                            <a class="nav-link active" href="/ExampleManage">
                                 예제 관리
                             </a>
                         </li>
