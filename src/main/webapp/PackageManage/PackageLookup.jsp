@@ -5,64 +5,69 @@
   Time: 오후 10:02
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<style>
-    data{
-        border-width: 0;
-    }
-</style>
-<form method="post">
-    <div>
-        <label for="minPrice">최소가격</label>
-        <input type="text" id="minPrice" name="minPrice" />
-        <label for="maxPrice">최대가격</label>
-        <input type="text" id="maxPrice" name="maxPrice" />
-        <button type="submit" name="lookup"> 검색 </button>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+<form action="${pageContext.request.servletPath}/lookup.do" method="POST">
+    <div class="form-inline">
+        <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">상품명</span>
+            </div>
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="packageName">
+        </div>
+        <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">분류</span>
+            </div>
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="type">
+        </div>
+        <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">회사</span>
+            </div>
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="company">
+        </div>
+        <div class="input-group col-3 mb-sm-n3 mb-3 mr-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon5">가격 범위</span>
+            </div>
+            <input type="number" class="form-control" name="packageMinPrice" aria-describedby="basic-addon5">
+            <div class="input-group-prepend">
+                <span class="input-group-text">~</span>
+            </div>
+            <input type="number" class="form-control" name="packageMaxPrice">
+        </div>
+        <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">등록자</span>
+            </div>
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="registrantID">
+        </div>
+
+        <button type="submit" class="btn btn-secondary bg-dark mb-sm-n3">조회</button>
     </div>
 </form>
-<table>
-    <table border="1">
-        <th>상품명</th>
-        <th>가격</th>
-        <th>납품사</th>
-        <th>등록자</th>
-        <th></th>
-        <th></th>
-        ${data}
-        
-    </table>
-    <input type="button" onclick="enrollPopup()" value="추가">
-    <script>
-        function enrollAndSubmit(data){
-            var form = document.createElement("form");
-            var packageName = document.createElement("input");
-            packageName.setAttribute("name", "packageName");
-            packageName.setAttribute("value", data.packageName);
-            var packagePrice = document.createElement("input");
-            packagePrice.setAttribute("name", "packagePrice");
-            packagePrice.setAttribute("value", data.packagePrice);
-            var packageCompany = document.createElement("input");
-            packageCompany.setAttribute("name", "packageCompany");
-            packageCompany.setAttribute("value", data.packageCompany);
-            var packageRegistrant = document.createElement("input");
-            packageRegistrant.setAttribute("name", "packageRegistrant");
-            packageRegistrant.setAttribute("value", data.packageRegistrant);
-            var button = document.createElement("input");
-            button.setAttribute("name", "enroll");
-            button.setAttribute("value", "enroll");
-            form.appendChild(packageName);
-            form.appendChild(packagePrice);
-            form.appendChild(packageCompany);
-            form.appendChild(packageRegistrant);
-            form.appendChild(button);
-            document.body.appendChild(form);
-            form.submit();
-        }
-        function enrollPopup() {
-            var wintype = "toolbar=no,width=500,height=300,top=150,left=150,directories=no,menubar=no,scrollbars=yes";
-            var child = window.open("PackageEnroll.jsp", "childWin", wintype);
-            child.focus();
-        }
-    </script>
-</table>
+<div style="width: 100%; max-height: 700px; overflow: auto" class="mt-5  mb-3">
+    <div class="table-responsive text-md-center">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th width="10%">상품명</th>
+                <th width="10%">분류</th>
+                <th width="10%">회사</th>
+                <th width="10%">가격</th>
+                <th width="10%">등록자</th>
+                <th width="40%">설명</th>
+                <th width="5%"></th>
+                <th width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            ${lookup}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<button type="button" class="btn btn-secondary bg-dark mb-sm-n3" style="float: right;margin-right: 2vw">추가</button>
+
