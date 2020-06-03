@@ -116,7 +116,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="/ExampleManage">
+                            <a class="nav-link active" href="/exampleManage">
                                 예제 관리
                             </a>
                         </li>

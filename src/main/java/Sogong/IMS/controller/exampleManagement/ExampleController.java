@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
-@WebServlet("/ExampleManage/*")
+@WebServlet({"/exampleManage/*","/exampleEnroll/*"})
 public class ExampleController extends HttpServlet {
 
     /**

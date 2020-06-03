@@ -259,7 +259,7 @@
     });
 
     function enrollPopup() {
-        var url = "/ExampleEnroll"
+        var url = "/exampleEnroll"
         var name = "enroll popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
 

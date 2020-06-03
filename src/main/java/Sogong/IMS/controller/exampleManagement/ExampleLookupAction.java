@@ -67,7 +67,7 @@ public class ExampleLookupAction implements Action {
 
         // 6. 보여줄 페이지를 지정합니다.
         ServletContext context = request.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/ExampleManage"); // 넘길 페이지 주소
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/exampleManage"); // 넘길 페이지 주소
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {

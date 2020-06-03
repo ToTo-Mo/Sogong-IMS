@@ -48,22 +48,22 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet>
     <servlet-name>exampleManage</servlet-name>
-    <jsp-file>/ExampleManage/exampleManage.jsp</jsp-file>
+    <jsp-file>/exampleManage/exampleManage.jsp</jsp-file>
 </servlet>
 
 <servlet-mapping>
     <servlet-name>exampleManage</servlet-name>
-    <url-pattern>/ExampleManage</url-pattern>
+    <url-pattern>/exampleManage</url-pattern>
 </servlet-mapping>
 
 <servlet>
     <servlet-name>exampleEnroll</servlet-name>
-    <jsp-file>/ExampleManage/exampleEnroll.jsp</jsp-file>
+    <jsp-file>/exampleManage/exampleEnroll.jsp</jsp-file>
 </servlet>
 
 <servlet-mapping>
     <servlet-name>exampleEnroll</servlet-name>
-    <url-pattern>/ExampleEnroll</url-pattern>
+    <url-pattern>/exampleEnroll</url-pattern>
 </servlet-mapping>
 
 </web-app>
