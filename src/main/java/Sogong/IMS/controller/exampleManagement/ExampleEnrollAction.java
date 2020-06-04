@@ -21,6 +21,9 @@ public class ExampleEnrollAction implements Action {
 
         try {
             request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html; charset=utf-8");
+
+            PrintWriter out = response.getWriter();
 
             String title = request.getParameter("inputTitle");
 
@@ -28,6 +31,10 @@ public class ExampleEnrollAction implements Action {
                                     Example.builder()
                                                     .title(title)
                                                     .build());
+
+            out.println("<script>alert('성공적으로 등록되었습니다.')</script>");
+            out.println("<script>self.close()</script>");
+            out.flush();
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
