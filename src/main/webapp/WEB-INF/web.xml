@@ -14,4 +14,20 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <jsp-file>/PackageManage/PackageManage.jsp</jsp-file>
 </servlet>
 
+<servlet-mapping>
+    <servlet-name>packageEnroll</servlet-name>
+    <url-pattern>/packageEnroll</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>packageEnroll</servlet-name>
+    <jsp-file>/PackageManage/PackageEnroll.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>packageModify</servlet-name>
+    <url-pattern>/packageModify/*</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>packageModify</servlet-name>
+    <jsp-file>/PackageManage/PackageModify.jsp</jsp-file>
+</servlet>
 </web-app>

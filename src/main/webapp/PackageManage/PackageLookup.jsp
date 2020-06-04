@@ -52,12 +52,13 @@
         <table class="table table-striped table-sm">
             <thead>
             <tr>
+                <th width="10%">상품번호</th>
                 <th width="10%">상품명</th>
                 <th width="10%">분류</th>
                 <th width="10%">회사</th>
                 <th width="10%">가격</th>
                 <th width="10%">등록자</th>
-                <th width="40%">설명</th>
+                <th width="30%">설명</th>
                 <th width="5%"></th>
                 <th width="5%"></th>
             </tr>
@@ -69,5 +70,19 @@
     </div>
 </div>
 
-<button type="button" class="btn btn-secondary bg-dark mb-sm-n3" style="float: right;margin-right: 2vw">추가</button>
+<script>
+    function modifyPopup(packageID) {
+        var url = "${pageContext.request.contextPath}/packageModify/" +packageID;
+        var name = "modify popup"
+        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
+        var child = window.open(url, name, option);
+
+        child.onload = function () {
+            var wid = child.document.body.offsetWidth + 50;
+            var hei = child.document.body.offsetHeight + 200;        //30 과 40은 넉넉하게 하려는 임의의 값임
+            child.resizeTo(wid, hei);
+        };
+    }
+</script>
+
 

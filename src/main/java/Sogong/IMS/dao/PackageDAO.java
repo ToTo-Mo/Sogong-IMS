@@ -5,6 +5,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,24 +23,16 @@ public class PackageDAO {
         return packageDAO;
     }
 
-    public Package[] lookup(HashMap<String, Object> conditions) throws NamingException, SQLException, ClassNotFoundException {
-        System.out.println("Dasdasdsa");
+    public Package[] lookup(HashMap<String, Object> conditions) throws NamingException, SQLException{
         Connection conn = null;
-        ResultSet rs = null;
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC", "admin", "tejava");
+        Context context = new InitialContext();
+        conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
         Statement statement = conn.createStatement();
-//        statement.executeQuery();
         StringBuilder query = new StringBuilder();
         query.append("select * from sogongdo.package");
         Iterator<String> iter = conditions.keySet().iterator();
         if (conditions.size() > 0)
             query.append(" where ");
-//        int[] priceRange = {conditions.get("packageMinPrice") != null ? Integer.parseInt((String) conditions.get("packageMinPrice")) : 0,
-//                conditions.get("packageMaxPrice") != null ? Integer.parseInt((String) conditions.get("packageMinPrice")) : 999999999};
-//        conditions.remove("packageMinPrice");
-//        conditions.remove("packageMaxPrice");
-//        conditions.put("price", priceRange);
         while (iter.hasNext()) {
             String key = iter.next();            //테이블의 속성명
             Object value = conditions.get(key);
@@ -56,10 +49,80 @@ public class PackageDAO {
         ResultSet resultSet = statement.executeQuery(query.toString());
         ArrayList<Package> packages = new ArrayList<>();
         while(resultSet.next()){
-            packages.add(new Package(resultSet.getString("packageID"),resultSet.getString("packageName"),resultSet.getString("registrantID"),resultSet.getString("company"),
+            packages.add(new Package(resultSet.getString("packageID"),resultSet.getString("registrantID"),resultSet.getString("packageName"),resultSet.getString("company"),
                     resultSet.getString("type"),resultSet.getString("explanation"),resultSet.getInt("price")));
         }
         conn.close();
         return packages.toArray(new Package[packages.size()]);
+    }
+
+    public boolean enroll(Package aPackage){
+        try {
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            Context context = new InitialContext();
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+
+
+            String sql = "INSERT INTO `sogongdo`.`package` (`registrantID`, `packageName`, `price`, `company`, `type`, `explanation`) " +
+                    "VALUES (?, ?, ?, ?, ?, ?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, aPackage.getRegistrantID());
+            stmt.setString(2, aPackage.getPackageName());
+            stmt.setInt(3, aPackage.getPrice());
+            stmt.setString(4, aPackage.getCompany());
+            stmt.setString(5, aPackage.getType());
+            stmt.setString(6, aPackage.getExplanation());
+            System.out.println(stmt.toString());
+            stmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean delete(int packageID) {
+        try {
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            Context context = new InitialContext();
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+            String sql = "DELETE FROM `sogongdo`.`package` WHERE (`packageID` = ?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, packageID);
+            stmt.execute();
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+
+    }
+
+    public boolean modify(Package aPakcage) {
+        try {
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            Context context = new InitialContext();
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+            String sql = "UPDATE `sogongdo`.`package` SET `registrantID` = ?, `packageName` = ?, `price` = ?, " +
+                    "`company` = ?, `type` = ?, `explanation` = ? WHERE (`packageID` = ?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, aPakcage.getRegistrantID());
+            stmt.setString(2, aPakcage.getPackageName());
+            stmt.setInt(3, aPakcage.getPrice());
+            stmt.setString(4, aPakcage.getCompany());
+            stmt.setString(5, aPakcage.getType());
+            stmt.setString(6, aPakcage.getExplanation());
+            stmt.setString(7, aPakcage.getPackageID());
+            stmt.execute();
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+
+
     }
 }

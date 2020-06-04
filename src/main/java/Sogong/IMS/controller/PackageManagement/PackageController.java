@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-@WebServlet("/packageManage/*")
+@WebServlet({"/packageManage/*"})
 public class PackageController extends HttpServlet {
     HashMap<String, Action> list = null;
     @SneakyThrows
@@ -21,7 +21,7 @@ public class PackageController extends HttpServlet {
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
 
-        String path = url.substring(servletPath.length());
+        String path = url.substring(servletPath.length()).split("/")[1];
 
         Action action = list.get(path);
         action.execute(request, response);
@@ -29,10 +29,10 @@ public class PackageController extends HttpServlet {
     @Override
     public void init(ServletConfig sc) throws ServletException {
         list = new HashMap<>();
-        list.put("/enroll.do", new PackageEnrollAction());
-        list.put("/modify.do", new PackageModifyAction());
-        list.put("/delete.do", new PackageDeleteAction());
-        list.put("/lookup.do", new PackageLookupAction());
+        list.put("enroll.do", new PackageEnrollAction());
+        list.put("modify.do", new PackageModifyAction());
+        list.put("delete.do", new PackageDeleteAction());
+        list.put("lookup.do", new PackageLookupAction());
     }
 
 }

@@ -31,4 +31,5 @@ dependencies {
 
     // mysql
     compile 'mysql:mysql-connector-java:8.0.20'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 }

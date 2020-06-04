@@ -42,8 +42,10 @@ public class PackageLookupAction implements Action {
         Package[] lookupResult = PackageDAO.getInstance().lookup(condtions);
         StringBuilder stringBuilder = new StringBuilder();
         for(Package tmp : lookupResult){
-            stringBuilder.append("<form action=\"${pageContext.request.servletPath}/modify.do\" method=\"POST\">");
-            stringBuilder.append("<tr name='packageData'>\n");
+            stringBuilder.append("<tr>\n");
+            stringBuilder.append("<td>");
+            stringBuilder.append(tmp.getPackageID());
+            stringBuilder.append("</td>\n");
             stringBuilder.append("<td>");
             stringBuilder.append(tmp.getPackageName());
             stringBuilder.append("</td>\n");
@@ -63,13 +65,12 @@ public class PackageLookupAction implements Action {
             stringBuilder.append(tmp.getExplanation());
             stringBuilder.append("</td>\n");
             stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"submit\" class=\"btn btn-secondary btn-sm\">수정</button>");
+            stringBuilder.append("<button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick='modifyPopup("+ tmp.getPackageID() + ")'>수정</button>");
             stringBuilder.append("</td>\n");
             stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"submit\" class=\"btn btn-secondary btn-sm\">삭제</button>");
+            stringBuilder.append("<a class='btn btn-secondary btn-sm' href='delete.do/"+tmp.getPackageID() + "'>삭제</a>");
             stringBuilder.append("</td>\n");
             stringBuilder.append("</tr>\n");
-            stringBuilder.append("</form>\n");
         }
         request.setAttribute("lookup", stringBuilder.toString());
         ServletContext context = request.getServletContext();
