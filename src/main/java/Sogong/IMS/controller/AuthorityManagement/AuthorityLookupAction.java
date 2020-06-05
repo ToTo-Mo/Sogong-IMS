@@ -2,6 +2,7 @@ package Sogong.IMS.controller.authorityManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,20 +25,25 @@ import Sogong.IMS.model.Member;
 public class AuthorityLookupAction implements Action {
 
     @Override
-    public void excute(HttpServletRequest request, HttpServletResponse response) {
+    public void excute(final HttpServletRequest request, final HttpServletResponse response) {
         // TODO Auto-generated method stub
 
-        response.setCharacterEncoding("UTF-8");
+        try {
+            request.setCharacterEncoding("utf-8");
+        } catch (UnsupportedEncodingException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
 
         String memberID = StringUtils.defaultIfBlank(request.getParameter("inputMemberID"), null);
         String memberType = StringUtils.defaultIfBlank(request.getParameter("inputMemberType"), null);
         String department = StringUtils.defaultIfBlank(request.getParameter("inputDepartment"), null);
-        String authorityGroupName = StringUtils.defaultIfBlank(request.getParameter("inputAuthorityGroupName"), null);
+        String authorityName = StringUtils.defaultIfBlank(request.getParameter("inputAuthorityName"), null);
 
         AuthorityGroup authorityGroup = null;
 
-        if(authorityGroupName != null){
-            authorityGroup = AuthorityGroup.builder().authorityGroupName(authorityGroupName).build();
+        if(authorityName != null){
+            authorityGroup = AuthorityGroup.builder().authorityGroupName(authorityName).build();
         }
 
         HashMap<String,Object> condition = new HashMap<>();
@@ -52,7 +58,7 @@ public class AuthorityLookupAction implements Action {
         request.setAttribute("members", members);
 
         ServletContext context = request.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/AuthorityManage"); // 넘길 페이지 주소
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/authorityManage"); // 넘길 페이지 주소
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
