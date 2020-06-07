@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -30,6 +32,13 @@ public class AccomodationBookHistoryDAO {
             Context context = new InitialContext();
             //DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+/*
+            String url= "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
+            String id= "admin";
+            String pwd= "tejava";
+
+            conn = DriverManager.getConnection(url, id, pwd);
+*/
             /************************
              * `accomodationbookhistory` ( 
              * `accomodationBookHistoryID` varchar(20) NOT NULL,
@@ -71,7 +80,7 @@ public class AccomodationBookHistoryDAO {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (NamingException e) {
+        }  catch (NamingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -92,6 +101,7 @@ public class AccomodationBookHistoryDAO {
             Context context = new InitialContext();
             //DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+
              /************************
              * `accomodationbookhistory` ( 
              * `accomodationBookHistoryID` varchar(20) NOT NULL,
@@ -169,20 +179,87 @@ public class AccomodationBookHistoryDAO {
         return false;
     }
 
-    public AccomodationBookHistory[] lookup() {
+    public AccomodationBookHistory[] lookup(HashMap<String,Object> condition) {
 
         try {
             Connection conn = null;
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            // db 연결 코드
-            String url = "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            String id = "admin";
-            String pwd = "tejava";
+            Context context = new InitialContext();
+            conn = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            conn = DriverManager.getConnection(url, id, pwd);
+            // conn = DriverManager.getConnection("jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC", "admin", "tejava");
 
+            StringBuilder sqlBuilder = new StringBuilder();
+
+            sqlBuilder.append("SELECT * FROM ")
+                        .append("`accomodationbookhistory` ");
+
+            // 조건 검색
+            if (condition.size()>0) {
+                sqlBuilder.append("WHERE ");
+
+                // condition은 속성과 값으로 구성되어있다.
+                // iter는 테이블 속성명이 들어있다.
+                Iterator<String> iter = condition.keySet().iterator();
+
+                while (iter.hasNext()) {
+                    String columnName = iter.next();            //테이블의 속성명
+
+                    Object value = condition.get(columnName);   //그 속성의 값
+
+                    // 자료형이 String이나 Integer라면
+                    if(value instanceof String || value instanceof Integer){
+                        sqlBuilder.append(String.format("`%s` LIKE '%%%s%%' ", columnName, (String)value));
+                    }
+
+                    // 자료형이 LocalDate[]   여기에는 시작일과 종료일 둘다 있으므로 배열이 됩니다.
+                    if(value instanceof LocalDate[]){
+                        LocalDate[] dateRange = (LocalDate[])value;
+                        sqlBuilder.append(String.format("`%s` BETWEEN '%s' AND  '%s'",columnName, dateRange[0].toString(),dateRange[1].toString()));
+                    }
+
+                    if (iter.hasNext())
+                        sqlBuilder.append("AND ");
+                }
+            }
+
+            String sql = sqlBuilder.toString();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            ArrayList<AccomodationBookHistory> accomodationBookHistories = new ArrayList<>();
+
+            while (rs.next()) {
+                // 코드 처리부
+
+                accomodationBookHistories.add(
+                    new AccomodationBookHistory(
+                        rs.getString("accomodationBookHistoryID") , rs.getInt("numOfPeople") ,
+                        rs.getString("name") , rs.getString("phoneNum"),rs.getObject("bookDate", LocalDate.class) , 
+                        rs.getString("bookState"), rs.getInt("paymentPrice"), rs.getObject("checkInTime", LocalDateTime.class), 
+                        rs.getObject("checkOutTime", LocalDateTime.class), rs.getString("enteringState"), 
+                        rs.getString("memberID") , rs.getString("registrantID"), rs.getString("accomodationID"), rs.getInt("roomNum"))
+                );
+
+            }
+
+            return accomodationBookHistories.toArray(new AccomodationBookHistory[accomodationBookHistories.size()]);
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (NamingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return null;
+
+
+/*
+        예시 테스트용
             stmt = conn.prepareStatement("SELECT * FROM accomodationbookhistory");
             rs = stmt.executeQuery();
 
@@ -194,63 +271,13 @@ public class AccomodationBookHistoryDAO {
                 rs.getString("accomodationBookHistoryID") , rs.getInt("numOfPeople") ,
                 rs.getString("name") , rs.getString("phoneNum"),rs.getObject("bookDate", LocalDate.class) , 
                 rs.getString("bookState"), rs.getInt("paymentPrice"), rs.getObject("checkInTime", LocalDateTime.class), 
-                rs.getObject("checkOutTiem", LocalDateTime.class), rs.getString("enteringState"), 
+                rs.getObject("checkOutTime", LocalDateTime.class), rs.getString("enteringState"), 
                 rs.getString("memberID") , rs.getString("registrantID"), rs.getString("accomodationID"), rs.getInt("roomNum")));
             }
 
             return accomodationBookHistories.toArray(new AccomodationBookHistory[accomodationBookHistories.size()]);
-            /*
-            //META-INF아래 context.xml
-            Context context = new InitialContext();
-            //DB Connection
-            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-
-            StringBuilder builder = new StringBuilder();
-
-            builder
-                .append("SELECT * FROM ")
-                .append("memberauthoritygroup ");
-
-
-            // 조건 검색
-            if (condition != null) {
-                builder.append("WHERE ");
-
-                // condition은 속성과 값으로 구성되어있다.
-                // key : memberName,  value : 소공도 
-                Iterator<String> iter = condition.keySet().iterator();
-
-                while (iter.hasNext()) {
-                    String key = iter.next();
-                    builder.append(String.format("`%s`=%s ", key, condition.get(key)));
-
-                    if (iter.hasNext())
-                        builder.append("AND ");
-                }
-            }
-
-            String sql = builder.toString();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
-
-            conn.close();
-
-            ArrayList<Member> members = new ArrayList<>();
-
-            while (rs.next()) {
-
-            }
-        */
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } 
-        // catch (NamingException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
-
-        return null;
+            */
     }
+
+   
 }

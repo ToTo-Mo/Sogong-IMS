@@ -36,7 +36,7 @@ public class RefundHistoryDAO {
             stmt.setString(3,refundHistory.getRegistrantID());
             stmt.setString(4,refundHistory.getResonsRefund());
             stmt.setInt(5,refundHistory.getRefundPrice());
-            // stmt.setLocalDateTime(6, refundHistory.getRefundTime());
+            stmt.setTimestamp(6, Timestamp.valueOf(refundHistory.getRefundTime()));
             stmt.setString(7,refundHistory.getRefundMethod());
             
             stmt.executeQuery();

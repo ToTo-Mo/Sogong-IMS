@@ -98,7 +98,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/PaymentHistoryManage">
                                 숙박 시설 결제 내역 관리
                             </a>
                         </li>

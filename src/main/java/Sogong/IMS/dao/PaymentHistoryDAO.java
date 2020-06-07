@@ -95,10 +95,10 @@ public class PaymentHistoryDAO {
                     }
 
                     // 자료형이 LocalDate[]   여기에는 시작일과 종료일 둘다 있으므로 배열이 됩니다.
-                    if(value instanceof LocalDate[])
+                    if(value instanceof LocalDateTime[])
                     {
-                        LocalDate[] dateRange = (LocalDate[])value;
-                        sqlBuilder.append(String.format("`%s` BETWEEN '%s' AND  '%s'",columnName, dateRange[0].toString(),dateRange[1].toString()));
+                        LocalDateTime[] dateTimeRange = (LocalDateTime[])value;
+                        sqlBuilder.append(String.format("`%s` BETWEEN '%s' AND  '%s'",columnName, dateTimeRange[0].toString(),dateTimeRange[1].toString()));
                     }
 
                     if (iter.hasNext())
@@ -192,10 +192,8 @@ public class PaymentHistoryDAO {
 
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (NamingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
