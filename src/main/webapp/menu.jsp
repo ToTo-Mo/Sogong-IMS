@@ -19,11 +19,10 @@
     <li class="item"><a href="">시설 요금 및 할인율 관리</p></li>
     <li class="item"><a href="">숙박시설 예약 정보 관리</p></li>
     <li class="item"><a href="">숙박시설 예약 취소 관리</p></li>
-    <li class="item"><a href="">숙박시설 결재 내역 관리</p></li>
+    <li class="item"><a href="PaymentHistoryManage">숙박시설 결제 내역 관리</p></li>
     <li class="item"><a href="">숙박시설 환불 내역 관리</p></li>
     <li class="item"><a href="PackageManage">판매 상품 관리</a></li>
     <li class="item"><a href="">판매 상품 실적 집계</p></li>
 </ul>
-
 </body>
 </html>

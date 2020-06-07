@@ -44,6 +44,5 @@
     <input type="button" onclick="window.close()" value="취소"/>
     </form>
 
-
 </body>
 </html>
