@@ -1,4 +1,4 @@
-package Sogong.IMS.controller.authorityManagement;
+package Sogong.IMS.controller.AuthorityManagement;
 
 import java.util.HashMap;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
 
-@WebServlet("/AuthorityManage/*")
+@WebServlet({"/authorityManage/*","/authorityEnroll/*"})
 public class AuthorityController extends HttpServlet {
 
     private static final long serialVersionUID = 8559171819500212874L;
@@ -37,8 +37,10 @@ public class AuthorityController extends HttpServlet {
 
         String path = url.substring(servletPath.length());
 
-        Action action = list.get(path);
-        action.excute(request, response);
+        if(list.get(path) !=null){
+            Action action = list.get(path);
+            action.excute(request, response);
+        }
     }
 
     public boolean hasAuthority(Member member, String authorityName){

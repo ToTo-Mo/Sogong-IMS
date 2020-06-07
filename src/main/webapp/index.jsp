@@ -54,7 +54,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/AuthorityManage">
+                            <a class="nav-link" href="/authorityManage">
                                 권한 관리
                             </a>
                         </li>
