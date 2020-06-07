@@ -11,6 +11,9 @@ public class AuthorityDeleteAction implements Action {
     public void excute(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
 
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html; charset=utf-8");
     }
     
 }

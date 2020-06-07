@@ -145,8 +145,8 @@
 
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary mr-2" onclick="">수정</button>
-                                    <button type="button" class="btn btn-secondary">삭제</button>
+                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup(<%= m.getMemberID()%>)">수정</button>
+                                    <button type="button" class="btn btn-secondary" onclick="deleteRow(<%= m.getMemberID()%>)">삭제</button>
                                 </div>
                             </td>
                         </tr>
@@ -179,9 +179,9 @@
 </main>
 
 <script>
-    function enrollPopup() {
-        var url = "/authorityEnroll"
-        var name = "enroll popup"
+    function modifyPopup(memberID) {
+        var url = "${pageContext.request.contextPath}/authorityModify/" + memberID;
+        var name = "modify popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
 
         var child = window.open(url, name, option);
@@ -195,20 +195,20 @@
         };
     }
 
-    function modifyPopup() {
-        var url = "/authorityModify"
-        var name = "enroll popup"
-        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
+    function deleteRow(memberID) {
 
-        var child = window.open(url, name, option);
-        child.focus();
+        var $form = $("<form></form>");
+        $form.append('<input type="text" name="hello" value="world">');
+        $form.attr("action","${pageContext.request.contextPath}/authorityManage/delete.do");
+        $form.attr("method","post");
 
-        child.onload = function () {
-            var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
+        var $input = $("<input>");
+        $input.attr("name","inputMemberID");
 
-            child.resizeTo(wid, hei);
-        };
+        $form.append($input);
+
+        $form.submit();
+
     }
 </script>
 

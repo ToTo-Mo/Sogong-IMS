@@ -8,6 +8,10 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Sogong.IMS.model.MemberAuthorityGroup" %>
+<%@ page import="Sogong.IMS.dao.MemberAuthorityGroupDAO" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="Sogong.IMS.model.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -36,12 +40,37 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/authority-enroll.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 
 
     <!-- 화면 이름 -->
-    <title>권한 등록</title>
+    <title>권한 수정</title>
 </head>
+
+<%
+    String url = request.getRequestURI();
+    String servletPath = request.getServletPath();
+    String memberID = url.substring(servletPath.length()).split("/")[1];
+
+    HashMap<String,Object> conditions = new HashMap<>();
+    conditions.put("memberID", memberID);
+
+    Member member = new MemberAuthorityGroupDAO().lookup(conditions)[0];
+
+    List<AuthorityGroup> authorityGroups = Arrays.asList(new AuthorityGroupDAO().lookup());
+
+    for(MemberAuthorityGroup mag : member.getMemberAuthorityGroups()){
+        authorityGroups.removeIf(authorityGroup ->(
+            mag.getAuthorityGroup().getAuthorityGroupID() == authorityGroup.getAuthorityGroupID()));
+    }
+
+    request.setAttribute("memberID", member.getMemberID());
+    request.setAttribute("memberType", member.getMemberType());
+    request.setAttribute("department", member.getDepartment());
+    request.setAttribute("memberAuthorityGroups",member.getMemberAuthorityGroups());
+    request.setAttribute("m");
+%>
 
 <body>
 
@@ -52,7 +81,7 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/enroll.do" id="form" method="POST">
+        <form action="${pageContext.request.contextPath}/authorityManage/modify.do" id="form" method="POST">
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
@@ -61,7 +90,7 @@
                         <span class="input-group-text" id="basic-addon1">ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputMemberID" id="inputMemberID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" readonly>
                 </div>
             </div>
 
