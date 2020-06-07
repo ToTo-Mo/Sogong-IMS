@@ -1,4 +1,4 @@
-package Sogong.IMS.controller.authorityManagement;
+package Sogong.IMS.controller.AuthorityManagement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
