@@ -30,7 +30,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet>
     <servlet-name>AuthorityManage</servlet-name>
-    <jsp-file>/AuthManage.jsp</jsp-file>
+    <jsp-file>/AuthorityManage.jsp</jsp-file>
 </servlet>
 <servlet-mapping>
     <servlet-name>AuthorityManage</servlet-name>
@@ -46,6 +46,19 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/PackageManage</url-pattern>
 </servlet-mapping>
 
+<<<<<<< HEAD
+=======
+<servlet>
+    <servlet-name>authorityModify</servlet-name>
+    <jsp-file>/authorityManage/AuthorityModify.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>authorityModify</servlet-name>
+    <url-pattern>/authorityModify</url-pattern>
+</servlet-mapping>
+
+>>>>>>> f65c465873abc5a8f73431374a150348f3cecc02
 <servlet>
     <servlet-name>exampleManage</servlet-name>
     <jsp-file>/exampleManage/exampleManage.jsp</jsp-file>
@@ -75,6 +88,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/paymentHistoryManage</url-pattern>
 </servlet-mapping>
 
+<<<<<<< HEAD
 <servlet>
     <servlet-name>RefundHistoryManage</servlet-name>
     <jsp-file>/refundManage/RefundHistoryManage.jsp</jsp-file>
@@ -84,4 +98,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/refundHistoryManage</url-pattern>
 </servlet-mapping>
 
+=======
+>>>>>>> f65c465873abc5a8f73431374a150348f3cecc02
 </web-app>
