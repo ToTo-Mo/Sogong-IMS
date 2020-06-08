@@ -29,6 +29,15 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 </servlet-mapping>
 
 <servlet>
+    <servlet-name>AuthorityManage</servlet-name>
+    <jsp-file>/AuthManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>AuthorityManage</servlet-name>
+    <url-pattern>/AuthorityManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
     <servlet-name>packageManage</servlet-name>
     <jsp-file>/PackageManage.jsp</jsp-file>
 </servlet>
@@ -36,27 +45,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-name>packageManage</servlet-name>
     <url-pattern>/PackageManage</url-pattern>
 </servlet-mapping>
-
-<servlet>
-    <servlet-name>authorityManage</servlet-name>
-    <jsp-file>/authorityManage/AuthorityManage.jsp</jsp-file>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>authorityManage</servlet-name>
-    <url-pattern>/authorityManage</url-pattern>
-</servlet-mapping>
-
- <servlet>
-    <servlet-name>authorityEnroll</servlet-name>
-    <jsp-file>/authorityManage/AuthorityEnroll.jsp</jsp-file>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>authorityEnroll</servlet-name>
-    <url-pattern>/authorityEnroll</url-pattern>
-</servlet-mapping>
-
 
 <servlet>
     <servlet-name>exampleManage</servlet-name>
@@ -80,10 +68,20 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet>
     <servlet-name>PaymentHistoryManage</servlet-name>
-    <jsp-file>PaymentHistoryManage.jsp</jsp-file>
+    <jsp-file>/paymentManage/PaymentHistoryManage.jsp</jsp-file>
 </servlet>
-
 <servlet-mapping>
     <servlet-name>PaymentHistoryManage</servlet-name>
-    <url-pattern>/PaymentHistoryManage</url-pattern>
+    <url-pattern>/paymentHistoryManage</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>RefundHistoryManage</servlet-name>
+    <jsp-file>/refundManage/RefundHistoryManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>RefundHistoryManage</servlet-name>
+    <url-pattern>/refundHistoryManage</url-pattern>
+</servlet-mapping>
+
+</web-app>

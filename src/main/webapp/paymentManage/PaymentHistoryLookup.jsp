@@ -1,5 +1,15 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Sogong.IMS.model.PaymentHistory" %>
+<%@ page import="Sogong.IMS.model.Member" %>
+<%@ page import="java.util.Iterator" %>
+
+<%--
+  Created by IntelliJ IDEA.
+  User: bum44
+  Date: 2020-06-01
+  Time: 오후 5:34
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="container-fluid">
@@ -26,7 +36,6 @@
 
         </div>
 
-        
 
         <!-- mb-3 는 spacing 요소이며 margin-buttom-3의 약자입니다. 자세한 내용은 아래 링크를 참고하세요.
             https://getbootstrap.com/docs/4.5/utilities/spacing/-->
@@ -44,63 +53,3 @@
 </div>
 
 </main>
-
-<script>
-    $(function () {
-
-        $('input[name="inputDateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="inputDateRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-        });
-
-        $('input[name="inputDateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
-    });
-
-    $(function () {
-
-        $('input[name="inputDateTimeRange"]').daterangepicker({
-            autoUpdateInput: false,
-            timePicker: true,
-            timePicker24Hour: true,
-            timePickerIncrement: 30,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="inputDateTimeRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD hh:mm') + '-' + picker.endDate.format('YYYY/MM/DD hh:mm'));
-        });
-
-
-        $('input[name="inputDateTimeRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
-    });
-
-    function enrollPopup() {
-        var url = "/exampleEnroll"
-        var name = "enroll popup"
-        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
-
-        var child = window.open(url, name, option);
-        child.focus();
-
-        child.onload = function () {
-            var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
-            child.resizeTo(wid, hei);
-        };
-    }
-</script>
