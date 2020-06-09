@@ -30,4 +30,29 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-name>packageModify</servlet-name>
     <jsp-file>/PackageManage/PackageModify.jsp</jsp-file>
 </servlet>
+    <servlet-mapping>
+        <servlet-name>packagePurchase</servlet-name>
+        <url-pattern>/packagePurchase</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packagePurchase</servlet-name>
+        <jsp-file>/PackagePurchaseManage/PackagePurchase.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>packageInfo</servlet-name>
+    <url-pattern>/packageInfo/*</url-pattern>
+</servlet-mapping>
+    <servlet>
+        <servlet-name>packageInfo</servlet-name>
+        <jsp-file>/PackagePurchaseManage/PackageInfo.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>packagePurchaseNonMember</servlet-name>
+        <url-pattern>/packagePurchaseNonMember</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packagePurchaseNonMember</servlet-name>
+        <jsp-file>/PackagePurchaseManage/PackagePurchaseNonMember.jsp</jsp-file>
+    </servlet>
 </web-app>

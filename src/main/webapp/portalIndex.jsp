@@ -16,9 +16,9 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">소공도 통합관리 시스템</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">소공도 통합 관광지 포털</a>
         <ul class="navbar-nav">
-            <li class="nav-item text-nowrap">
+            <li class="nav-item text-nowrap ">
                 <!-- 로그인 -->
                 <%@ include file="Login.jsp" %>
             </li>
@@ -31,79 +31,12 @@
 
             <!-- 좌측 메뉴 -->
 
-            <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar" >
+            <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                회원 정보 관리
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                권한 관리
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                사업장 관리
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                사업장 속성 관리
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                시설 관리
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                시설 속성 관리
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                시설 요금 및 할인율 관리
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                숙박시설 예약 정보 관리
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                숙박시설 예약 취소 관리
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                숙박 시설 결제 내역 관리
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                숙박 시설 환불 내역 관리
-                            </a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                                판매 상품 실적 집계
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/exampleManage">
-                                예제 관리
+                                상품 패키지 구매
                             </a>
                         </li>
                     </ul>
