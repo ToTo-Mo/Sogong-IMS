@@ -1,4 +1,4 @@
-package Sogong.IMS.controller.AuthorityManagement;
+package Sogong.IMS.controller.authorityManagement;
 
 import java.util.HashMap;
 

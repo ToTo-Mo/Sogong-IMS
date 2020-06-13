@@ -69,7 +69,6 @@
     request.setAttribute("memberType", member.getMemberType());
     request.setAttribute("department", member.getDepartment());
     request.setAttribute("memberAuthorityGroups",member.getMemberAuthorityGroups());
-    request.setAttribute("m");
 %>
 
 <body>

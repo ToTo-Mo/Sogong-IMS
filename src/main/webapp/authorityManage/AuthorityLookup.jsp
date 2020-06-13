@@ -145,8 +145,8 @@
 
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup(<%= m.getMemberID()%>)">수정</button>
-                                    <button type="button" class="btn btn-secondary" onclick="deleteRow(<%= m.getMemberID()%>)">삭제</button>
+                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= m.getMemberID()%>')">수정</button>
+                                    <button type="button" class="btn btn-secondary" onclick="deleteRow('<%= m.getMemberID()%>')">삭제</button>
                                 </div>
                             </td>
                         </tr>
@@ -198,7 +198,6 @@
     function deleteRow(memberID) {
 
         var $form = $("<form></form>");
-        $form.append('<input type="text" name="hello" value="world">');
         $form.attr("action","${pageContext.request.contextPath}/authorityManage/delete.do");
         $form.attr("method","post");
 
@@ -206,7 +205,6 @@
         $input.attr("name","inputMemberID");
 
         $form.append($input);
-
         $form.submit();
 
     }
