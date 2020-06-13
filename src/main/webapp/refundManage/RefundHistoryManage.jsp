@@ -9,7 +9,7 @@
 <body>
 
 <%@ include file="../index.jsp" %>
-<%@ include file="AuthorityLookup.jsp"%>
+<%@ include file="RefundHistoryLookup.jsp"%>
 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>

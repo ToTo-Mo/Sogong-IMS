@@ -179,9 +179,9 @@
 </main>
 
 <script>
-    function modifyPopup(memberID) {
-        var url = "${pageContext.request.contextPath}/authorityModify/" + memberID;
-        var name = "modify popup"
+    function enrollPopup() {
+        var url = "/authorityEnroll"
+        var name = "enroll popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
 
         var child = window.open(url, name, option);
@@ -207,6 +207,8 @@
         $form.append($input);
         $form.submit();
 
+            child.resizeTo(wid, hei);
+        };
     }
 </script>
 
