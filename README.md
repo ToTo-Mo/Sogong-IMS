@@ -61,7 +61,7 @@ C:\Groovy\ 위치에 넣어주시면 됩니다.
 
 Servlet을 동작하기위한 Container가 필요합니다. 여기서는 tomcat을 이용하도록 하겠습니다.
 
-1. http://mirror.navercorp.com/apache/tomcat/tomcat-9/v9.0.35/bin/apache-tomcat-9.0.35-windows-x64.zip
+1. http://apache.mirror.cdnetworks.com/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36-windows-x64.zip
 
 2. 자주 사용하실 위치에 tomcat을 저장해주시면 됩니다. 
 
