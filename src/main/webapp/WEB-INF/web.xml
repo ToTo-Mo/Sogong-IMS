@@ -19,65 +19,80 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-name>index</servlet-name>
     <jsp-file>/index.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>index</servlet-name>
     <url-pattern>/index</url-pattern>
 </servlet-mapping>
+
 <servlet>
     <servlet-name>packageManage</servlet-name>
     <jsp-file>/PackageManage.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>packageManage</servlet-name>
     <url-pattern>/PackageManage</url-pattern>
 </servlet-mapping>
+
 <servlet>
     <servlet-name>authorityManage</servlet-name>
     <jsp-file>/authorityManage/AuthorityManage.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>authorityManage</servlet-name>
     <url-pattern>/authorityManage</url-pattern>
 </servlet-mapping>
+
  <servlet>
     <servlet-name>authorityEnroll</servlet-name>
     <jsp-file>/authorityManage/AuthorityEnroll.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>authorityEnroll</servlet-name>
     <url-pattern>/authorityEnroll</url-pattern>
 </servlet-mapping>
+
 <servlet>
     <servlet-name>authorityModify</servlet-name>
     <jsp-file>/authorityManage/AuthorityModify.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>authorityModify</servlet-name>
     <url-pattern>/authorityModify</url-pattern>
 </servlet-mapping>
+
 <servlet>
     <servlet-name>exampleManage</servlet-name>
     <jsp-file>/exampleManage/exampleManage.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>exampleManage</servlet-name>
     <url-pattern>/exampleManage</url-pattern>
 </servlet-mapping>
- <servlet>
+
+<servlet>
     <servlet-name>exampleEnroll</servlet-name>
     <jsp-file>/exampleManage/exampleEnroll.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>exampleEnroll</servlet-name>
     <url-pattern>/exampleEnroll</url-pattern>
 </servlet-mapping>
+
 <servlet>
-    <servlet-name>PaymentHistoryManage</servlet-name>
-    <jsp-file>/paymentManage/PaymentHistoryManage.jsp</jsp-file>
+    <servlet-name>accomodationBookHistoryManage</servlet-name>
+    <jsp-file>/accomodationBookHistoryManage/accomodationBookHistoryManage.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
-    <servlet-name>PaymentHistoryManage</servlet-name>
-    <url-pattern>/paymentHistoryManage</url-pattern>
+    <servlet-name>accomodationBookHistoryManage</servlet-name>
+    <url-pattern>/accomodationBookHistoryManage</url-pattern>
 </servlet-mapping>
 
 </web-app> 

@@ -50,36 +50,36 @@ public class ExampleController extends HttpServlet {
         String servletPath = request.getServletPath();
         String path = url.substring(servletPath.length());
 
-        Member member = Member.builder().name("apple").build();
+        // Member member = Member.builder().name("apple").build();
 
-        try {
-            PrintWriter out;
-            out = response.getWriter();
+        // try {
+        //     PrintWriter out;
+        //     out = response.getWriter();
 
 
-            if(!hasAuthority(member, "관리자")){
-                switch (path) {
-                    case "/enroll.do":
-                        if (!hasAuthority(member, "회원_등록")) {
-                            path= null;
-                            out.println("<script>alert('권한이 없습니다.');</script>");
-                            out.flush();
-                            return;
-                        }
-                    case "/lookup.do":
-                        if (!hasAuthority(member, "회원_조회")) {
-                            path= null;
-                            out.println("<script>alert('조회 권한이 없습니다.'); location.href='"+servletPath+"';</script>");
-                            out.flush();
-                            return;
-                        }
-                }
-            }
+        //     if(!hasAuthority(member, "관리자")){
+        //         switch (path) {
+        //             case "/enroll.do":
+        //                 if (!hasAuthority(member, "회원_등록")) {
+        //                     path= null;
+        //                     out.println("<script>alert('권한이 없습니다.');</script>");
+        //                     out.flush();
+        //                     return;
+        //                 }
+        //             case "/lookup.do":
+        //                 if (!hasAuthority(member, "회원_조회")) {
+        //                     path= null;
+        //                     out.println("<script>alert('조회 권한이 없습니다.'); location.href='"+servletPath+"';</script>");
+        //                     out.flush();
+        //                     return;
+        //                 }
+        //         }
+        //     }
             
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // } catch (IOException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
         if (list.get(path) != null) {
             Action action = list.get(path);

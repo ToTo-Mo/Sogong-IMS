@@ -236,11 +236,20 @@ public class AccomodationBookHistoryDAO {
 
                 accomodationBookHistories.add(
                     new AccomodationBookHistory(
-                        rs.getString("accomodationBookHistoryID") , rs.getInt("numOfPeople") ,
-                        rs.getString("name") , rs.getString("phoneNum"),rs.getObject("bookDate", LocalDate.class) , 
-                        rs.getString("bookState"), rs.getInt("paymentPrice"), rs.getObject("checkInTime", LocalDateTime.class), 
-                        rs.getObject("checkOutTime", LocalDateTime.class), rs.getString("enteringState"), 
-                        rs.getString("memberID") , rs.getString("registrantID"), rs.getString("accomodationID"), rs.getInt("roomNum"))
+                        rs.getString("accomodationBookHistoryID") , 
+                        rs.getInt("numOfPeople") ,
+                        rs.getString("name") , 
+                        rs.getString("phoneNum"),
+                        rs.getObject("bookDate", LocalDate.class) , 
+                        rs.getString("bookState"), 
+                        rs.getInt("paymentPrice"), 
+                        rs.getObject("checkInTime", LocalDateTime.class), 
+                        rs.getObject("checkOutTime", LocalDateTime.class), 
+                        rs.getString("enteringState"), 
+                        rs.getString("memberID") , 
+                        rs.getString("registrantID"), 
+                        rs.getString("accomodationID"), 
+                        rs.getInt("roomNum"))
                 );
 
             }

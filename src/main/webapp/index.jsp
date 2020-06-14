@@ -86,7 +86,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/accomodationBookHistoryManage">
                                 숙박시설 예약 정보 관리
                             </a>
                         </li>
