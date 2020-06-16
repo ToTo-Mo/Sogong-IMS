@@ -160,41 +160,11 @@
             </div>
             <%-- 테이블 끝 --%>
         </div>
-
-        <!-- mb-3 는 spacing 요소이며 margin-buttom-3의 약자입니다. 자세한 내용은 아래 링크를 참고하세요.
-            https://getbootstrap.com/docs/4.5/utilities/spacing/-->
-        <div class="mb-3"></div>
-
-        <%-- 추가 버튼  justify-content-end는 요소들을 오른쪽 정렬하겠다는 의미 입니다. --%>
-        <div class="row justify-content-end">
-            <div class="col-auto">
-                <div class="input-group mb-3 mr-3">
-                    <button type="button" class="btn btn-secondary bg-dark" onclick="enrollPopup()">추가</button>
-                </div>
-            </div>
-        </div>
-
 </div>
 
 </main>
 
 <script>
-    function enrollPopup() {
-        var url = "/authorityEnroll"
-        var name = "enroll popup"
-        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
-
-        var child = window.open(url, name, option);
-        child.focus();
-
-        child.onload = function () {
-            var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
-            child.resizeTo(wid, hei);
-        };
-    }
-
     function deleteRow(memberID) {
 
         var $form = $("<form></form>");
@@ -203,10 +173,24 @@
 
         var $input = $("<input>");
         $input.attr("name","inputMemberID");
+        $input.attr("value",memberID)
 
         $form.append($input);
+        $('body').append($form);
         $form.submit();
+    };
 
+    function modifyPopup(memberID) {
+    
+        // 해당 url은 Authority
+        var url = "${pageContext.request.contextPath}/authorityModify/" +memberID;
+        var name = "modify popup"
+        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
+        var child = window.open(url, name, option);
+
+        child.onload = function () {
+            var wid = child.document.body.offsetWidth + 50;
+            var hei = child.document.body.offsetHeight + 200;        //30 과 40은 넉넉하게 하려는 임의의 값임
             child.resizeTo(wid, hei);
         };
     }

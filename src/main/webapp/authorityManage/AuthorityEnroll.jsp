@@ -53,7 +53,7 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/enroll.do" id="form" method="POST">
+        <form action="${pageContext.request.contextPath}/authorityManage/enroll.do" id="form" method="POST">
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
@@ -250,6 +250,6 @@
                 }
             }
         }
-    </script>
+    </script>   
 </body>
 </html>
