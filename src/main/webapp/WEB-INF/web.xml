@@ -95,4 +95,34 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/accomodationBookHistoryManage</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>accomodationBookHistoryEnroll</servlet-name>
+    <jsp-file>/accomodationBookHistoryManage/accomodationBookHistoryEnroll.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>accomodationBookHistoryEnroll</servlet-name>
+    <url-pattern>/accomodationBookHistoryEnroll</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>accomodationBookCancleHistoryManage</servlet-name>
+    <jsp-file>/accomodationBookCancleHistoryManage/accomodationBookCancleHistoryManage.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>accomodationBookCancleHistoryManage</servlet-name>
+    <url-pattern>/accomodationBookCancleHistoryManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>accomodationBookCancleHistoryEnroll</servlet-name>
+    <jsp-file>/accomodationBookCancleHistoryManage/accomodationBookCancleHistoryEnroll.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>accomodationBookCancleHistoryEnroll</servlet-name>
+    <url-pattern>/accomodationBookCancleHistoryEnroll</url-pattern>
+</servlet-mapping>
+
 </web-app> 

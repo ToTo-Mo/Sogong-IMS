@@ -92,7 +92,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/accomodationBookCancleHistoryManage">
                                 숙박시설 예약 취소 관리
                             </a>
                         </li>

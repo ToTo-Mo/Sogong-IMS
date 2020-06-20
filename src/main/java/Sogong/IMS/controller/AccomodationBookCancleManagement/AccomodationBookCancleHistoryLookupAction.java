@@ -41,14 +41,14 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
 
        
 
-        LocalDate[] createDate = null;
+        // LocalDate[] createDate = null;
 
-        if(dateRange != null){
-            createDate = new LocalDate[2];
+        // if(dateRange != null){
+        //     createDate = new LocalDate[2];
 
-            createDate[0] = LocalDate.parse(dateRange.split("~")[0]);   // 시작일
-            createDate[1] = LocalDate.parse(dateRange.split("~")[1]);   // 종료일
-        }
+        //     createDate[0] = LocalDate.parse(dateRange.split("~")[0]);   // 시작일
+        //     createDate[1] = LocalDate.parse(dateRange.split("~")[1]);   // 종료일
+        // }
 
         // 2. 조건 검색을 위한 HashMap으로 String은 table의 column명, Object는 그 자료형이 됩니다.
         HashMap<String,Object> condition = new HashMap<>();
@@ -58,7 +58,7 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
 
         if(title != null) condition.put("title", title);
 
-        if(createDate != null) condition.put("createDate", createDate);
+        //if(createDate != null) condition.put("createDate", createDate);
 
         // 4. 결과를 가져옵니다. 출력의 편의성을 위해 Example[]에서 ArrayList로 변환했습니다.
         ArrayList<AccomodationBookCancleHistory> accomodationBookCancleHistories = new ArrayList<>(Arrays.asList(new AccomodationBookCancleHistoryDAO().lookup(condition)));

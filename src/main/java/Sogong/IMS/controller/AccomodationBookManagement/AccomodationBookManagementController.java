@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
-@WebServlet({ "/accomodationBookManage/*", "/accomodationBookEnroll/*" })
+@WebServlet({ "/accomodationBookHistoryManage/*", "/accomodationBookHistoryEnroll/*" })
 public class AccomodationBookManagementController extends HttpServlet {
     private static final long serialVersionUID = 8559000000000000002L;
 

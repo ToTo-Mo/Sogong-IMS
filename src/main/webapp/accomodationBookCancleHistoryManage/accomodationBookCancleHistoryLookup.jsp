@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Sogong.IMS.model.AccomodationBookHistory" %>
+<%@ page import="Sogong.IMS.model.AccomodationBookCancleHistory" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -23,7 +23,7 @@
 
             <%-- 화면 이름 --%>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">숙박 시설 예약 정보 관리</h1>
+                <h1 class="h2">숙박 시설 예약 취소 관리</h1>
             </div>
 
         </div>
@@ -49,37 +49,10 @@
                     <%-- 하나의 입력 필드 입니다. --%>
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon2">예약인 이름</span>
+                            <span class="input-group-text" id="basic-addon2">등록자</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputName"
+                        <input type="text" class="form-control" placeholder="입력" name="inputRegister"
                                aria-describedby="basic-addon2" autocomplete="off">
-                    </div>
-
-                 
-
-                    <%-- 하나의 입력 필드 입니다. --%>
-                    <div class="input-group mb-3 mr-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon6">등록자</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
-                               aria-describedby="basic-addon6" autocomplete="off">
-                    </div>
-
-                
-
-
-                    <%--    select가 필요하실 수도 있을 겁니다. 그럴때는 이걸 사용하세요.--%>
-                    <div class="input-group mb-3 mr-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon8">시설명</span>
-                        </div>
-                        <select class="custom-select" aria-describedby="basic-addon8" name="selectFacilityName">
-                            <option selected>선택</option>
-                            <option value="1">체험존</option>
-                            <option value="2">행사장</option>
-                            <option value="3">운동장</option>
-                        </select>
                     </div>
 
                     <%-- 조회 버튼 --%>
@@ -104,46 +77,27 @@
                               width의 합은 100%가 되도록 해주세요.--%>
 
                         <tr>
-                            <th style="width: 7%">예약번호</th>
-                            <th style="width: 7%">인원</th>
-                            <th style="width: 7%">예약인 이름</th>
-                            <th style="width: 7%">전화번호</th>
-                            <th style="width: 7%">예약일자</th>
-                            <th style="width: 7%">예약상태</th>
-                            <th style="width: 7%">결제금액</th>
-                            <th style="width: 7%">체크인</th>
-                            <th style="width: 7%">체크아웃</th>
-                            <th style="width: 7%">입실상태</th>
-                            <th style="width: 7%">숙박시설</th>
-                            <th style="width: 6%">호실</th>
-                            <th style="width: 7%">등록자</th>
+                            <th style="width: 20%">예약번호</th>
+                            <th style="width: 25%">취소일자</th>
+                            <th style="width: 30%">취소사유</th>
+                            <th style="width: 15%">등록자</th>
                             <%-- 이 th는 수정과 삭제 버튼을 위한 th입니다. --%>
                             <th style="width: 10%"><th>
                         </tr>
                         </thead>
                         <tbody>
                         <%
-                            ArrayList<AccomodationBookHistory> accomodationBookHistories = (ArrayList<AccomodationBookHistory>) request.getAttribute("accomodationBookHistories");
+                            ArrayList<AccomodationBookCancleHistory> accomodationBookCancleHistories = (ArrayList<AccomodationBookCancleHistory>) request.getAttribute("accomodationBookCancleHistories");
 
-                            if (accomodationBookHistories != null) {
-                                for (AccomodationBookHistory acc : accomodationBookHistories) {%>
+                            if (accomodationBookCancleHistories != null) {
+                                for (AccomodationBookCancleHistory acc : accomodationBookCancleHistories) {%>
 
                         <tr>
-                            <td><%= acc.getAccomodationBookHistoryID() %></td>
-                            <td><%= acc.getNumOfPeople() %></td>
-                            <td><%= acc.getName() %></td>
-                            <td><%= acc.getPhoneNum() %></td>
-                            <td><%= acc.getBookDate() %></td>
-                            <td><%= acc.getBookState() %></td>
-                            <td><%= acc.getPaymentPrice() %></td>
-                            <td><%= acc.getCheckInTime() %></td>
-                            <td><%= acc.getCheckOutTiem() %></td>
-                            <td><%= acc.getEnteringState() %></td>
-                            <td><%= acc.getMemberID() %></td>
+                            <td><%= acc.getAccomodationBookCancleHistoryID() %></td>
+                            <td><%= acc.getCancleDate()%></td>
+                            <td><%= acc.getCancleReason() %></td>
                             <td><%= acc.getRegistrantID() %></td>
-                            <td><%= acc.getAccomodationID() %></td>
-                            <td><%= acc.getRoomNum() %></td>
-
+                            <td><%= acc.getAccomodationBookHistoryID() %></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-secondary mr-2">수정</button>
@@ -181,14 +135,33 @@
 
 </main>
 <script>
- function enrollPopup() {
-        var url = "/accomodationBookHistoryEnroll"
+    $(function () {
+
+        $('input[name="inputDateRange"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="inputDateRange"]').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
+        });
+
+        $('input[name="inputDateRange"]').on('cancel.daterangepicker', function (ev, picker) {
+            $(this).val('');
+        });
+
+    });
+
+    function enrollPopup() {
+        var url = "/accomodationBookCancleHistoryEnroll"
         var name = "enroll popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
 
         var child = window.open(url, name, option);
         child.focus();
-       
+
         child.onload = function () {
             var wid = child.document.body.offsetWidth + 30;
             var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임

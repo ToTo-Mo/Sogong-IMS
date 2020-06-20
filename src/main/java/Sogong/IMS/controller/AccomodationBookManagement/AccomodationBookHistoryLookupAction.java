@@ -55,7 +55,7 @@ public class AccomodationBookHistoryLookupAction implements Action {
         // 3. 값이 있는 항목에 대해서만 조건 검색에 추가합니다.
         if(accomodationBookHistoryID != null) condition.put("accomodationBookHistoryID", accomodationBookHistoryID);
 
-        if(name != null) condition.put("title", name);
+        if(name != null) condition.put("name", name);
 
         if(registrantID != null) condition.put("registrantID", registrantID);
 
