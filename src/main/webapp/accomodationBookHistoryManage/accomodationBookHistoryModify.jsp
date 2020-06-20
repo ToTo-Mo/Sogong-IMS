@@ -30,7 +30,25 @@
     <!-- 화면 이름 -->
     <title>숙박시설 예약 정보 수정</title>
 </head>
+<%
+    String url = request.getRequestURI();
+    String servletPath = request.getServletPath();
+    String memberID = url.substring(servletPath.length()).split("/")[1];
 
+    HashMap<String,Object> conditions = new HashMap<>();
+    conditions.put("memberID", memberID);
+
+    Member member = new MemberAuthorityGroupDAO().lookup(conditions)[0];
+
+    List<AuthorityGroup> authorityGroups = new ArrayList<>(Arrays.asList(new AuthorityGroupDAO().lookup()));
+
+    for(MemberAuthorityGroup mag : member.getMemberAuthorityGroups()){
+        authorityGroups.removeIf(authorityGroup ->(
+                mag.getAuthorityGroup().getAuthorityGroupID() == authorityGroup.getAuthorityGroupID()));
+    }
+
+
+%>
 <body>
 
 <!-- 전체 화면 영역 설정 container -->

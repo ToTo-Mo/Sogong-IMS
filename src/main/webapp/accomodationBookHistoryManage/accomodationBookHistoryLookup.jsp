@@ -66,22 +66,6 @@
                                aria-describedby="basic-addon6" autocomplete="off">
                     </div>
 
-                
-
-
-                    <%--    select가 필요하실 수도 있을 겁니다. 그럴때는 이걸 사용하세요.--%>
-                    <div class="input-group mb-3 mr-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon8">시설명</span>
-                        </div>
-                        <select class="custom-select" aria-describedby="basic-addon8" name="selectFacilityName">
-                            <option selected>선택</option>
-                            <option value="1">체험존</option>
-                            <option value="2">행사장</option>
-                            <option value="3">운동장</option>
-                        </select>
-                    </div>
-
                     <%-- 조회 버튼 --%>
                     <div class="input-group mb-3 mr-3">
                         <button type="submit" class="btn btn-secondary bg-dark">조회</button>
