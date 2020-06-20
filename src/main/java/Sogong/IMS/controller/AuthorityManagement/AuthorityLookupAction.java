@@ -35,25 +35,35 @@ public class AuthorityLookupAction implements Action {
             e1.printStackTrace();
         }
 
-        String memberID = StringUtils.defaultIfBlank(request.getParameter("inputMemberID"), null);
-        String memberType = StringUtils.defaultIfBlank(request.getParameter("inputMemberType"), null);
-        String department = StringUtils.defaultIfBlank(request.getParameter("inputDepartment"), null);
+        // String memberID = StringUtils.defaultIfBlank(request.getParameter("inputMemberID"), null);
+        // String memberType = StringUtils.defaultIfBlank(request.getParameter("inputMemberType"), null);
+        // String department = StringUtils.defaultIfBlank(request.getParameter("inputDepartment"), null);
+        AuthorityGroup authorityGroup = null;
         String authorityName = StringUtils.defaultIfBlank(request.getParameter("inputAuthorityName"), null);
 
-        AuthorityGroup authorityGroup = null;
 
+        String[] conditionNames = {"inputMemberID", "inputMemberType" , "inputDepartment"};
+        HashMap<String,Object> conditions = new HashMap<>();
+
+        for(String condition : conditionNames){
+            String value = request.getParameter(condition);
+            if(value != "")
+                conditions.put(condition, value);
+        }
         if(authorityName != null){
             authorityGroup = AuthorityGroup.builder().authorityGroupName(authorityName).build();
+            conditions.put(authorityName, authorityGroup);
         }
 
-        HashMap<String,Object> condition = new HashMap<>();
 
-        if(memberID != null) condition.put("memberID", memberID);
-        if(memberType != null) condition.put("memberType", memberType);
-        if(department != null) condition.put("department", department);
-        if(authorityGroup != null) condition.put("authorityGroupName", authorityGroup);
+        // HashMap<String,Object> condition = new HashMap<>();
 
-        ArrayList<Member> members = new ArrayList<>(Arrays.asList(new MemberAuthorityGroupDAO().lookup(condition)));
+        // if(memberID != null) condition.put("memberID", memberID);
+        // if(memberType != null) condition.put("memberType", memberType);
+        // if(department != null) condition.put("department", department);
+        // if(authorityGroup != null) condition.put("authorityGroupName", authorityGroup);
+
+        ArrayList<Member> members = new ArrayList<>(Arrays.asList(new MemberAuthorityGroupDAO().lookup(conditions)));
 
         request.setAttribute("members", members);
 

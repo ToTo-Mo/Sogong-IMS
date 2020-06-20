@@ -73,13 +73,6 @@ public class MemberAuthorityGroupDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            // String url=
-            // "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            // String id= "admin";
-            // String pwd= "tejava";
-
-            // conn = DriverManager.getConnection(url, id, pwd);
-
             StringBuilder builder = new StringBuilder();
 
             builder.append("SELECT * FROM (").append(
@@ -206,8 +199,8 @@ public class MemberAuthorityGroupDAO {
         return false;
     }
 
-    // 테이블 설계의 수정이 필요함
-    public boolean modify(MemberAuthorityGroup memberAuthorityGroup) {
+
+    public boolean modify(Member member) {
 
         try {
             Connection conn = null;
@@ -219,14 +212,21 @@ public class MemberAuthorityGroupDAO {
             // DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "UPDATE `sogongdo`.`memberauthoritygroup` SET `memberID` = ?, `authorityGroupID` = ? WHERE `memberAuthorityGroupID` = ?";
+            String sql = "DELETE FROM `sogongdo`.`memberauthoritygroup`WHERE `memberID` = ?";
             stmt = conn.prepareStatement(sql);
-
-            stmt.setString(1, memberAuthorityGroup.getMemberID());
-            stmt.setInt(2, memberAuthorityGroup.getAuthorityGroup().getAuthorityGroupID());
-            stmt.setInt(3, memberAuthorityGroup.getMemberAuthorityGroupID());
-
+            stmt.setString(1, member.getMemberID());
             stmt.executeUpdate();
+
+            for(MemberAuthorityGroup mag : member.getMemberAuthorityGroups()){
+                sql = "INSERT INTO `sogongdo`.`memberauthoritygroup` (`memberID`,`authorityGroupID`,`memberAuthorityGroupID`) VALUES (?,?,default) ON DUPLICATE KEY UPDATE memberID=?, authorityGroupID=?";
+                stmt = conn.prepareStatement(sql);
+    
+                stmt.setString(1, member.getMemberID());
+                stmt.setInt(2, mag.getAuthorityGroup().getAuthorityGroupID());
+                stmt.setString(3, member.getMemberID());
+                stmt.setInt(4, mag.getAuthorityGroup().getAuthorityGroupID());
+                stmt.executeUpdate();
+            }
 
             return true;
         } catch (SQLException e) {
@@ -241,7 +241,6 @@ public class MemberAuthorityGroupDAO {
     }
 
     public boolean delete(MemberAuthorityGroup memberAuthorityGroup) {
-
         try {
             Connection conn = null;
             PreparedStatement stmt = null;

@@ -35,6 +35,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/PackageManage</url-pattern>
 </servlet-mapping>
 
+<!-- 권한 관리 -->
 <servlet>
     <servlet-name>authorityManage</servlet-name>
     <jsp-file>/authorityManage/AuthorityManage.jsp</jsp-file>
@@ -45,7 +46,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/authorityManage</url-pattern>
 </servlet-mapping>
 
- <servlet>
+<servlet>
     <servlet-name>authorityEnroll</servlet-name>
     <jsp-file>/authorityManage/AuthorityEnroll.jsp</jsp-file>
 </servlet>
@@ -62,8 +63,10 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet-mapping>
     <servlet-name>authorityModify</servlet-name>
-    <url-pattern>/authorityModify</url-pattern>
+    <url-pattern>/authorityModify/*</url-pattern>
 </servlet-mapping>
+
+<!-- 권한관리 끝 -->
 
 <servlet>
     <servlet-name>exampleManage</servlet-name>
