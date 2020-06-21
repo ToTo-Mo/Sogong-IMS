@@ -157,8 +157,27 @@ public class ExampleDAO {
         return false;
     }
 
-    public boolean delete(MemberAuthorityGroup memberAuthorityGroup) {
+    public boolean delete(Example workspace) {
 
+        try {
+			Connection con = null;
+			PreparedStatement st = null;
+			
+			Context context = new InitialContext();
+			con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+			
+			String sql = "Delete FROM `workspace` WHERE workspaceID = ?";
+			st = con.prepareStatement(sql);
+			
+			st.setString(1, workspace.getWorkspaceID());
+			st.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
         return false;
     }
 }
