@@ -14,7 +14,7 @@ import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
 
-@WebServlet({ "/accomodationBookCancleManage/*", "/accomodationBookCancleEnroll/*" })
+@WebServlet({ "/accomodationBookCancleHistoryManage/*", "/accomodationBookCancleHistoryEnroll/*" })
 public class AccomodationBookCancleManagementController extends HttpServlet {
      
     private static final long serialVersionUID = 8559000000000000001L;
@@ -33,13 +33,7 @@ public class AccomodationBookCancleManagementController extends HttpServlet {
      // get이나 post 요청에 대한 처리를 수행합니다.
      @Override
      public void service(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setCharacterEncoding("euc-kr");
-            response.setCharacterEncoding("euc-kr");
-        } catch (UnsupportedEncodingException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+      
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
         String path = url.substring(servletPath.length());

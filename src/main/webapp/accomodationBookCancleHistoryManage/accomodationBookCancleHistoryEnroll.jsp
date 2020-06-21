@@ -46,10 +46,31 @@
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">예약인 이름</span>
+                        <span class="input-group-text" id="basic-addon1">예약취소번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputText"
+                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookCancleHistoryID"
                            aria-describedby="basic-addon1" autocomplete="off" required>
+                </div>
+            </div>
+
+            <!-- 일반 텍스트 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">예약번호</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookHistoryID"
+                           aria-describedby="basic-addon1" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">취소일자</span>
+                    </div>
+                    <input type="text" id = "bookDate" class="form-control" placeholder="입력" name="inputCancleDate"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly >
                 </div>
             </div>
 
@@ -59,8 +80,19 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon7">사유</span>
                     </div>
-                    <textarea class="form-control" rows="3" name="inputAboutText" aria-describedby="basic-addon7"
-                              autocomplete="off"></textarea>
+                    <textarea class="form-control" rows="3" name="inputCancleReason" 
+                    aria-describedby="basic-addon7" autocomplete="off" required></textarea>
+                </div>
+            </div>
+
+             <!-- 일반 텍스트 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">등록자</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
+                           aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
 
@@ -86,3 +118,19 @@
     <div class="mb-5"></div>
 </body>
 </html>
+
+<script>
+   
+   let today = new Date();
+   let year =  today.getFullYear();
+   let month = today.getMonth()+1;
+   month = month >= 10 ? month : '0' + month;
+   let date = today.getDate();
+   date = date >= 10 ? date : '0' + date;
+   
+   
+    $('input[name="inputCancleDate"]').val(year +"-"+ month +"-"+date);
+
+   
+
+</script>

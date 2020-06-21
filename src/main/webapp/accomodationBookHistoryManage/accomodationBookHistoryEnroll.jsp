@@ -46,6 +46,16 @@
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">예약번호</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookHistoryID"
+                           aria-describedby="basic-addon1" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">예약인 이름</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputName"
@@ -73,7 +83,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <%-- <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">예약상태</span>
@@ -81,8 +91,20 @@
                     <input type="text" class="form-control" placeholder="입력" name="inputBookState"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
-            </div>
-          
+            </div> --%>
+            <div class="form-group">
+                <div class="input-group mb-3 mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon8">예약상태</span>
+                        </div>
+                        <select class="custom-select" aria-describedby="basic-addon8" name="inputBookState">
+                            <option value="결제중" selected>결제중</option>
+                            <option value="예약완료">예약완료</option>
+                            <option value="예약취소">예약취소</option>
+                        </select>
+                </div>
+          </div>
+
            <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -117,7 +139,7 @@
                     </div>
             </div>
             
-            <div class="form-group">
+            <%-- <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">입실상태</span>
@@ -125,7 +147,19 @@
                     <input type="text" class="form-control" placeholder="입력" name="inputEnteringState"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
-            </div>
+            </div> --%>
+            <div class="form-group">
+                <div class="input-group mb-3 mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon8">입실상태</span>
+                        </div>
+                        <select class="custom-select" aria-describedby="basic-addon8" name="inputEnteringState">
+                            <option value="입실전" selected>입실전</option>
+                            <option value="입실중">입실중</option>
+                            <option value="퇴실">퇴실</option>
+                        </select>
+                </div>
+          </div>
 
             <div class="form-group">
                 <div class="input-group mb-3">
@@ -199,28 +233,12 @@
    let today = new Date();
    let year =  today.getFullYear();
    let month = today.getMonth()+1;
+   month = month >= 10 ? month : '0' + month;
    let date = today.getDate();
+   date = date >= 10 ? date : '0' + date;
    
    
-    $('input[name="inputBookDate"]').val(year +"/"+ month +"/"+date);
-
-    $(function () {
-        $('input[name="inputDateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="inputDateRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-        });
-
-        $('input[name="inputDateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
-    });
+    $('input[name="inputBookDate"]').val(year +"-"+ month +"-"+date);
 
     $(function () {
 
@@ -235,7 +253,7 @@
         });
 
         $('input[name="inputCheckDateTimeRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD hh:mm') + '-' + picker.endDate.format('YYYY/MM/DD hh:mm'));
+            $(this).val(picker.startDate.format('YYYY-MM-DDThh:mm') + '~' + picker.endDate.format('YYYY-MM-DDThh:mm'));
         });
 
 

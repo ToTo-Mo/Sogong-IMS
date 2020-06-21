@@ -117,7 +117,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet-mapping>
     <servlet-name>accomodationBookHistoryModify</servlet-name>
-    <url-pattern>/accomodationBookHistoryModify</url-pattern>
+    <url-pattern>/accomodationBookHistoryModify/*</url-pattern>
 </servlet-mapping>
 
 <servlet>
@@ -148,7 +148,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet-mapping>
     <servlet-name>accomodationBookCancleHistoryModify</servlet-name>
-    <url-pattern>/accomodationBookCancleHistoryModify</url-pattern>
+    <url-pattern>/accomodationBookCancleHistoryModify/*</url-pattern>
 </servlet-mapping>
 <!-- 예약 관리 끝 -->
 </web-app> 

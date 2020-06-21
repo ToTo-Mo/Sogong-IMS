@@ -29,15 +29,12 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
             e1.printStackTrace();
         }
 
-        /******************************
-        수정 필요 (1번 3번)
-        -검색조건 
-        ******************************/
+       
 
         //1. 값이 없다면 null로 지정됩니다.
-        String id = StringUtils.defaultIfBlank(request.getParameter("inputId"), null);
-        String title = StringUtils.defaultIfBlank(request.getParameter("inputTitle"), null);
-        String dateRange =  StringUtils.defaultIfBlank(request.getParameter("inputDateRange"), null);
+        String inputAccomodationBookHistoryID = StringUtils.defaultIfBlank(request.getParameter("inputAccomodationBookHistoryID"), null);
+        String inputRegister = StringUtils.defaultIfBlank(request.getParameter("inputRegister"), null);
+   
 
        
 
@@ -54,9 +51,9 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
         HashMap<String,Object> condition = new HashMap<>();
         
         // 3. 값이 있는 항목에 대해서만 조건 검색에 추가합니다.
-        if(id != null) condition.put("id", id);
+        if(inputAccomodationBookHistoryID != null) condition.put("inputAccomodationBookHistoryID", inputAccomodationBookHistoryID);
 
-        if(title != null) condition.put("title", title);
+        if(inputRegister != null) condition.put("inputRegister", inputRegister);
 
         //if(createDate != null) condition.put("createDate", createDate);
 
@@ -68,7 +65,7 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
 
         // 6. 보여줄 페이지를 지정합니다.
         ServletContext context = request.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/accomodationBookCancleManage"); // 넘길 페이지 주소
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/accomodationBookCancleHistoryManage"); // 넘길 페이지 주소
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {

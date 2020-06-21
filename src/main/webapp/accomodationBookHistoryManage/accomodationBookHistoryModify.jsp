@@ -30,7 +30,7 @@
     <!-- 화면 이름 -->
     <title>숙박시설 예약 정보 수정</title>
 </head>
-<%
+<%-- <%
     String url = request.getRequestURI();
     String servletPath = request.getServletPath();
     String memberID = url.substring(servletPath.length()).split("/")[1];
@@ -48,7 +48,7 @@
     }
 
 
-%>
+%> --%>
 <body>
 
 <!-- 전체 화면 영역 설정 container -->
@@ -58,7 +58,7 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/enroll.do" method="POST">
+        <form action="${pageContext.request.servletPath}/accomodationBookHistoryManage/modify.do" method="POST">
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
