@@ -157,7 +157,7 @@ public class ExampleDAO {
         return false;
     }
 
-    public boolean delete(Example workspace) {
+    public boolean delete(Example example) {
 
         try {
 			Connection con = null;
@@ -166,10 +166,10 @@ public class ExampleDAO {
 			Context context = new InitialContext();
 			con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 			
-			String sql = "Delete FROM `workspace` WHERE workspaceID = ?";
+			String sql = "Delete FROM `example` WHERE id = ?";
 			st = con.prepareStatement(sql);
 			
-			st.setString(1, workspace.getWorkspaceID());
+			st.setInt(1, example.getId());
 			st.executeUpdate();
 			
 			return true;
