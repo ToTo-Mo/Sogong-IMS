@@ -8,6 +8,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Sogong.IMS.model.FacilityCharge" %>
+
 <html>
 <head>
 
@@ -113,39 +116,29 @@
                           width의 합은 100%가 되도록 해주세요.--%>
                     <tr>
                         <th style="width : 10%">#</th>
-                        <th style="width : 10%">부서</th>
-                        <th style="width : 10%">ID</th>
-                        <th style="width : 10%">유형</th>
-                        <th style="width : 50%">권한</th>
-                        <th style="width : 10%"></th>
+                        <th style="width : 50%">요금명</th>
+                        <th style="width : 20%">요금</th>
+                        <th style="width : 10%">할인여부</th>
+                        <th style="width : 10%">할인율</th>
                     </tr>
                     </thead>
 
                     <tbody>
                     <%
-                        ArrayList<Member> members = (ArrayList<Member>) request.getAttribute("members");
+                        ArrayList<FacilityCharge> facilityCharges = (ArrayList<FacilityCharge>) request.getAttribute("facilityCharge");
 
-                        if (members != null) {
-                            for (Member m : members) {%>
+                        if (facilityCharges != null) {
+                            for (FacilityCharge fc : facilityCharges) {%>
 
                     <tr>
                         <td>-</td>
-                        <td><%= m.getDepartment() %>
+                        <td><%= fc.getChargeName() %>
                         </td>
-                        <td><%= m.getMemberID() %>
-                        </td>
-                        <td><%= m.getMemberType() %>
+                        <td><%= fc.getCharge() %>
                         </td>
 
                         <%
-                            String authorityGroups = "";
-                            ArrayList<MemberAuthorityGroup> mag = (ArrayList<MemberAuthorityGroup>) m.getMemberAuthorityGroups();
 
-                            int size = mag.size();
-
-                            for (int i = 0; i < size; i++) {
-                                authorityGroups += mag.get(i).getAuthorityGroup().getAuthorityGroupName() + (i < size - 1 ? ", " : " ");
-                            }
                         %>
 
                         <td><%=authorityGroups%>
