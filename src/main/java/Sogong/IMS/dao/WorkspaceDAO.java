@@ -27,6 +27,16 @@ public class WorkspaceDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
+            /*
+                코멘트 : workspaceID는 자동으로 생성되지 않으므로 INSERT시 추가되어야 합니다.
+                
+                INSERT INTO `workspace`(`workspaceID`,`workspaceName`,`registrantID`) VALUES (?,?,?)
+            
+                stmt.setString(1, workspace.getWorkspaceID());
+                stmt.setString(2, workspace.getWorkspaceName());
+                stmt.setString(3, workspace.getRegistrantID());
+            */
+
             String sql = "INSERT INTO `workspace`(`workspaceName`,`registrantID`) VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
 
@@ -64,6 +74,11 @@ public class WorkspaceDAO {
 
             stmt.setString(1,workspace.getWorkspaceName());
             stmt.setString(2,workspace.getRegistrantID());
+
+            /*
+                sql에 ?가 3개인데 2개 밖에 set이 지정이 안되있으니
+                77번째 줄에 stmt.getString(3,workspace.getWorkspaceID());를 추가합니다.
+            */
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
