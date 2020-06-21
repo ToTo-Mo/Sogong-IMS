@@ -1,4 +1,4 @@
-package Sogong.IMS.controller.AuthorityManagement;
+package Sogong.IMS.controller.authorityManagement;
 
 import java.util.HashMap;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
 
-@WebServlet({"/authorityManage/*","/authorityEnroll/*"})
+@WebServlet("/authorityManage/*")
 public class AuthorityController extends HttpServlet {
 
     private static final long serialVersionUID = 8559171819500212874L;
@@ -23,10 +23,10 @@ public class AuthorityController extends HttpServlet {
     public void init(ServletConfig sc) throws ServletException {
         list = new HashMap<>();
 
-        list.put("/enroll.do", new AuthorityEnrollAction());
-        list.put("/lookup.do", new AuthorityLookupAction());
-        list.put("/modify.do", new AuthorityModifyAction());
-        list.put("/delete.do", new AuthorityDeleteAction());
+        list.put("enroll.do", new AuthorityEnrollAction());
+        list.put("lookup.do", new AuthorityLookupAction());
+        list.put("modify.do", new AuthorityModifyAction());
+        list.put("delete.do", new AuthorityDeleteAction());
     }
 
     // get이나 post 요청에 대한 처리를 수행합니다.
@@ -35,7 +35,7 @@ public class AuthorityController extends HttpServlet {
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
 
-        String path = url.substring(servletPath.length());
+        String path = url.substring(servletPath.length()).split("/")[1];
 
         if(list.get(path) !=null){
             Action action = list.get(path);

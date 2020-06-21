@@ -1,12 +1,14 @@
 package Sogong.IMS.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,13 +34,7 @@ public class AccomodationBookHistoryDAO {
             Context context = new InitialContext();
             //DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-/*
-            String url= "jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull";
-            String id= "admin";
-            String pwd= "tejava";
 
-            conn = DriverManager.getConnection(url, id, pwd);
-*/
             /************************
              * `accomodationbookhistory` ( 
              * `accomodationBookHistoryID` varchar(20) NOT NULL,
@@ -58,16 +54,16 @@ public class AccomodationBookHistoryDAO {
              ****************************/
             String sql = "INSERT INTO `accomodationbookhistory` VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
-
+        
             stmt.setString(1, accomodationBookHistory.getAccomodationBookHistoryID());
             stmt.setInt(2, accomodationBookHistory.getNumOfPeople());
             stmt.setString(3, accomodationBookHistory.getName());
             stmt.setString(4, accomodationBookHistory.getPhoneNum());
-            stmt.setObject(5, accomodationBookHistory.getBookDate());
+            stmt.setDate(5, Date.valueOf(accomodationBookHistory.getBookDate()));
             stmt.setString(6, accomodationBookHistory.getBookState());
             stmt.setInt(7, accomodationBookHistory.getPaymentPrice());
             stmt.setObject(8, accomodationBookHistory.getCheckInTime());
-            stmt.setObject(9, accomodationBookHistory.getCheckOutTiem());
+            stmt.setObject(9,accomodationBookHistory.getCheckOutTime());
             stmt.setString(10, accomodationBookHistory.getEnteringState());
             stmt.setString(11, accomodationBookHistory.getMemberID());
             stmt.setString(12, accomodationBookHistory.getRegistrantID());
@@ -75,7 +71,6 @@ public class AccomodationBookHistoryDAO {
             stmt.setInt(14, accomodationBookHistory.getRoomNum());
 
             stmt.execute();
-
             return true;
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -129,7 +124,7 @@ public class AccomodationBookHistoryDAO {
             stmt.setString(5, accomodationBookHistory.getBookState());
             stmt.setInt(6,accomodationBookHistory.getPaymentPrice());
             stmt.setObject(7, accomodationBookHistory.getCheckInTime());
-            stmt.setObject(8, accomodationBookHistory.getCheckOutTiem());
+            stmt.setObject(8, accomodationBookHistory.getCheckOutTime());
             stmt.setString(9, accomodationBookHistory.getEnteringState());
             stmt.setString(10, accomodationBookHistory.getRegistrantID());
             stmt.setInt(11, accomodationBookHistory.getRoomNum());
@@ -236,11 +231,20 @@ public class AccomodationBookHistoryDAO {
 
                 accomodationBookHistories.add(
                     new AccomodationBookHistory(
-                        rs.getString("accomodationBookHistoryID") , rs.getInt("numOfPeople") ,
-                        rs.getString("name") , rs.getString("phoneNum"),rs.getObject("bookDate", LocalDate.class) , 
-                        rs.getString("bookState"), rs.getInt("paymentPrice"), rs.getObject("checkInTime", LocalDateTime.class), 
-                        rs.getObject("checkOutTime", LocalDateTime.class), rs.getString("enteringState"), 
-                        rs.getString("memberID") , rs.getString("registrantID"), rs.getString("accomodationID"), rs.getInt("roomNum"))
+                        rs.getString("accomodationBookHistoryID") , 
+                        rs.getInt("numOfPeople") ,
+                        rs.getString("name") , 
+                        rs.getString("phoneNum"),
+                        rs.getObject("bookDate", LocalDate.class) , 
+                        rs.getString("bookState"), 
+                        rs.getInt("paymentPrice"), 
+                        rs.getObject("checkInTime", LocalDateTime.class), 
+                        rs.getObject("checkOutTime", LocalDateTime.class), 
+                        rs.getString("enteringState"), 
+                        rs.getString("memberID") , 
+                        rs.getString("registrantID"), 
+                        rs.getString("accomodationID"), 
+                        rs.getInt("roomNum"))
                 );
 
             }
