@@ -123,7 +123,7 @@
                             <td><%= acc.getBookState() %></td>
                             <td><%= acc.getPaymentPrice() %></td>
                             <td><%= acc.getCheckInTime() %></td>
-                            <td><%= acc.getCheckOutTiem() %></td>
+                            <td><%= acc.getCheckOutTime() %></td>
                             <td><%= acc.getEnteringState() %></td>
                             <td><%= acc.getMemberID() %></td>
                             <td><%= acc.getRegistrantID() %></td>

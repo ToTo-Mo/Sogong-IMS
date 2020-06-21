@@ -31,7 +31,7 @@ public class AccomodationBookHistoryDeleteAction implements Action {
             String bookState  = request.getParameter("inputBookState");
             int paymentPrice = Integer.parseInt(request.getParameter("inputPaymentPrice"));
             LocalDateTime checkInTime = LocalDateTime.parse(request.getParameter("inputCheckInTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            LocalDateTime checkOutTiem = LocalDateTime.parse(request.getParameter("inputCheckOutTiem"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            LocalDateTime checkOutTime = LocalDateTime.parse(request.getParameter("inputCheckOutTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             String enteringState = request.getParameter("inputEnteringState");
             String memberID = request.getParameter("inputMemberID");
             String registrantID = request.getParameter("inputRegistrantID");
@@ -48,7 +48,7 @@ public class AccomodationBookHistoryDeleteAction implements Action {
                     .bookState(bookState)
                     .paymentPrice(paymentPrice)
                     .checkInTime(checkInTime)
-                    .checkOutTiem(checkOutTiem)
+                    .checkOutTime(checkOutTime)
                     .enteringState(enteringState)
                     .memberID(memberID)
                     .registrantID(registrantID)

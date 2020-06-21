@@ -43,7 +43,7 @@ public class AccomodationBookHistoryEnrollAction implements Action {
             String bookState  = request.getParameter("inputBookState");
             int paymentPrice = Integer.parseInt(request.getParameter("inputPaymentPrice"));
             LocalDateTime checkInTime = createDate[0];
-            LocalDateTime checkOutTiem = createDate[1];
+            LocalDateTime checkOutTime = createDate[1];
             String enteringState = request.getParameter("inputEnteringState");
             String memberID = request.getParameter("inputMemberID");
             String registrantID = request.getParameter("inputRegistrantID");
@@ -60,7 +60,7 @@ public class AccomodationBookHistoryEnrollAction implements Action {
                     .bookState(bookState)
                     .paymentPrice(paymentPrice)
                     .checkInTime(checkInTime)
-                    .checkOutTiem(checkOutTiem)
+                    .checkOutTime(checkOutTime)
                     .enteringState(enteringState)
                     .memberID(memberID)
                     .registrantID(registrantID)

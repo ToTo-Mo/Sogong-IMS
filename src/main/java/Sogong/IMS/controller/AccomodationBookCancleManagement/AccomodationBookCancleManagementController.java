@@ -24,10 +24,10 @@ public class AccomodationBookCancleManagementController extends HttpServlet {
      public void init(ServletConfig sc) throws ServletException {
          list = new HashMap<>();
  
-         list.put("/enroll.do", new AccomodationBookCancleHistoryEnrollAction());
-         list.put("/lookup.do", new AccomodationBookCancleHistoryLookupAction());
-         list.put("/modify.do", new AccomodationBookCancleHistoryModifyAction());
-         list.put("/delete.do", new AccomodationBookCancleHistoryDeleteAction());
+         list.put("enroll.do", new AccomodationBookCancleHistoryEnrollAction());
+         list.put("lookup.do", new AccomodationBookCancleHistoryLookupAction());
+         list.put("modify.do", new AccomodationBookCancleHistoryModifyAction());
+         list.put("delete.do", new AccomodationBookCancleHistoryDeleteAction());
      }
  
      // get이나 post 요청에 대한 처리를 수행합니다.
@@ -36,9 +36,10 @@ public class AccomodationBookCancleManagementController extends HttpServlet {
       
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
-        String path = url.substring(servletPath.length());
 
-         if (list.get(path) != null) {
+        String path = url.substring(servletPath.length()).split("/")[1];
+
+        if(list.get(path) !=null){
             Action action = list.get(path);
             action.excute(request, response);
         }

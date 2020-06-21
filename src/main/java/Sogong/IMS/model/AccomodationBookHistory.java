@@ -22,7 +22,7 @@ public class AccomodationBookHistory {
     private String bookState;
     private int paymentPrice;
     private LocalDateTime checkInTime;
-    private LocalDateTime checkOutTiem;
+    private LocalDateTime checkOutTime;
     private String enteringState;
     private String memberID;
     private String registrantID;

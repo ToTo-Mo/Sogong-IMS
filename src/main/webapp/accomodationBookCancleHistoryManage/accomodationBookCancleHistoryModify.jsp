@@ -2,10 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="Sogong.IMS.model.AccomodationBookCancleHistory" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-<%@ page import="Sogong.IMS.dao.AccomodationBookCancleHistoryDAO;" %>
+<%@ page import="Sogong.IMS.dao.AccomodationBookCancleHistoryDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +31,7 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
 
     <!-- 화면 이름 -->
-    <title>숙박시설 예약 정보 수정</title>
+    <title>숙박시설 예약취소 수정</title>
 </head>
 
 <%
@@ -99,7 +96,7 @@
                         <span class="input-group-text" id="basic-addon7">사유</span>
                     </div>
                     <textarea class="form-control" rows="3" name="inputCancleReason" 
-                    aria-describedby="basic-addon7" autocomplete="off" required value=<%=acc.getCancleReason()%>></textarea>
+                    aria-describedby="basic-addon7" autocomplete="off" required><%=acc.getCancleReason()%></textarea>
                 </div>
             </div>
 

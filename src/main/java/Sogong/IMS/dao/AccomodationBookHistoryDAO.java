@@ -63,7 +63,7 @@ public class AccomodationBookHistoryDAO {
             stmt.setString(6, accomodationBookHistory.getBookState());
             stmt.setInt(7, accomodationBookHistory.getPaymentPrice());
             stmt.setObject(8, accomodationBookHistory.getCheckInTime());
-            stmt.setObject(9,accomodationBookHistory.getCheckOutTiem());
+            stmt.setObject(9,accomodationBookHistory.getCheckOutTime());
             stmt.setString(10, accomodationBookHistory.getEnteringState());
             stmt.setString(11, accomodationBookHistory.getMemberID());
             stmt.setString(12, accomodationBookHistory.getRegistrantID());
@@ -124,7 +124,7 @@ public class AccomodationBookHistoryDAO {
             stmt.setString(5, accomodationBookHistory.getBookState());
             stmt.setInt(6,accomodationBookHistory.getPaymentPrice());
             stmt.setObject(7, accomodationBookHistory.getCheckInTime());
-            stmt.setObject(8, accomodationBookHistory.getCheckOutTiem());
+            stmt.setObject(8, accomodationBookHistory.getCheckOutTime());
             stmt.setString(9, accomodationBookHistory.getEnteringState());
             stmt.setString(10, accomodationBookHistory.getRegistrantID());
             stmt.setInt(11, accomodationBookHistory.getRoomNum());
