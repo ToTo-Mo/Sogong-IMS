@@ -27,10 +27,16 @@ public class WorkspacePropertyDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
+
+            /*
+                WorkspaceProperty 테이블의 속성은 총 10개이므로, INSERT 시 속성은 총 10개가 필요하며 VALUE도 동일하게 10개 필요합니다.
+
+                VALUE뒤에 ?가 2개가 아닌 10개가 있어야 합니다. 
+            */
+
             String sql = "INSERT INTO `workspaceproperty`(`representativeName`,`workspaceAddress`,`phoneNum`,`typeOfBusiness`,`workspaceMemberCount`,`workspaceStatus`,`registrantID`,`workspaceID`,`workspaceName`) VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
 
-            //id는 autoincrement이므로 추가하지 않습니다.
             stmt.setString(1, workspaceproperty.getRepresentativeName());
             stmt.setString(2, workspaceproperty.getWorkspaceAddress());
             stmt.setString(3, workspaceproperty.getPhoneNum());
@@ -78,6 +84,14 @@ public class WorkspacePropertyDAO {
             stmt.setString(6, workspaceproperty.getWorkspaceStatus());
             stmt.setString(7, workspaceproperty.getWorkspaceID());
             stmt.setString(8, workspaceproperty.getWorkspaceName());
+            
+
+            /*
+                ?가 10개인데 지금 설정한건 8 개입니다. 7번째 순서가 registrantID가 되어아 하고 7,10번째 부분이 빠져있습니다.
+
+                stmt.setString(7, workspaceproperty.getRegistrantID());
+                stmt.setString(10, workspaceproperty.getCorporateRegistrantNumber());
+            */
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
