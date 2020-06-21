@@ -37,12 +37,13 @@ public class WorkspaceDAO {
                 stmt.setString(3, workspace.getRegistrantID());
             */
 
-            String sql = "INSERT INTO `workspace`(`workspaceName`,`registrantID`) VALUES (?,?)";
+            String sql = "INSERT INTO `workspace`(`workspaceID`,`workspaceName`,`registrantID`) VALUES (?,?)";
             stmt = conn.prepareStatement(sql);
 
             //id는 autoincrement이므로 추가하지 않습니다.
-            stmt.setString(1, workspace.getWorkspaceName());
-            stmt.setString(2, workspace.getRegistrantID());
+            stmt.setString(1, workspace.getWorkspaceID());
+            stmt.setString(2, workspace.getWorkspaceName());
+            stmt.setString(3, workspace.getRegistrantID());
 
             stmt.executeUpdate();
 
@@ -74,6 +75,7 @@ public class WorkspaceDAO {
 
             stmt.setString(1,workspace.getWorkspaceName());
             stmt.setString(2,workspace.getRegistrantID());
+            stmt.setString(3,workspace.getWorkspaceID());
 
             /*
                 sql에 ?가 3개인데 2개 밖에 set이 지정이 안되있으니
