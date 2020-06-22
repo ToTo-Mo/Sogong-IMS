@@ -37,8 +37,6 @@ public class WorkspacePropertyDAO {
             stmt.setString(4, workspaceproperty.getTypeOfBusiness());
             stmt.setInt(5, workspaceproperty.getWorkspaceMemberCount());
             stmt.setString(6, workspaceproperty.getWorkspaceStatus());
-            stmt.setString(7, workspaceproperty.getRegistrantID());
-            stmt.setString(8, workspaceproperty.getWorkspaceID());
             stmt.setString(9, workspaceproperty.getWorkspaceName());
 
 
