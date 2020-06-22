@@ -37,7 +37,7 @@ public class WorkspaceDAO {
                 stmt.setString(3, workspace.getRegistrantID());
             */
 
-            String sql = "INSERT INTO `workspace`(`workspaceID`,`workspaceName`,`registrantID`) VALUES (?,?)";
+            String sql = "INSERT INTO `workspace`(`workspaceID`,`workspaceName`,`registrantID`) VALUES (?,?,?)";
             stmt = conn.prepareStatement(sql);
 
             //id는 autoincrement이므로 추가하지 않습니다.
