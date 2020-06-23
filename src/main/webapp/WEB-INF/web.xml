@@ -151,4 +151,32 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/accomodationBookCancleHistoryModify/*</url-pattern>
 </servlet-mapping>
 <!-- 예약 관리 끝 -->
+
+<!-- 시설 요금 및 할인율 관리 시작-->
+<servlet>
+    <servlet-name>facilityChargeManage</servlet-name>
+    <jsp-file>/facilitychargeManage/FacilitychargeManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>facilityChargeManage</servlet-name>
+    <url-pattern>/faclityChargeManage/*</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>facilityChargeEnroll</servlet-name>
+    <jsp-file>/facilitychargeManage/FacilitychargeEnroll.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>facilityChargeEnroll</servlet-name>
+    <url-pattern>/facilityChargeEnroll</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>facilityChargeModify</servlet-name>
+    <jsp-file>/facilitychargeManage/FacilitychargeModify.jsp</jsp-file>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>facilityChargeModify</servlet-name>
+        <url-pattern>/facilityChargeModify</url-pattern>
+    </servlet-mapping>
 </web-app> 
