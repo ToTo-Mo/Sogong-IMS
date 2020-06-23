@@ -36,8 +36,8 @@ public class FacilityChargeDAO {
             stmt.setString(2, facilityCharge.getWorkspaceID());
             stmt.setString(3, facilityCharge.getChargeName());
             stmt.setInt(4, facilityCharge.getCharge());
-            stmt.setString(5, facilityCharge.getIsDiscount());
-            stmt.setString(6, facilityCharge.getDiscountRate());
+            stmt.setBoolean(5, facilityCharge.isDiscount());
+            stmt.setFloat(6, facilityCharge.getDiscountRate());
             stmt.setString(7, facilityCharge.getResistrantID());
 
             stmt.executeUpdate();
@@ -104,7 +104,7 @@ public class FacilityChargeDAO {
 
             stmt.setString(1, facilityCharge.getChargeName());
             stmt.setInt(2, facilityCharge.getCharge());
-            stmt.setBoolean(3, facilityCharge.getIsDiscount());
+            stmt.setBoolean(3, facilityCharge.isDiscount());
             stmt.setFloat(4, facilityCharge.getDiscountRate());
             stmt.setString(5, facilityCharge.getWorkspaceID());
             stmt.setString(6, facilityCharge.getFacilityID());

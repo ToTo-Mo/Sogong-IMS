@@ -56,7 +56,7 @@ public class FacilityChargeModifyAction implements Action{
 
                 facilityCharge.setChargeName(newChargeName);
                 facilityCharge.setCharge(newCharge);
-                facilityCharge.setIsDiscount(newIsDiscount);
+                facilityCharge.setDiscount(newIsDiscount);
                 facilityCharge.setDiscountRate(newDiscountRate);
 
                 boolean isOK = new FacilityChargeDAO().modify(prevChargeName, facilityCharge);

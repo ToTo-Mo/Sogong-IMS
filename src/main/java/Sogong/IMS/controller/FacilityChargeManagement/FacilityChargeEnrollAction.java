@@ -60,7 +60,7 @@ public class FacilityChargeEnrollAction implements Action{
                     facilityCharge.setFacilityID(facilityID);
                     facilityCharge.setChargeName(chargeName);
                     facilityCharge.setCharge(charge);
-                    facilityCharge.setIsDiscount(isDiscount);
+                    facilityCharge.setDiscount(isDiscount);
                     facilityCharge.setDiscountRate(discountRate);
                     facilityCharge.setResistrantID(resistrantID);
 
