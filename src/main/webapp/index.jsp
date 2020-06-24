@@ -98,13 +98,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/paymentManage">
+                            <a class="nav-link" href="/paymentHistoryManage">
                                 숙박 시설 결제 내역 관리
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/refundManage">
+                            <a class="nav-link" href="/refundHistoryManage">
                                 숙박 시설 환불 내역 관리
                             </a>
                         </li>

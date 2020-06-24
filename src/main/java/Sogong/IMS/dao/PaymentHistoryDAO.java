@@ -31,7 +31,7 @@ public class PaymentHistoryDAO {
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "INSERT INTO `PaymentHistory`(`paymentHistoryID`,`accomodationBookID`,`registantID`,`price`,`paymentMethod`, `paymentTime`) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO 'sogondo`.`paymentHistory`(`paymentHistoryID`,`accomodationBookID`,`registantID`,`price`,`paymentMethod`, `paymentTime`) VALUES (?,?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1,paymentHistory.getPaymentHistoryID());
@@ -70,7 +70,7 @@ public class PaymentHistoryDAO {
             StringBuilder sqlBuilder = new StringBuilder();
 
             sqlBuilder.append("SELECT * FROM ")
-                        .append("`example` ");
+                        .append("`paymentHistory` ");
 
             // 조건 검색
             if (condition.size()>0) 
@@ -154,7 +154,7 @@ public class PaymentHistoryDAO {
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             stmt = conn.prepareStatement(
-                    "DELETE FROM `PaymentHistory` WHERE `memberID`=?");
+                    "DELETE FROM `paymentHistory` WHERE `paymentHistoryID`=?");
             stmt.setString(1, paymentHistory.getPaymentHistoryID());
             
             return stmt.execute();
@@ -179,7 +179,7 @@ public class PaymentHistoryDAO {
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
 
-            String sql = "UPDATE `sogongdo`.`example` SET `id` =?, `title` = ?, `createDate` = ? WHERE `id` = ?;";
+            String sql = "UPDATE `sogongdo`.`PaymentHistory` SET `accomodationBookHistoryID` = ?, `registrantID` = ?,`price` = ?, `paymentMethod` = ?, `paymentTime` = ?, WHERE `paymenyHistoryID` =?;";
 
             stmt = conn.prepareStatement(sql);
 
@@ -190,7 +190,9 @@ public class PaymentHistoryDAO {
             stmt.setString(5,paymentHistory.getPaymentMethod());
             stmt.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
 
+            stmt.executeUpdate();
 
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {
