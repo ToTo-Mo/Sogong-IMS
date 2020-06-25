@@ -1,12 +1,15 @@
 package Sogong.IMS.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FacilityCharge {
-    private String facilityID;
+    private Workspace workspaceID;
+    private Facility facilityID;
     private String chargeName;
     private int charge;
     private boolean isDiscount;
