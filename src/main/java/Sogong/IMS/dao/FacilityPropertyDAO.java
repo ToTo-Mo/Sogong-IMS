@@ -43,6 +43,7 @@ public class FacilityPropertyDAO {
 			stmt.setInt(5, facilityProperty.getFacilityScale());
 			stmt.setInt(6, facilityProperty.getFacilityCost());
 			stmt.execute();
+			conn.close();
 			return true;
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
@@ -91,6 +92,7 @@ public class FacilityPropertyDAO {
 						new FacilityProperty(facilityPropertyID,facilityID, registrantID,openingDate,facilityScale,facilityCost)
 				);
 			}
+			conn.close();
 			return list.toArray(new FacilityProperty[list.size()]);
 		}
 		catch (Exception e){
@@ -120,6 +122,7 @@ public class FacilityPropertyDAO {
 			stmt.setInt(6,facilityProperty.getFacilityCost());
 			stmt.setString(7,facilityProperty.getFacilityPropertyID());
 			stmt.execute();
+			conn.close();
 			return true;
 		}
 		catch (Exception e){
@@ -139,6 +142,7 @@ public class FacilityPropertyDAO {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, facilityPropertyID);
 			stmt.execute();
+			conn.close();
 			return true;
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();

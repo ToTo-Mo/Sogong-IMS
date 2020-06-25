@@ -48,7 +48,7 @@ public class FacilityDAO {
             stmt.setString(3, facility.getWorkspaceID());
             stmt.setString(4, facility.getFacilityName());
             stmt.execute();
-
+            conn.close();
             return true;
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
@@ -94,7 +94,7 @@ public class FacilityDAO {
             );
 
         }
-
+        conn.close();
         return list.toArray(new Facility[list.size()]);
     }
 
@@ -114,6 +114,7 @@ public class FacilityDAO {
             stmt.setString(4,facility.getFacilityName());
             stmt.setString(5,facility.getFacilityID());
             stmt.execute();
+            conn.close();
             return true;
         }
         catch (Exception e){
@@ -134,6 +135,7 @@ public class FacilityDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, facilityID);
             stmt.execute();
+            conn.close();
             return true;
         }catch (Exception e){
             e.printStackTrace();

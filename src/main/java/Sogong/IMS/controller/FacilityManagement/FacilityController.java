@@ -1,6 +1,7 @@
 package Sogong.IMS.controller.FacilityManagement;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
@@ -25,8 +26,24 @@ public class FacilityController extends HttpServlet {
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
         String path = url.substring(servletPath.length()).split("/")[1];
-        Action action = list.get(path);
-        action.excute(request, response);
+
+
+        HashMap<String,String> authorityList = new HashMap<>();
+        authorityList.put("enroll.do", "시설_등록");
+        authorityList.put("modify.do", "시설_수정");
+        authorityList.put("delete.do", "시설_삭제");
+        authorityList.put("lookup.do", "시설_조회");
+
+        if(request.getSession().getAttribute("member") != null && hasAuthority((Member) request.getSession().getAttribute("member"), authorityList.get(path))){
+            Action action = list.get(path);
+            action.excute(request, response);
+        }
+        else {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter printWriter = response.getWriter();
+            printWriter.print(String.format("<script>alert('권한이 없습니다'); location.replace('%s')</script>", request.getServletPath()));
+        }
     }
     @Override
     public void init(ServletConfig sc) throws ServletException {

@@ -41,6 +41,7 @@ public class DeviceDAO {
 				stmt.setString(5, device.getInstruction());
 				stmt.setInt(6, device.getInstructionCost());
 				stmt.execute();
+				conn.close();
 				return true;
 			}catch (Exception e){
 				e.printStackTrace();
@@ -80,6 +81,7 @@ public class DeviceDAO {
 				int instructionCost = rs.getInt("instructionCost");
 				list.add(new Device(deviceID, facilityPropertyID, registrantID, deviceName, instruction, instructionCost));
 			}
+			conn.close();
 			return list.toArray(new Device[list.size()]);
 		}catch (Exception e){
     		e.printStackTrace();
@@ -103,6 +105,7 @@ public class DeviceDAO {
 			stmt.setInt(6, device.getInstructionCost());
 			stmt.setString(7, device.getDeviceID());
 			stmt.execute();
+			conn.close();
 			return true;
 		}catch (Exception e){
     		e.printStackTrace();
@@ -122,6 +125,7 @@ public class DeviceDAO {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, deviceID);
 			stmt.execute();
+			conn.close();
 			return true;
 		}catch (Exception e){
     		e.printStackTrace();
