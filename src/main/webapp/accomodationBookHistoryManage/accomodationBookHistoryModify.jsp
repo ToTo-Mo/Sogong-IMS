@@ -6,6 +6,8 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="Sogong.IMS.model.Member" %>
 
 <!DOCTYPE html>
 <html>
@@ -56,7 +58,18 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/modify.do" method="POST">
+        <form action="${pageContext.request.contextPath}/accomodationBookHistoryManage/modify.do" method="POST">
+
+            <!-- 일반 텍스트 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">예약번호</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookHistoryID"
+                           aria-describedby="basic-addon1" autocomplete="off" required readonly value =<%=acc.getAccomodationBookHistoryID()%>>
+                </div>
+            </div>
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
@@ -65,7 +78,7 @@
                         <span class="input-group-text" id="basic-addon1">예약인 이름</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputName"
-                           aria-describedby="basic-addon1" autocomplete="off" required value =<%=acc.getAccomodationBookHistoryID()%>>
+                           aria-describedby="basic-addon1" autocomplete="off" required value =<%=acc.getName()%>>
                 </div>
             </div>
 
@@ -89,15 +102,19 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">예약상태</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputBookState"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getBookState()%>>
+
+        <div class="form-group">
+                <div class="input-group mb-3 mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon8">예약상태</span>
+                        </div>
+                        <select class="custom-select" aria-describedby="basic-addon8" name="inputBookState">
+                            <option value="결제중" selected>결제중</option>
+                            <option value="예약완료">예약완료</option>
+                            <option value="예약취소">예약취소</option>
+                        </select>
                 </div>
-            </div>
+          </div>
           
            <div class="form-group">
                 <div class="input-group mb-3">
@@ -133,16 +150,19 @@
                                aria-describedby="basic-addon4" autocomplete="off" required value="<%=timeRange%>">
                     </div>
             </div>
-            
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">입실상태</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputEnteringState"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getEnteringState()%>>
+
+             <div class="form-group">
+                <div class="input-group mb-3 mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon8">입실상태</span>
+                        </div>
+                        <select class="custom-select" aria-describedby="basic-addon8" name="inputEnteringState" id="idEnteringState">
+                            <option value="입실전" selected>입실전</option>
+                            <option value="입실중">입실중</option>
+                            <option value="퇴실">퇴실</option>
+                        </select>
                 </div>
-            </div>
+          </div>
 
             <div class="form-group">
                 <div class="input-group mb-3">
@@ -157,10 +177,13 @@
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                    <%
+                        String registrantID = ((Member)session.getAttribute("member")).getMemberID();
+                    %>
                         <span class="input-group-text" id="basic-addon1">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getRegistrantID()%>>
+                           aria-describedby="basic-addon1" autocomplete="off" required value ="<%=registrantID%>" >
                 </div>
             </div>
 
@@ -205,41 +228,20 @@
     https://getbootstrap.com/docs/4.5/utilities/spacing/-->
     <div class="mb-5"></div>
 
-
-    
-
-</body>
-</html>
-
 <script>
    
-   let today = new Date();
-   let year =  today.getFullYear();
-   let month = today.getMonth()+1;
-   let date = today.getDate();
+  
    
    
-    $('input[name="inputBookDate"]').val(year +"/"+ month +"/"+date);
-
-    $(function () {
-        $('input[name="inputDateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="inputDateRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-        });
-
-        $('input[name="inputDateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
+    $(document).ready(function(){
+    $("select option[value='<%=acc.getEnteringState()%>']").attr("selected", true);
+     $("select option[value='<%=acc.getBookState()%>']").attr("selected", true);
     });
 
-    $(function () {
+
+
+
+     $(function () {
 
         $('input[name="inputCheckDateTimeRange"]').daterangepicker({
             autoUpdateInput: false,
@@ -252,7 +254,7 @@
         });
 
         $('input[name="inputCheckDateTimeRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD hh:mm') + '-' + picker.endDate.format('YYYY/MM/DD hh:mm'));
+            $(this).val(picker.startDate.format('YYYY-MM-DDThh:mm') + '~' + picker.endDate.format('YYYY-MM-DDThh:mm'));
         });
 
 
@@ -262,3 +264,8 @@
 
     });
 </script>
+    
+
+</body>
+</html>
+
