@@ -22,6 +22,7 @@ public class MemberDAO {
 	private static MemberDAO memberDAO = null;
 
     private MemberDAO() {
+
     }
 
     public static MemberDAO getInstance() {
@@ -35,21 +36,22 @@ public class MemberDAO {
             PreparedStatement st = null;
 
             Context context = new InitialContext();
-            con = ((DataSource) context.lookup("\"java:comp/env/jdbc/mysql\"")).getConnection();
+            con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "INSERT INTO `member` VALUES (?,?)";
+            // 
+            String sql = "INSERT INTO `member`(`memberID`, `memberPW`, `name`, `phoneNumber`, `address`, `email`, `memberType`, `department`) VALUES (?,?,?,?,?,?,?,?)";
             st = con.prepareStatement(sql);
 
             st.setString(1, m.getMemberID());
             st.setString(2, m.getMemberPW());
             st.setString(3, m.getName());
             st.setString(4, m.getPhoneNumber());
-            st.setString(4, m.getAddress());
-            st.setString(5, m.getEmail());
-            st.setString(6, m.getMemberType());
-            st.setString(7, m.getDepartment());
+            st.setString(5, m.getAddress());
+            st.setString(6, m.getEmail());
+            st.setString(7, m.getMemberType());
+            st.setString(8, m.getDepartment());
 
-            st.execute();
+            st.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
