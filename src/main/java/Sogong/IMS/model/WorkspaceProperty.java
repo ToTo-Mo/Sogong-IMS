@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 
 public class WorkspaceProperty {
-    private String corporateRegistrantNumber;
+    private String corporateRegistrationNumber;
     private String representativeName;
     private String workspaceAddress;
     private String phoneNum;

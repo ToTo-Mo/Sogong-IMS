@@ -34,13 +34,14 @@ public class WorkspacePropertyDAO {
                 VALUE뒤에 ?가 2개가 아닌 10개가 있어야 합니다. 
             */
 
-            String sql = "INSERT INTO `workspaceproperty`(`representativeName`,`workspaceAddress`,`phoneNum`,`typeOfBusiness`,`workspaceMemberCount`,`workspaceStatus`,`registrantID`,`workspaceID`,`workspaceName`) VALUES (?,?)";
+            String sql = "INSERT INTO `workspaceproperty`(`corporateRegistrationNumber`, `representitiveName`, `workspaceAddress`, `phoneNum`, `typeOfBusiness`, `workspaceMemberCount`, `workspaceStatus`, `registraintID`, `workspaceID`) VALUES (?,?,?,?,?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, workspaceproperty.getRepresentativeName());
-            stmt.setString(2, workspaceproperty.getWorkspaceAddress());
-            stmt.setString(3, workspaceproperty.getPhoneNum());
-            stmt.setString(4, workspaceproperty.getTypeOfBusiness());
+            stmt.setString(1, workspaceproperty.getCorporateRegistrationNumber());
+            stmt.setString(2, workspaceproperty.getRepresentativeName());
+            stmt.setString(3, workspaceproperty.getWorkspaceAddress());
+            stmt.setString(4, workspaceproperty.getPhoneNum());
+            stmt.setString(5, workspaceproperty.getTypeOfBusiness());
             stmt.setInt(5, workspaceproperty.getWorkspaceMemberCount());
             stmt.setString(6, workspaceproperty.getWorkspaceStatus());
             stmt.setString(9, workspaceproperty.getWorkspaceName());
