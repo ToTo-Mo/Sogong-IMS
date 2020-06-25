@@ -3,11 +3,8 @@ package Sogong.IMS.controller.PaymentHistoryManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
-=======
->>>>>>> 0f5d4a581f8d3359eae4952fde086aaa82e23731
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
