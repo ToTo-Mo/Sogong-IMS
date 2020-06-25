@@ -330,7 +330,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 </servlet>
 <servlet-mapping>
     <servlet-name>workspaceModify</servlet-name>
-    <url-pattern>/workspaceModify</url-pattern>
+    <url-pattern>/workspaceModify/*</url-pattern>
 </servlet-mapping>
 <!-- 사업장 관리 끝 -->
 </web-app> 
