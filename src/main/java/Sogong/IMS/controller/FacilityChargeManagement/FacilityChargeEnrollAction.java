@@ -9,8 +9,6 @@ import Sogong.IMS.model.Facility;
 import Sogong.IMS.model.FacilityCharge;
 import Sogong.IMS.model.Workspace;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -36,12 +34,12 @@ public class FacilityChargeEnrollAction implements Action{
 
             boolean isDiscount = false;
 
-            String strIsDiscount = request.getParameter("inputIsDiscount");
-            switch (strIsDiscount) {
-                case "예":
+            int intIsDiscount = Integer.parseInt(request.getParameter("selectedDiscount"));
+            switch (intIsDiscount) {
+                case 1:
                     isDiscount = true;
                     break;
-                case "아니오":
+                case 0:
                     isDiscount = false;
                     break;
             }
@@ -60,14 +58,8 @@ public class FacilityChargeEnrollAction implements Action{
 
                     FacilityCharge facilityCharge = new FacilityCharge();
 
-                    Workspace workspace = new Workspace();
-                    Facility facility = new Facility();
-
-                    workspace.setWorkspaceID(workspaceID);
-                    facility.setFacilityID(facilityID);
-
-                    facilityCharge.setWorkspaceID(workspace);
-                    facilityCharge.setFacilityID(facility);
+                    facilityCharge.setWorkspaceID(workspaceID);
+                    facilityCharge.setFacilityID(facilityID);
                     facilityCharge.setChargeName(chargeName);
                     facilityCharge.setCharge(charge);
                     facilityCharge.setDiscount(isDiscount);

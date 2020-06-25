@@ -22,25 +22,21 @@ public class FacilityChargeModifyAction implements Action{
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = response.getWriter();
 
-            String workspaceID = StringUtils.defaultIfBlank(request.getParameter("inputWorkspaceID"), null);
-            String facilityID = StringUtils.defaultIfBlank(request.getParameter("inputFacilityID"), null);
-            String prevChargeName = StringUtils.defaultIfBlank(request.getParameter("inputPreviousChargeName"), null);
+            String workspaceID = StringUtils.defaultIfBlank(request.getParameter("WorkspaceID"), null);
+            String facilityID = StringUtils.defaultIfBlank(request.getParameter("FacilityID"), null);
+            String prevChargeName = StringUtils.defaultIfBlank(request.getParameter("prevChargeName"), null);
 
-            String newChargeName;
-            int newCharge;
+            String newChargeName = StringUtils.defaultIfBlank(request.getParameter("inputChargeName"), null);
+            int newCharge = Integer.parseInt(request.getParameter("inputCharge"));
+            float newDiscountRate = Float.parseFloat(request.getParameter("inputDiscountRate"));
             boolean newIsDiscount = false;
-            float newDiscountRate;
 
-            newChargeName = StringUtils.defaultIfBlank(request.getParameter("inputNewChargeName"), null);
-            newCharge = Integer.parseInt(request.getParameter("inputNewCharge"));
-            newDiscountRate = Float.parseFloat(request.getParameter("inputNewDiscountRate"));
-
-            String strNewIsDiscount = StringUtils.defaultIfBlank(request.getParameter("inputNewIsDiscount"), null);
-            switch (strNewIsDiscount) {
-                case "예":
+            int intNewIsDiscount = Integer.parseInt(request.getParameter("selectedDiscount"));
+            switch (intNewIsDiscount) {
+                case 1:
                     newIsDiscount = true;
                     break;
-                case "아니오":
+                case 0:
                     newIsDiscount = false;
                     break;
             }
