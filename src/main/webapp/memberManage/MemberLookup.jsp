@@ -9,7 +9,7 @@
     <title>회원조회</title>
     <script>
         function modify(memberID) {
-            var url = "${pageContext.request.contextPath}/membermodify/" +memberID;
+            var url = "${pageContext.request.contextPath}/memberModify/" +memberID;
         console.log(url);
         var name = "modify popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
