@@ -51,15 +51,6 @@
                     <%-- 하나의 입력 필드 입니다. --%>
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">숙박시설명</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputAccomodationID"
-                               aria-describedby="basic-addon1" autocomplete="off">
-                    </div>
-
-                    <%-- 하나의 입력 필드 입니다. --%>
-                    <div class="input-group mb-3 mr-3">
-                        <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">결제수단</span>
                         </div>
                         <input type="text" class="form-control" placeholder="입력" name="inputPaymentMethod"
@@ -91,7 +82,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">등록자</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="registrantName"
+                        <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
                                aria-describedby="basic-addon2" autocomplete="off">
                     </div>
 
@@ -202,18 +193,6 @@
             <%-- 조회 필드 끝 --%>
 
         </div>
-
-
-
-        <%-- 추가 버튼  justify-content-end는 요소들을 오른쪽 정렬하겠다는 의미 입니다. --%>
-        <div class="row justify-content-end">
-            <div class="col-auto">
-                <div class="input-group mb-3 mr-3">
-                    <button type="button" class="btn btn-secondary bg-dark" onclick="enrollPopup()">추가</button>
-                </div>
-            </div>
-        </div>
-
 </div>
 
 </main>
