@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="Sogong.IMS.model.Member" %>
 
 <!DOCTYPE html>
 <html>
@@ -68,7 +70,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">인원</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputNumOfPeople"
+                    <input type="number" class="form-control" placeholder="입력" name="inputNumOfPeople"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
@@ -78,20 +80,12 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">전화번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputPhoneNum"
+                    <input type="tel" class="form-control" placeholder="입력" name="inputPhoneNum"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
 
-            <%-- <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">예약상태</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputBookState"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
-                </div>
-            </div> --%>
+           
             <div class="form-group">
                 <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
@@ -110,7 +104,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">결제금액</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputPaymentPrice"
+                    <input type="number" class="form-control" placeholder="입력" name="inputPaymentPrice"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
@@ -137,15 +131,6 @@
                     </div>
             </div>
             
-            <%-- <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">입실상태</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputEnteringState"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
-                </div>
-            </div> --%>
             <div class="form-group">
                 <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
@@ -172,22 +157,27 @@
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                    <%
+                        String registrantID = ((Member)session.getAttribute("member")).getMemberID();
+                    %>
                         <span class="input-group-text" id="basic-addon1">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value ="<%=registrantID%>" >
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">숙박시설</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                <div class="input-group mb-3 mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon8">숙박시설</span>
+                        </div>
+                        <select class="custom-select" aria-describedby="basic-addon8" name="inputAccomodationID">
+                            <option value="통나무펜션" selected>통나무펜션</option>
+                            <option value="인빈관">인빈관</option>
+                        </select>
                 </div>
-            </div>
+          </div>
 
         <div class="form-group">
                 <div class="input-group mb-3">

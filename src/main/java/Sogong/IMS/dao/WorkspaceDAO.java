@@ -82,6 +82,9 @@ public class WorkspaceDAO {
                 77번째 줄에 stmt.getString(3,workspace.getWorkspaceID());를 추가합니다.
             */
 
+            stmt.executeUpdate();
+            return true;
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

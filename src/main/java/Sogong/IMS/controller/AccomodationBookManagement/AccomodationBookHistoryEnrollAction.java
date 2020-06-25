@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.AccomodationBookHistoryDAO;
+import Sogong.IMS.dao.MemberAuthorityGroupDAO;
+import Sogong.IMS.dao.MemberDAO;
 import Sogong.IMS.model.AccomodationBookHistory;
 
 public class AccomodationBookHistoryEnrollAction implements Action {
@@ -50,27 +53,51 @@ public class AccomodationBookHistoryEnrollAction implements Action {
             String accomodationID = request.getParameter("inputAccomodationID");
             int roomNum = Integer.parseInt(request.getParameter("inputRoomNum"));
             
-            new AccomodationBookHistoryDAO().enroll(
-                    AccomodationBookHistory.builder()
-                    .accomodationBookHistoryID(accomodationBookHistoryID)
-                    .numOfPeople(numOfPeople)
-                    .name(name)
-                    .phoneNum(phoneNum)
-                    .bookDate(bookDate)
-                    .bookState(bookState)
-                    .paymentPrice(paymentPrice)
-                    .checkInTime(checkInTime)
-                    .checkOutTime(checkOutTime)
-                    .enteringState(enteringState)
-                    .memberID(memberID)
-                    .registrantID(registrantID)
-                    .accomodationID(accomodationID)
-                    .roomNum(roomNum)
-                            .build());
 
-            out.println("<script>alert('성공적으로 등록되었습니다.')</script>");
+            Boolean isOk = null;
+            HashMap<String, Object> condition = new HashMap<>();
+           
+           condition.put("memberID",memberID);
+           MemberDAO memDAO = MemberDAO.getInstance();
+           if (memDAO.lookup(condition).length <= 0) {
+            out.println("<script>alert('존재하지 않는 회원ID입니다.')</script>");
             out.println("<script>self.close()</script>");
+            isOk = false;
+           } else {
+               condition.clear();
+               isOk = true;
+           }
+           
+           if(isOk){
+            AccomodationBookHistoryDAO accBookDAO = new AccomodationBookHistoryDAO();
+            condition.put("accomodationBookHistoryID", accomodationBookHistoryID);
+ 
+            if (accBookDAO.lookup(condition).length <= 0) {
+                isOk = accBookDAO
+                        .enroll(AccomodationBookHistory.builder().accomodationBookHistoryID(accomodationBookHistoryID)
+                                .numOfPeople(numOfPeople).name(name).phoneNum(phoneNum).bookDate(bookDate)
+                                .bookState(bookState).paymentPrice(paymentPrice).checkInTime(checkInTime)
+                                .checkOutTime(checkOutTime).enteringState(enteringState).memberID(memberID)
+                                .registrantID(registrantID).accomodationID(accomodationID).roomNum(roomNum).build());
+ 
+                if (isOk) {
+                    out.println("<script>alert('성공적으로 등록되었습니다.')</script>");
+                    out.println("<script>self.close()</script>");
+                } else {
+                    out.println("<script>alert('등록이 실패되었습니다. 등록 정보를 다시 한번 확인하세요')</script>");
+                    out.println("<script>self.close()</script>");
+                }
+ 
+            } else {
+                out.println("<script>alert('이미 존재하는 예약번호입니다.')</script>");
+                out.println("<script>self.close()</script>");
+            }
+           }
+           
+
+           
             out.flush();
+
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
