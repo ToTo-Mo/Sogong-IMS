@@ -121,6 +121,18 @@
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">결제 수단</span>
+                    </div>
+                    <select name="paymentMethod" required>
+                        <option value="무통장입금">무통장입금</option>
+                        <option value="카드결제">카드결제</option>
+                        <option value="상품권">상품권</option>
+                    </select>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-3">
                     <button type="submit" class="btn btn-secondary bg-dark">구매</button>
