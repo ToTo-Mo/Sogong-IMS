@@ -1,15 +1,12 @@
 package Sogong.IMS.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -22,6 +19,7 @@ public class MemberDAO {
 	private static MemberDAO memberDAO = null;
 
     private MemberDAO() {
+
     }
 
     public static MemberDAO getInstance() {
@@ -29,27 +27,27 @@ public class MemberDAO {
         return memberDAO;
     }
 
-    public boolean enroll(Member m) {
+    public boolean enroll(Member member) {
         try {
             Connection con = null;
-            PreparedStatement st = null;
+            PreparedStatement stmt = null;
 
             Context context = new InitialContext();
-            con = ((DataSource) context.lookup("\"java:comp/env/jdbc/mysql\"")).getConnection();
+            con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "INSERT INTO `member` VALUES (?,?)";
-            st = con.prepareStatement(sql);
+            String sql = "INSERT INTO `member`(`memberID`, `memberPW`, `name`, `phoneNumber`, `address`, `email`, `memberType`, `department`) VALUES (?,?,?,?,?,?,?,?)";
+            stmt = con.prepareStatement(sql);
 
-            st.setString(1, m.getMemberID());
-            st.setString(2, m.getMemberPW());
-            st.setString(3, m.getName());
-            st.setString(4, m.getPhoneNumber());
-            st.setString(4, m.getAddress());
-            st.setString(5, m.getEmail());
-            st.setString(6, m.getMemberType());
-            st.setString(7, m.getDepartment());
+            stmt.setString(1, member.getMemberID());
+            stmt.setString(2, member.getMemberPW());
+            stmt.setString(3, member.getName());
+            stmt.setString(4, member.getPhoneNumber());
+            stmt.setString(5, member.getAddress());
+            stmt.setString(6, member.getEmail());
+            stmt.setString(7, member.getMemberType());
+            stmt.setString(8, member.getDepartment());
 
-            st.execute();
+            stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,8 +103,8 @@ public class MemberDAO {
             	String memberType = rs.getString(7);
             	String department = rs.getString(8);
             	
-            	Member m = new Member(name, memberID, memberPW, phoneNumber, address, email, memberType, department, null);
-            	memList.add(m);
+            	Member member = new Member(name, memberID, memberPW, phoneNumber, address, email, memberType, department, null);
+            	memList.add(member);
             }
 
 
@@ -119,19 +117,19 @@ public class MemberDAO {
         return null;
     }
 
-    public boolean delete(String mID) {
+    public boolean delete(String memberID) {
         try {
             Connection con = null;
-            PreparedStatement st = null;
+            PreparedStatement stmt = null;
 
             Context context = new InitialContext();
             con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             String sql = "Delete FROM `member` WHERE memberID = ?";
-            st = con.prepareStatement(sql);
+            stmt = con.prepareStatement(sql);
 
-            st.setString(1,  mID);
-            st.execute();
+            stmt.setString(1,  memberID);
+            stmt.execute();
 
             return true;
         } catch (SQLException e) {
@@ -142,7 +140,8 @@ public class MemberDAO {
         return false;
     }
 
-    public boolean modify(Member m) {
+
+    public boolean modify(Member member) {
         try {
             Connection con = null;
             PreparedStatement st = null;
