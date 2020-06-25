@@ -32,11 +32,11 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon5">전체 판매 수량</span>
             </div>
-            <input type="number" class="form-control" name="minSalesNum" aria-describedby="basic-addon5">
+            <input type="number" class="form-control" name="minSalesNum" aria-describedby="basic-addon5" oninput="negativeHandler(this)">
             <div class="input-group-prepend">
                 <span class="input-group-text">~</span>
             </div>
-            <input type="number" class="form-control" name="maxSalesNum">
+            <input type="number" class="form-control" name="maxSalesNum" oninput="negativeHandler(this)">
         </div>
     </div>
     <div class="form-inline mt-4" style="position: relative">
@@ -44,11 +44,11 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">수익 합계</span>
             </div>
-            <input type="number" class="form-control" name="minSumSalesPrice" aria-describedby="basic-addon5">
+            <input type="number" class="form-control" name="minSumSalesPrice" aria-describedby="basic-addon5" oninput="negativeHandler(this)">
             <div class="input-group-prepend">
                 <span class="input-group-text">~</span>
             </div>
-            <input type="number" class="form-control" name="maxSumSalesPrice">
+            <input type="number" class="form-control" name="maxSumSalesPrice" oninput="negativeHandler(this)">
         </div>
 
         <div class="input-group col-6 mb-sm-n3 mb-3 mr-1">
@@ -116,4 +116,10 @@
             $(this).val('');
         });
     });
+    function negativeHandler(input){
+        if(input.value < 0){
+            alert("음수는 허용되지 않습니다");
+            input.value = 0;
+        }
+    }
 </script>

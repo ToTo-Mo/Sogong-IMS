@@ -66,7 +66,7 @@
                         <span class="input-group-text" id="basic-addon2">가격</span>
                     </div>
                     <input type="number" class="form-control" placeholder="입력" name="price"
-                           aria-describedby="basic-addon1" autocomplete="off" value=<%=aPackage.getPrice()%> required>
+                           aria-describedby="basic-addon1" autocomplete="off" oninput="negativeHandler(this)" value=<%=aPackage.getPrice()%> required>
                 </div>
             </div>
             <div class="form-group">
@@ -110,3 +110,12 @@
 </div>
 </body>
 </html>
+
+<script>
+    function negativeHandler(input){
+        if(input.value < 0){
+            alert("음수는 허용되지 않습니다");
+            input.value = 0;
+        }
+    }
+</script>

@@ -32,11 +32,11 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon5">가격 범위</span>
             </div>
-            <input type="number" class="form-control" name="packageMinPrice" aria-describedby="basic-addon5">
+            <input type="number" class="form-control" name="packageMinPrice" aria-describedby="basic-addon5" oninput="negativeHandler(this)">
             <div class="input-group-prepend">
                 <span class="input-group-text">~</span>
             </div>
-            <input type="number" class="form-control" name="packageMaxPrice">
+            <input type="number" class="form-control" name="packageMaxPrice" oninput="negativeHandler(this)">
         </div>
         <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
             <div class="input-group-prepend">
@@ -101,5 +101,11 @@
             var hei = child.document.body.offsetHeight + 200;        //30 과 40은 넉넉하게 하려는 임의의 값임
             child.resizeTo(wid, hei);
         };
+    }
+    function negativeHandler(input){
+        if(input.value < 0){
+            alert("음수는 허용되지 않습니다");
+            input.value = 0;
+        }
     }
 </script>
