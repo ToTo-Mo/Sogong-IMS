@@ -55,6 +55,16 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-name>memberModify</servlet-name>
     <url-pattern>/memberModify/*</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>myPage</servlet-name>
+    <jsp-file>/memberManage/MyPage.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>myPage</servlet-name>
+    <url-pattern>/myPage/*</url-pattern>
+</servlet-mapping>
 <!-- 회원 관리 끝-->
 
 
