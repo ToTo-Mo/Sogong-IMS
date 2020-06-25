@@ -1,4 +1,4 @@
-package Sogong.IMS.controller.authorityManagement;
+package Sogong.IMS.controller.AuthorityManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
