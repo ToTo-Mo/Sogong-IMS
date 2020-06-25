@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.AccomodationBookHistoryDAO;
 import Sogong.IMS.model.AccomodationBookHistory;
@@ -24,15 +26,27 @@ public class AccomodationBookHistoryModifyAction implements Action {
 
             PrintWriter out = response.getWriter();
 
+            LocalDateTime[] createDate = null;
+            String dateRange =  StringUtils.defaultIfBlank(request.getParameter("inputCheckDateTimeRange"), null);
+
+            if(dateRange != null){
+                createDate = new LocalDateTime[2];
+              
+                createDate[0] = LocalDateTime.parse(dateRange.split("~")[0]);   // 시작일
+                createDate[1] = LocalDateTime.parse(dateRange.split("~")[0]);   // 종료일
+            }
+           
+
+
             String accomodationBookHistoryID = request.getParameter("inputAccomodationBookHistoryID");
             int numOfPeople = Integer.parseInt(request.getParameter("inputNumOfPeople"));
             String name = request.getParameter("inputName");
             String phoneNum  = request.getParameter("inputPhoneNum");
-            LocalDate bookDate  = LocalDate.parse(request.getParameter("inputBookDate"), DateTimeFormatter.ISO_DATE); //yyyy-mm-dd
+            LocalDate bookDate  = LocalDate.parse(request.getParameter("inputBookDate"));
             String bookState  = request.getParameter("inputBookState");
             int paymentPrice = Integer.parseInt(request.getParameter("inputPaymentPrice"));
-            LocalDateTime checkInTime = LocalDateTime.parse(request.getParameter("inputCheckInTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            LocalDateTime checkOutTiem = LocalDateTime.parse(request.getParameter("inputCheckOutTiem"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            LocalDateTime checkInTime = createDate[0];
+            LocalDateTime checkOutTime = createDate[1];
             String enteringState = request.getParameter("inputEnteringState");
             String memberID = request.getParameter("inputMemberID");
             String registrantID = request.getParameter("inputRegistrantID");
@@ -49,7 +63,7 @@ public class AccomodationBookHistoryModifyAction implements Action {
                     .bookState(bookState)
                     .paymentPrice(paymentPrice)
                     .checkInTime(checkInTime)
-                    .checkOutTiem(checkOutTiem)
+                    .checkOutTime(checkOutTime)
                     .enteringState(enteringState)
                     .memberID(memberID)
                     .registrantID(registrantID)

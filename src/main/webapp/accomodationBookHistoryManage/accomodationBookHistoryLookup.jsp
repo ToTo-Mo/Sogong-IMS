@@ -89,8 +89,8 @@
 
                         <tr>
                             <th style="width: 7%">예약번호</th>
-                            <th style="width: 7%">인원</th>
-                            <th style="width: 7%">예약인 이름</th>
+                            <th style="width: 5%">인원</th>
+                            <th style="width: 6%">예약인 이름</th>
                             <th style="width: 7%">전화번호</th>
                             <th style="width: 7%">예약일자</th>
                             <th style="width: 7%">예약상태</th>
@@ -98,9 +98,11 @@
                             <th style="width: 7%">체크인</th>
                             <th style="width: 7%">체크아웃</th>
                             <th style="width: 7%">입실상태</th>
+                            <th style="width: 7%">회원ID</th>
+                            <th style="width: 7%">등록자</th>
                             <th style="width: 7%">숙박시설</th>
                             <th style="width: 6%">호실</th>
-                            <th style="width: 7%">등록자</th>
+                            
                             <%-- 이 th는 수정과 삭제 버튼을 위한 th입니다. --%>
                             <th style="width: 10%"><th>
                         </tr>
@@ -121,7 +123,7 @@
                             <td><%= acc.getBookState() %></td>
                             <td><%= acc.getPaymentPrice() %></td>
                             <td><%= acc.getCheckInTime() %></td>
-                            <td><%= acc.getCheckOutTiem() %></td>
+                            <td><%= acc.getCheckOutTime() %></td>
                             <td><%= acc.getEnteringState() %></td>
                             <td><%= acc.getMemberID() %></td>
                             <td><%= acc.getRegistrantID() %></td>
@@ -130,7 +132,7 @@
 
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary mr-2">수정</button>
+                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= acc.getAccomodationBookHistoryID()%>')">수정</button>
                                     <button type="button" class="btn btn-secondary">삭제</button>
                                 </div>
                             </td>
@@ -177,6 +179,21 @@
             var wid = child.document.body.offsetWidth + 30;
             var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
 
+            child.resizeTo(wid, hei);
+        };
+    }
+
+    function modifyPopup(accomodationBookHistoryID) {
+    
+        // 해당 url은 Authority
+        var url = "${pageContext.request.contextPath}/accomodationBookHistoryModify/" +accomodationBookHistoryID;
+        var name = "modify popup"
+        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
+        var child = window.open(url, name, option);
+
+        child.onload = function () {
+            var wid = child.document.body.offsetWidth + 50;
+            var hei = child.document.body.offsetHeight + 200;        //30 과 40은 넉넉하게 하려는 임의의 값임
             child.resizeTo(wid, hei);
         };
     }

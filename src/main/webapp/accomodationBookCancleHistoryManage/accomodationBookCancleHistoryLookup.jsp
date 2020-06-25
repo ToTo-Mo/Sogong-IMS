@@ -77,9 +77,10 @@
                               width의 합은 100%가 되도록 해주세요.--%>
 
                         <tr>
-                            <th style="width: 20%">예약번호</th>
-                            <th style="width: 25%">취소일자</th>
-                            <th style="width: 30%">취소사유</th>
+                            <th style="width: 15%">예약취소번호</th>
+                            <th style="width: 15%">예약번호</th>
+                            <th style="width: 20%">취소일자</th>
+                            <th style="width: 25%">취소사유</th>
                             <th style="width: 15%">등록자</th>
                             <%-- 이 th는 수정과 삭제 버튼을 위한 th입니다. --%>
                             <th style="width: 10%"><th>
@@ -94,13 +95,13 @@
 
                         <tr>
                             <td><%= acc.getAccomodationBookCancleHistoryID() %></td>
+                            <td><%= acc.getAccomodationBookHistoryID() %></td>
                             <td><%= acc.getCancleDate()%></td>
                             <td><%= acc.getCancleReason() %></td>
                             <td><%= acc.getRegistrantID() %></td>
-                            <td><%= acc.getAccomodationBookHistoryID() %></td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary mr-2">수정</button>
+                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= acc.getAccomodationBookCancleHistoryID()%>')">수정</button>
                                     <button type="button" class="btn btn-secondary">삭제</button>
                                 </div>
                             </td>
@@ -135,25 +136,7 @@
 
 </main>
 <script>
-    $(function () {
-
-        $('input[name="inputDateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="inputDateRange"]').on('apply.daterangepicker', function (ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD') + '-' + picker.endDate.format('YYYY/MM/DD'));
-        });
-
-        $('input[name="inputDateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            $(this).val('');
-        });
-
-    });
-
+    
     function enrollPopup() {
         var url = "/accomodationBookCancleHistoryEnroll"
         var name = "enroll popup"
@@ -163,9 +146,23 @@
         child.focus();
 
         child.onload = function () {
-            var wid = child.document.body.offsetWidth + 100;
-            var hei = child.document.body.offsetHeight + 100;        //30 과 40은 넉넉하게 하려는 임의의 값임
+            var wid = child.document.body.offsetWidth + 50;
+            var hei = child.document.body.offsetHeight + 80;        //30 과 40은 넉넉하게 하려는 임의의 값임
 
+            child.resizeTo(wid, hei);
+        };
+    }
+
+    function modifyPopup(accomodationBookCancleHistoryID) {
+    
+        var url = "${pageContext.request.contextPath}/accomodationBookCancleHistoryModify/" + accomodationBookCancleHistoryID;
+        var name = "modify popup"
+        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
+        var child = window.open(url, name, option);
+
+        child.onload = function () {
+            var wid = child.document.body.offsetWidth + 50;
+            var hei = child.document.body.offsetHeight + 200;        //30 과 40은 넉넉하게 하려는 임의의 값임
             child.resizeTo(wid, hei);
         };
     }

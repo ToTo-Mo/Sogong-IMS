@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="Sogong.IMS.model.AccomodationBookCancleHistory" %>
+<%@ page import="Sogong.IMS.dao.AccomodationBookCancleHistoryDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -28,8 +31,20 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
 
     <!-- 화면 이름 -->
-    <title>숙박시설 예약 정보 수정</title>
+    <title>숙박시설 예약취소 수정</title>
 </head>
+
+<%
+    String url = request.getRequestURI();
+    String servletPath = request.getServletPath();
+    String accomodationBookCancleHistoryID = url.substring(servletPath.length()).split("/")[1];
+
+    HashMap<String,Object> conditions = new HashMap<>();
+    conditions.put("accomodationBookCancleHistoryID", accomodationBookCancleHistoryID);
+
+    AccomodationBookCancleHistory acc = new AccomodationBookCancleHistoryDAO().lookup(conditions)[0];
+
+%>
 
 <body>
 
@@ -40,16 +55,37 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/enroll.do" method="POST">
+        <form action="${pageContext.request.servletPath}/accomodationBookCancleHistoryManage/modify.do method="POST">
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">예약인 이름</span>
+                        <span class="input-group-text" id="basic-addon1">예약취소번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputText"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookCancleHistoryID"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=<%=acc.getAccomodationBookCancleHistoryID()%>>
+                </div>
+            </div>
+
+            <!-- 일반 텍스트 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">예약번호</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookHistoryID"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=<%=acc.getAccomodationBookHistoryID()%>>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">취소일자</span>
+                    </div>
+                    <input type="text" id = "bookDate" class="form-control" placeholder="입력" name="inputCancleDate"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=<%=acc.getCancleDate()%> >
                 </div>
             </div>
 
@@ -59,8 +95,19 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon7">사유</span>
                     </div>
-                    <textarea class="form-control" rows="3" name="inputAboutText" aria-describedby="basic-addon7"
-                              autocomplete="off"></textarea>
+                    <textarea class="form-control" rows="3" name="inputCancleReason" 
+                    aria-describedby="basic-addon7" autocomplete="off" required><%=acc.getCancleReason()%></textarea>
+                </div>
+            </div>
+
+             <!-- 일반 텍스트 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">등록자</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getRegistrantID()%>>
                 </div>
             </div>
 

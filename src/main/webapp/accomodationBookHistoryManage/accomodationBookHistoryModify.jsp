@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="Sogong.IMS.model.AccomodationBookHistory" %>
+<%@ page import="Sogong.IMS.dao.AccomodationBookHistoryDAO" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,25 +35,17 @@
 
     <!-- 화면 이름 -->
     <title>숙박시설 예약 정보 수정</title>
+    
 </head>
 <%
     String url = request.getRequestURI();
     String servletPath = request.getServletPath();
-    String memberID = url.substring(servletPath.length()).split("/")[1];
+    String accomodationBookHistoryID = url.substring(servletPath.length()).split("/")[1];
 
     HashMap<String,Object> conditions = new HashMap<>();
-    conditions.put("memberID", memberID);
+    conditions.put("accomodationBookHistoryID", accomodationBookHistoryID);
 
-    Member member = new MemberAuthorityGroupDAO().lookup(conditions)[0];
-
-    List<AuthorityGroup> authorityGroups = new ArrayList<>(Arrays.asList(new AuthorityGroupDAO().lookup()));
-
-    for(MemberAuthorityGroup mag : member.getMemberAuthorityGroups()){
-        authorityGroups.removeIf(authorityGroup ->(
-                mag.getAuthorityGroup().getAuthorityGroupID() == authorityGroup.getAuthorityGroupID()));
-    }
-
-
+    AccomodationBookHistory acc = new AccomodationBookHistoryDAO().lookup(conditions)[0];
 %>
 <body>
 
@@ -58,7 +56,7 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/enroll.do" method="POST">
+        <form action="${pageContext.request.servletPath}/modify.do" method="POST">
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
@@ -67,7 +65,7 @@
                         <span class="input-group-text" id="basic-addon1">예약인 이름</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputName"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value =<%=acc.getAccomodationBookHistoryID()%>>
                 </div>
             </div>
 
@@ -77,7 +75,7 @@
                         <span class="input-group-text" id="basic-addon1">인원</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputNumOfPeople"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getNumOfPeople()%>>
                 </div>
             </div>
 
@@ -87,7 +85,7 @@
                         <span class="input-group-text" id="basic-addon1">전화번호</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputPhoneNum"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getPhoneNum()%>>
                 </div>
             </div>
 
@@ -97,7 +95,7 @@
                         <span class="input-group-text" id="basic-addon1">예약상태</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputBookState"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getBookState()%>>
                 </div>
             </div>
           
@@ -107,7 +105,7 @@
                         <span class="input-group-text" id="basic-addon1">결제금액</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputPaymentPrice"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getPaymentPrice()%>>
                 </div>
             </div>
 
@@ -117,7 +115,7 @@
                         <span class="input-group-text" id="basic-addon1">예약일자</span>
                     </div>
                     <input type="text" id = "bookDate" class="form-control" placeholder="입력" name="inputBookDate"
-                           aria-describedby="basic-addon1" autocomplete="off" readonly >
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=<%=acc.getBookDate()%>>
                 </div>
             </div>
 
@@ -128,10 +126,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon4">체크인 체크아웃</span>
                         </div>
-                        
+                        <%
+                            String timeRange = acc.getCheckInTime() + "~" + acc.getCheckOutTime();
+                        %>
                         <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckDateTimeRange"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off" required>
+                               aria-describedby="basic-addon4" autocomplete="off" required value="<%=timeRange%>">
                     </div>
             </div>
             
@@ -141,7 +140,7 @@
                         <span class="input-group-text" id="basic-addon1">입실상태</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputEnteringState"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getEnteringState()%>>
                 </div>
             </div>
 
@@ -151,7 +150,7 @@
                         <span class="input-group-text" id="basic-addon1">회원ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputMemberID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getMemberID()%>>
                 </div>
             </div>
 
@@ -161,7 +160,7 @@
                         <span class="input-group-text" id="basic-addon1">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getRegistrantID()%>>
                 </div>
             </div>
 
@@ -171,7 +170,7 @@
                         <span class="input-group-text" id="basic-addon1">숙박시설</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputAccomodationID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getAccomodationID()%>>
                 </div>
             </div>
 
@@ -181,7 +180,7 @@
                         <span class="input-group-text" id="basic-addon1">호실</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputRoomNum"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getRoomNum()%>>
                 </div>
             </div>
 
