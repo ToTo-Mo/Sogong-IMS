@@ -1,5 +1,6 @@
 package Sogong.IMS.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +25,7 @@ public class DeviceDAO {
         return LazyHolder.dao;
     }
 
-    public boolean enroll(Device device) {
-        try {
+    public boolean enroll(Device device) throws NamingException {
 
             // DB연결
             Connection conn = null;
@@ -34,36 +34,105 @@ public class DeviceDAO {
             // META-INF아래 context.xml
             Context context = new InitialContext();
             // DB Connection
-            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+                		
+            String sql = "insert into Device (DeviceID, registrantID, DeviceName, instruction, instructionCost, Device) values(?, ?, ?, ?, ?, ?)";
+    		try {
+    			context = new InitialContext();
+    			conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+    			
 
-            String sql = "INSERT INTO `Device`(`deviceID`, `registrantID`, `facilityPropertyID`, 'deviceName', 'instruction', 'instructionCost') VALUES (?,?,?,)";
-            stmt = conn.prepareStatement(sql);
+    			stmt = conn.prepareStatement(sql);
+    			stmt.setString(1, device.getDeviceID());
+    			stmt.setString(2, device.getRegistrantID());
+    			stmt.setString(3, device.getDeviceName());
+    			stmt.setString(4, device.getInstruction());
+    			stmt.setInt(5, device.getInstructionCost());
+    			stmt.setString(6, device.getDeviceID());
+    			stmt.executeUpdate();
+   
+    			return true;
+    		} catch (NamingException | SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+            }
+            return false;
+    }
 
-            // 장치 번호, 담당자, 시설 속성 번호, 장치 이름, 도입처, 도입 금액을 Value에 각각 지정
-            stmt.setString(1, device.getDeviceID());
-            stmt.setString(2, device.getRegistrantID());
-            stmt.setString(3, device.getFacilityPropertyID());
-            stmt.setString(4, device.getDeviceName());
-            stmt.setString(5, device.getInstruction());
-            stmt.setInt(6, device.getInstructionCost());
-            stmt.execute();
+	public Device[] lookup(HashMap<String, Object> condtions) throws NamingException, SQLException {// DB연결
+		Connection conn = null;
+		PreparedStatement stmt = null;
 
-            return true;
-        } catch (NamingException | SQLException e) {
-            e.printStackTrace();
+		// META-INF아래 context.xml
+		Context context = new InitialContext();
+		// DB Connection
+		conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+		
+		
+		String sql = "SELECT * FROM Device";
+		stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		ArrayList<Device> list = new ArrayList<>();
+
+        while (rs.next()) {
+            
+        	String facilityPropertyID = rs.getString("facilityPropertyID");
+            String deviceID = rs.getString("DeviceID");
+            String registrantID = rs.getString("registrantID");
+            String deviceName = rs.getString("deviceName");
+            String instruction = rs.getString("intruction");
+            int instructionCost = rs.getInt("instructionCost");
+
+            list.add(new Device(facilityPropertyID, deviceID, registrantID, deviceName, instruction, instructionCost));
+
         }
-        return false;
-    }
 
-    public Device[] lookup(HashMap<String, String> condition) {
-        return null;
-    }
+        return list.toArray(new Device[list.size()]);
+	}
 
-    public boolean modify(Device device) {
-        return false;
-    }
+	public boolean modify(Device device) throws SQLException, NamingException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 
-    public boolean delete(Device device) {
-        return false;
-    }
+		// META-INF아래 context.xml
+		Context context = new InitialContext();
+		// DB Connection
+		conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+
+		String sql = "UPDATE `sogongdo`.`Device` SET `DeviceID` = ?, `registrantID` = ?, `DeviceName` = ?, `instruction` = ?, `instructionCost` = ? WHERE `DeviceID` = ?;";
+
+		stmt = conn.prepareStatement(sql);
+
+		stmt.setString(1, device.getDeviceID());
+		stmt.setString(2, device.getRegistrantID());
+		stmt.setString(3, device.getDeviceName());
+		stmt.setString(4, device.getInstruction());
+		stmt.setInt(5, device.getInstructionCost());
+		stmt.setString(6, device.getDeviceID());
+
+        return true;
+	}
+
+	public boolean delete(int i) {
+		// DB연결
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		// META-INF아래 context.xml
+		Context context;
+
+		String sql = "delete from Device where DeviceID=?";
+		try {
+			context = new InitialContext();
+			conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, i);
+			return true;
+		} catch (NamingException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }
