@@ -1,8 +1,12 @@
 package Sogong.IMS.controller.memberManagement;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.Vector;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,38 +18,28 @@ public class MemberLookupAction implements Action{
 
 	@Override
 	public void excute(HttpServletRequest rq, HttpServletResponse rs) {
-		rs.setCharacterEncoding("UTF-8");
+		try {
+			rq.setCharacterEncoding("utf-8");
+		} catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		
-		String memberID = (String)rq.getAttribute("memberID");
-		String memberPW = (String)rq.getAttribute("memberPW");
-		String name = (String)rq.getAttribute("name");
-		String phoneNumber = (String)rq.getAttribute("phoneNumber");
-		String address = (String)rq.getAttribute("address");
-		String email = (String)rq.getAttribute("email");
-		String memberType = (String)rq.getAttribute("memberType");
-		String department = (String)rq.getAttribute("department");
+		String[] conditionNames = {"memberID", "memberPW", "name", "phoneNumber", "address", "email", "memberType", "department"};
+		HashMap<String, Object> conditions = new HashMap<>();
 		
-		HashMap<String, Object> condition = new HashMap<>();
-		if(!memberID.equals("")) condition.put("memberID", memberID);
-		if(!name.equals("")) condition.put("name", name);
+		for(String condition : conditionNames) {
+			String value = rq.getParameter(condition);
+			
+			if(value != "") conditions.put(condition, value);
+		}
 		
-		rq.getSession().setAttribute("preCondition", condition);
-		rq.setAttribute("data", generateHtml(condition).toString());
-	}
-
-	public void executePreCondition(HttpServletRequest rq, HttpServletResponse rs) {
-		HashMap<String, Object> condition = (HashMap<String, Object>) rq.getSession().getAttribute("preCondition");
-		rq.setAttribute("data", generateHtml(condition).toString());
-	}
-	
-	private StringBuilder generateHtml(HashMap<String, Object> condition) {
-
-		// 팀장 : MemberDAO는 싱글톤 패턴을 이용하신 건가요?
-		// MemberDAO에 이러한 내용이 없어서요
-		Vector<Member> members = MemberDAO.getInstance().select(condition);
+		if((rq.getParameter("memberID") != "") || (rq.getParameter("name") != "")) {
+			
+		}
+		
+		Member[] lookupResult = MemberDAO.getInstance().lookup(conditions);
 		StringBuilder stringBuilder = new StringBuilder();
-		
-		for(Member tmp : members) {
+		for(Member tmp : lookupResult) {
 			stringBuilder.append("<form method=\"post\">\n");
 			stringBuilder.append("<tr name='memberData'>\n");
 			stringBuilder.append("<td>");
@@ -72,14 +66,22 @@ public class MemberLookupAction implements Action{
             stringBuilder.append(tmp.getEmail() + ">\n");
             stringBuilder.append("</td>\n");
             stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"button\" name=\"modify\">����</button>");
+            stringBuilder.append("<button type=\"button\" name=\"modify\">수정</button>");
             stringBuilder.append("</td>\n");
             stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"submit\" name=\"delete\"> ���� </button>");
+            stringBuilder.append("<button type=\"submit\" name=\"delete\"> 삭제 </button>");
             stringBuilder.append("</td>\n");
             stringBuilder.append("</tr>\n");
             stringBuilder.append("</form>\n");
 		}
-		return stringBuilder;
+		rq.setAttribute("lookup", stringBuilder.toString());
+		ServletContext context = rq.getServletContext();
+		RequestDispatcher dispatcher = context.getRequestDispatcher("/memberManage");
+		
+		try {
+			dispatcher.forward(rq, rs);
+		} catch(ServletException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

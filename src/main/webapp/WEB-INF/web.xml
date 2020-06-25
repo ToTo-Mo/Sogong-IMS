@@ -35,6 +35,19 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/PackageManage</url-pattern>
 </servlet-mapping>
 
+<!-- 회원 관리 -->
+<servlet>
+    <servlet-name>memberManage</servlet-name>
+    <jsp-file>/memberManage/MemberManage.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>memberManage</servlet-name>
+    <url-pattern>/memberManage</url-pattern>
+</servlet-mapping>
+<!-- 회원 관리 끝-->
+
+
 <!-- 권한 관리 -->
 <servlet>
     <servlet-name>authorityManage</servlet-name>
