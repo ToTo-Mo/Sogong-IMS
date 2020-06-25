@@ -145,7 +145,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify(test())" >수정</button>
+                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify('<%= m.getMemberID() %>')" >수정</button>
                                         <button type="button" class="btn btn-secondary" onclick = "remove('<%= m.getMemberID() %>')">삭제</button>
                                     </div>
                                 </td>
