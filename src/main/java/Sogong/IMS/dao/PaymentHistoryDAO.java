@@ -65,8 +65,6 @@ public class PaymentHistoryDAO {
             Context context = new InitialContext();
             conn = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            // conn = DriverManager.getConnection("jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC", "admin", "tejava");
-
             StringBuilder sqlBuilder = new StringBuilder();
 
             sqlBuilder.append("SELECT * FROM ")

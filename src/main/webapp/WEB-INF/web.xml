@@ -102,7 +102,8 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 </servlet-mapping>
 
 <!-- 예약 관리 -->
-    <!-- 숙박시설 예약 -->
+
+<!-- 숙박시설 예약 -->
 <servlet>
     <servlet-name>accomodationBookHistoryManage</servlet-name>
     <jsp-file>/accomodationBookHistoryManage/accomodationBookHistoryManage.jsp</jsp-file>
@@ -121,14 +122,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 <servlet-mapping>
     <servlet-name>accomodationBookHistoryEnroll</servlet-name>
     <url-pattern>/accomodationBookHistoryEnroll</url-pattern>
-</servlet-mapping>
-<servlet>
-    <servlet-name>refundHistoryManage</servlet-name>
-    <jsp-file>/refundManage/RefundHistoryManage.jsp</jsp-file>
-</servlet>
-<servlet-mapping>
-    <servlet-name>refundHistoryManage</servlet-name>
-    <url-pattern>/refundHistoryManage</url-pattern>
 </servlet-mapping>
 
 <servlet>
@@ -172,4 +165,42 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/accomodationBookCancleHistoryModify/*</url-pattern>
 </servlet-mapping>
 <!-- 예약 관리 끝 -->
+
+
+<!-- 결제 내역 관리 시작 -->
+
+<servlet>
+    <servlet-name>paymentHistoryManage</servlet-name>
+    <jsp-file>/paymentManage/PaymentHistoryManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>paymentHistoryManage</servlet-name>
+    <url-pattern>/paymentHistoryManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>paymentHistoryEnroll</servlet-name>
+    <jsp-file>/paymentManage/PaymentHistoryEnroll.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>paymentHistoryEnroll</servlet-name>
+    <url-pattern>/paymentHistoryEnroll</url-pattern>
+</servlet-mapping>
+<!-- 결제 내역 관리 끝-->
+
+
+<!-- 환불 내역 관리 시작 -->
+
+<servlet>
+    <servlet-name>refundHistoryManage</servlet-name>
+    <jsp-file>/refundManage/RefundHistoryManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>refundHistoryManage</servlet-name>
+    <url-pattern>/refundHistoryManage</url-pattern>
+</servlet-mapping>
+
+
+<!-- 환불 내역 관리 끝-->
+
 </web-app> 

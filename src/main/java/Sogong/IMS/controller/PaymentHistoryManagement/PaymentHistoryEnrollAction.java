@@ -1,10 +1,15 @@
 package Sogong.IMS.controller.PaymentHistoryManagement;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.Patch;
+
+import com.mysql.cj.util.StringUtils;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.PaymentHistoryDAO;
@@ -18,13 +23,26 @@ public class PaymentHistoryEnrollAction implements Action {
 
         try {
             request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html; charset=utf-8");
 
-            String paymentHistoryID = request.getParameter("inputPaymentHistoryID");
+            PrintWriter out = response.getWriter();
+           
+            String accomodationBookHistoryID = request.getParameter("inputAccomodationID");
+            int price = Integer.parseInt(request.getParameter("inputPrice"));
+            LocalDateTime paymentTime  = LocalDateTime.parse(request.getParameter("inputPaymentTime"));
+            String paymentMethod  = request.getParameter("inputPaymentMethod");
 
             new PaymentHistoryDAO().enroll(
-                                    PaymentHistory.builder()
-                                                    .paymentHistoryID(paymentHistoryID)
-                                                    .build());
+                    PaymentHistory.builder()
+                    .accomodationBookHistoryID(accomodationBookHistoryID)
+                    .price(price)
+                    .paymentMethod(paymentMethod)
+                    .paymentTime(paymentTime)
+                            .build());
+
+            out.println("<script>alert('성공적으로 등록되었습니다.')</script>");
+            out.println("<script>self.close()</script>");
+            out.flush();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
