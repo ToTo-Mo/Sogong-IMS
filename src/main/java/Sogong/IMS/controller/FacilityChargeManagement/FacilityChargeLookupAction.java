@@ -18,7 +18,6 @@ import java.util.HashMap;
 public class FacilityChargeLookupAction implements Action{
     @Override
     public void excute(HttpServletRequest request, HttpServletResponse response) {
-
         try {
             request.setCharacterEncoding("utf-8");
             response.setContentType("text/html; charset=utf-8");
@@ -46,7 +45,7 @@ public class FacilityChargeLookupAction implements Action{
             request.setAttribute("facilityCharges", facilityCharges);
 
             ServletContext context = request.getServletContext();
-            RequestDispatcher dispatcher = context.getRequestDispatcher("faciltyChargeManage");
+            RequestDispatcher dispatcher = context.getRequestDispatcher("/faciltyChargeManage");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException | IOException e) {

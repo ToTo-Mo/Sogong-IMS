@@ -78,7 +78,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/facilityChargeManage">
                                 시설 요금 및 할인율 관리
                             </a>
                         </li>

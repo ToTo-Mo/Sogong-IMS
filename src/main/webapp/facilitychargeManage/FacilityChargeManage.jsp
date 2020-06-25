@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kdh97
-  Date: 2020-06-23
-  Time: 오후 2:42
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset='utf-8'>
@@ -15,17 +8,17 @@
 <body>
 
 <%@ include file="../index.jsp"%>
-<%@ include file="FacilitychargeLookup.jsp"%>
+<%@ include file="FacilityChargeLookup.jsp"%>
 
-    <div class="mb-3"></div>
+<div class="mb-3"></div>
 
-    <div class="row justify-content-end">
-        <div class="col-auto">
-            <div class="input-group mb-3 mr-3">
-                <button type="button" class="btn btn-secondary bg-dark" onclick="enrollPopup()">추가</button>
-            </div>
+<div class="row justify-content-end">
+    <div class="col-auto">
+        <div class="input-group mb-3 mr-3">
+            <button type="button" class="btn btn-secondary bg-dark" onclick="enrollPopup()">추가</button>
         </div>
     </div>
+</div>
 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 

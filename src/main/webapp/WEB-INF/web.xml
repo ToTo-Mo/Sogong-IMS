@@ -268,16 +268,17 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 <!-- 시설 요금 및 할인율 관리 시작-->
 <servlet>
     <servlet-name>facilityChargeManage</servlet-name>
-    <jsp-file>/facilitychargeManage/FacilitychargeManage.jsp</jsp-file>
+    <jsp-file>/facilitychargeManage/FacilityChargeManage.jsp</jsp-file>
 </servlet>
+
 <servlet-mapping>
     <servlet-name>facilityChargeManage</servlet-name>
-    <url-pattern>/faclityChargeManage/*</url-pattern>
+    <url-pattern>/facilityChargeManage</url-pattern>
 </servlet-mapping>
 
 <servlet>
     <servlet-name>facilityChargeEnroll</servlet-name>
-    <jsp-file>/facilitychargeManage/FacilitychargeEnroll.jsp</jsp-file>
+    <jsp-file>/facilitychargeManage/FacilityChargeEnroll.jsp</jsp-file>
 </servlet>
 <servlet-mapping>
     <servlet-name>facilityChargeEnroll</servlet-name>
@@ -286,7 +287,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet>
     <servlet-name>facilityChargeModify</servlet-name>
-    <jsp-file>/facilitychargeManage/FacilitychargeModify.jsp</jsp-file>
+    <jsp-file>/facilitychargeManage/FacilityChargeModify.jsp</jsp-file>
 </servlet>
 <servlet-mapping>
     <servlet-name>facilityChargeModify</servlet-name>
