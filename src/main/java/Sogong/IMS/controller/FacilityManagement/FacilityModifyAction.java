@@ -17,18 +17,14 @@ import Sogong.IMS.model.Facility;
 import Sogong.IMS.model.FacilityProperty;
 
 public class FacilityModifyAction implements Action {
-    public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, SQLException, NamingException {
-        try {
-            request.setCharacterEncoding("utf-8");
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/html; charset=UTF-8");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        Facility facility = new Facility(request.getParameter("FacilityID"), request.getParameter("registrantID"),request.getParameter("workspaceID")
+@Override
+	public void excute(HttpServletRequest request, HttpServletResponse response) {
+    try {
+        System.out.println("mo");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        Facility facility = new Facility(request.getParameter("facilityID"), request.getParameter("registrantID"),request.getParameter("workspaceID")
                 ,request.getParameter("facilityName"));
         PrintWriter printWriter = response.getWriter();
         if(FacilityDAO.getInstance().modify(facility) == true)
@@ -36,12 +32,9 @@ public class FacilityModifyAction implements Action {
         else
             printWriter.print("<script>alert('수정에 실패했습니다.')</script>");
         printWriter.print("<script>self.close()</script>");
-
-}
-
-@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
     }
 }
