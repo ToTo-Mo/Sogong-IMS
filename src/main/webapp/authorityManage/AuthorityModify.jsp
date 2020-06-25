@@ -8,6 +8,10 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Sogong.IMS.model.MemberAuthorityGroup" %>
+<%@ page import="Sogong.IMS.dao.MemberAuthorityGroupDAO" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="Sogong.IMS.model.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -41,8 +45,33 @@
 
 
     <!-- 화면 이름 -->
-    <title>권한 등록</title>
+    <title>권한 수정</title>
 </head>
+
+<%
+    String url = request.getRequestURI();
+    String servletPath = request.getServletPath();
+    String memberID = url.substring(servletPath.length()).split("/")[1];
+
+    HashMap<String,Object> conditions = new HashMap<>();
+    conditions.put("memberID", memberID);
+
+    Member member = new MemberAuthorityGroupDAO().lookup(conditions)[0];
+
+    List<AuthorityGroup> authorityGroups = new ArrayList<>(Arrays.asList(new AuthorityGroupDAO().lookup()));
+
+    for(MemberAuthorityGroup mag : member.getMemberAuthorityGroups()){
+        authorityGroups.removeIf(authorityGroup ->(
+                mag.getAuthorityGroup().getAuthorityGroupID() == authorityGroup.getAuthorityGroupID()));
+    }
+
+//    request.setAttribute("memberID", member.getMemberID());
+//    request.setAttribute("memberType", member.getMemberType());
+//    request.setAttribute("department", member.getDepartment());
+//    request.setAttribute("memberAuthorityGroups",member.getMemberAuthorityGroups());
+%>
+
+
 
 <body>
 
@@ -53,16 +82,16 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.contextPath}/authorityManage/enroll.do" id="form" method="POST">
+        <form action="${pageContext.request.contextPath}/authorityManage/modify.do" id="form" method="POST">
 
-            <!-- 일반 텍스트 -->
+<!-- 일반 텍스트 -->
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputMemberID" id="inputMemberID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=<%=member.getMemberID()%>>
                 </div>
             </div>
 
@@ -72,8 +101,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon2">부서</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputText2"
-                           aria-describedby="basic-addon2" autocomplete="off" readonly>
+                    <input type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2" autocomplete="off" readonly value=<%=member.getDepartment()%>>
                 </div>
             </div>
 
@@ -83,8 +112,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">유형</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputText2"
-                           aria-describedby="basic-addon3" autocomplete="off" readonly>
+                    <input type="text" class="form-control" placeholder="입력"
+                           aria-describedby="basic-addon3" autocomplete="off" readonly value=<%=member.getMemberType()%>>
                 </div>
             </div>
 
@@ -95,6 +124,13 @@
                 </div>
                 <select multiple class="form-control" aria-describedby="basic-addon4" name="selectedAuthorities"
                         id="selectedAuthorities" size="10" required>
+                    <% for (MemberAuthorityGroup mag : member.getMemberAuthorityGroups()) {%>
+
+                    <option value="<%= mag.getAuthorityGroup().getAuthorityGroupID()%>"><%=mag.getAuthorityGroup().getAuthorityGroupName()%>
+                    </option>
+                    <%
+                        }
+                    %>
                 </select>
             </div>
 
@@ -141,10 +177,6 @@
                 </div>
             </div>
 
-            <%
-                List<AuthorityGroup> authorityGroups = Arrays.asList(new AuthorityGroupDAO().lookup());
-            %>
-
             <div class="input-group mb-3 mr-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon5">권한 목록</span>
@@ -173,6 +205,15 @@
                     <button type="button" class="btn btn-secondary bg-dark" onclick='self.close()'>취소</button>
                 </div>
             </div>
+
+            <% for (MemberAuthorityGroup mag : member.getMemberAuthorityGroups()) {%>
+                <input value='<%=mag.getAuthorityGroup().getAuthorityGroupID()%>' name='inputAuthorities' style="display: none">
+                <script>
+                    $("#selectedAuthorities").removeAttr("required")
+                </script>
+            <%
+                }
+            %>
         </form>
         <!-- 입력 양식 끝 -->
     </div>
@@ -250,6 +291,6 @@
                 }
             }
         }
-    </script>   
+    </script>
 </body>
 </html>

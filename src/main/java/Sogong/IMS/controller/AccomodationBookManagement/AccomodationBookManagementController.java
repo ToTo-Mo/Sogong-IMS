@@ -1,5 +1,7 @@
 package Sogong.IMS.controller.AccomodationBookManagement;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
-@WebServlet({ "/accomodationBookManage/*", "/accomodationBookEnroll/*" })
+@WebServlet({ "/accomodationBookHistoryManage/*", "/accomodationBookHistoryEnroll/*" })
 public class AccomodationBookManagementController extends HttpServlet {
     private static final long serialVersionUID = 8559000000000000002L;
 
@@ -23,27 +25,22 @@ public class AccomodationBookManagementController extends HttpServlet {
     public void init(ServletConfig sc) throws ServletException {
         list = new HashMap<>();
 
-        list.put("/enroll.do", new AccomodationBookHistoryEnrollAction());
-        list.put("/lookup.do", new AccomodationBookHistoryLookupAction());
-        list.put("/modify.do", new AccomodationBookHistoryModifyAction());
-        list.put("/delete.do", new AccomodationBookHistoryDeleteAction());
+        list.put("enroll.do", new AccomodationBookHistoryEnrollAction());
+        list.put("lookup.do", new AccomodationBookHistoryLookupAction());
+        list.put("modify.do", new AccomodationBookHistoryModifyAction());
+        list.put("delete.do", new AccomodationBookHistoryDeleteAction());
     }
 
     // get이나 post 요청에 대한 처리를 수행합니다.
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.setCharacterEncoding("euc-kr");
-            response.setCharacterEncoding("euc-kr");
-        } catch (UnsupportedEncodingException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+      
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
-        String path = url.substring(servletPath.length());
 
-         if (list.get(path) != null) {
+        String path = url.substring(servletPath.length()).split("/")[1];
+
+        if(list.get(path) !=null){
             Action action = list.get(path);
             action.excute(request, response);
         }

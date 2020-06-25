@@ -24,7 +24,9 @@ public class FacilityChargeController extends HttpServlet {
         list = new HashMap<>();
 
         list.put("/enroll.do", new FacilityChargeEnrollAction());
-        list.put("/enroll.do", new ChargeDiscountRateEnrollAction());
+        list.put("/lookup.do", new FacilityChargeLookupAction());
+        list.put("/modify.do", new FacilityChargeModifyAction());
+        list.put("/delete.do", new FacilityChargeDeleteAction());
     }
 
     @Override

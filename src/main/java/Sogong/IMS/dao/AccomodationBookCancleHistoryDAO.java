@@ -4,6 +4,7 @@ import Sogong.IMS.model.AccomodationBookCancleHistory;
 import Sogong.IMS.model.Member;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,10 +54,11 @@ public class AccomodationBookCancleHistoryDAO {
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, accomodationBookCancleHistory.getAccomodationBookCancleHistoryID());
-            stmt.setObject(2, accomodationBookCancleHistory.getCancleDate());
-            stmt.setString(3, accomodationBookCancleHistory.getCancleReason());
-            stmt.setString(4, accomodationBookCancleHistory.getRegistrantID());
-            stmt.setString(5, accomodationBookCancleHistory.getAccomodationBookHistoryID());
+            stmt.setString(2, accomodationBookCancleHistory.getAccomodationBookHistoryID());
+            stmt.setDate(3, Date.valueOf(accomodationBookCancleHistory.getCancleDate()));
+            stmt.setString(4, accomodationBookCancleHistory.getCancleReason());
+            stmt.setString(5, accomodationBookCancleHistory.getRegistrantID());
+           
          
             stmt.execute();
 
@@ -200,8 +202,11 @@ public class AccomodationBookCancleHistoryDAO {
 
                 accomodationBookCancleHistories.add(
                     new AccomodationBookCancleHistory(
-                        rs.getString("accomodationBookCancleHistoryID") , rs.getObject("cancleDate", LocalDate.class), 
-                        rs.getString("cancleReason"), rs.getString("registrantID"), rs.getString("accomodationBookHistoryID")
+                        rs.getString("accomodationBookCancleHistoryID") , 
+                        rs.getObject("cancleDate", LocalDate.class), 
+                        rs.getString("cancleReason"), 
+                        rs.getString("registrantID"),
+                        rs.getString("accomodationBookHistoryID")
                     )
                 );
 

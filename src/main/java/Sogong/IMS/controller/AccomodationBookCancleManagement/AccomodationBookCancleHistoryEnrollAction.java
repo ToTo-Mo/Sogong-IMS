@@ -24,11 +24,11 @@ public class AccomodationBookCancleHistoryEnrollAction implements Action {
             PrintWriter out = response.getWriter();
 
             String accomodationBookCancleHistoryID = request.getParameter("inputAccomodationBookCancleHistoryID");
-            LocalDate cancleDate  = LocalDate.parse(request.getParameter("inputCancleDate"), DateTimeFormatter.ISO_DATE); //yyyy-mm-dd
+            LocalDate cancleDate  = LocalDate.parse(request.getParameter("inputCancleDate")); //yyyy-mm-dd
             String cancleReason  = request.getParameter("inputCancleReason");
             String registrantID = request.getParameter("inputRegistrantID");
             String accomodationBookHistoryID = request.getParameter("inputAccomodationBookHistoryID");
-    
+            
             
             new AccomodationBookCancleHistoryDAO().enroll(
                 AccomodationBookCancleHistory.builder()
