@@ -4,13 +4,6 @@
 <%@ page import="Sogong.IMS.model.MemberAuthorityGroup" %>
 <%@ page import="java.util.Iterator" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: bum44
-  Date: 2020-06-01
-  Time: 오후 5:34
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="container-fluid">
@@ -51,7 +44,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">부서</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="부서명" name="inputDepartment"
+                        <input type="text" class="form-control" placeholder="부서명" name="department"
                                aria-describedby="basic-addon1" autocomplete="off">
                     </div>
 
@@ -60,7 +53,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">ID</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="ID" name="inputMemberID"
+                        <input type="text" class="form-control" placeholder="ID" name="memberID"
                                aria-describedby="basic-addon3" autocomplete="off">
                     </div>
 
@@ -69,7 +62,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon3">유형</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="유형" name="inputMemberType"
+                        <input type="text" class="form-control" placeholder="유형" name="memberType"
                                aria-describedby="basic-addon3" autocomplete="off">
                     </div>
 
@@ -78,7 +71,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon4">권한</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="권한명" name="inputAuthorityName"
+                        <input type="text" class="form-control" placeholder="권한명" name="authorityName"
                                aria-describedby="basic-addon4" autocomplete="off">
                     </div>
 
