@@ -40,39 +40,8 @@ public class PackageLookupAction implements Action {
             condtions.put("price", priceRange);
         }
         Package[] lookupResult = PackageDAO.getInstance().lookup(condtions);
-        StringBuilder stringBuilder = new StringBuilder();
-        for(Package tmp : lookupResult){
-            stringBuilder.append("<tr>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getPackageID());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getPackageName());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getType());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getCompany());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getPrice());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getRegistrantID());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getExplanation());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick='modifyPopup("+ tmp.getPackageID() + ")'>수정</button>");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<a class='btn btn-secondary btn-sm' href='delete.do/"+tmp.getPackageID() + "'>삭제</a>");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("</tr>\n");
-        }
-        request.setAttribute("lookup", stringBuilder.toString());
+        request.setAttribute("lookupResult", lookupResult);
+
         ServletContext context = request.getServletContext();
         RequestDispatcher dispatcher = context.getRequestDispatcher("/packageManage"); // 넘길 페이지 주소
         try {

@@ -36,13 +36,8 @@
     HashMap<String,Object> conditions = new HashMap<>();
     conditions.put("packageID", packageID);
     Package aPackage = PackageDAO.getInstance().lookup(conditions)[0];
-    request.setAttribute("packageID", aPackage.getPackageID());
-    request.setAttribute("packageName", aPackage.getPackageName());
-    request.setAttribute("price", aPackage.getPrice());
-    request.setAttribute("company", aPackage.getCompany());
-    request.setAttribute("type", aPackage.getType());
-    request.setAttribute("explanation", aPackage.getExplanation());
 %>
+
 <body>
 <div class="container">
     <div class="row col-auto justify-content-center mt-5">
@@ -53,7 +48,7 @@
                         <span class="input-group-text" id="basic-addon0">상품번호</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="packageID"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=${packageID} readonly>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=aPackage.getPackageID()%> readonly>
                 </div>
             </div>
             <div class="form-group">
@@ -62,7 +57,7 @@
                         <span class="input-group-text" id="basic-addon1">상품패키지 명</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="packageName"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=${packageName}>
+                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=aPackage.getPackageName()%>>
                 </div>
             </div>
             <div class="form-group">
@@ -71,7 +66,7 @@
                         <span class="input-group-text" id="basic-addon2">가격</span>
                     </div>
                     <input type="number" class="form-control" placeholder="입력" name="price"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${price} required>
+                           aria-describedby="basic-addon1" autocomplete="off" value=<%=aPackage.getPrice()%> required>
                 </div>
             </div>
             <div class="form-group">
@@ -80,7 +75,7 @@
                         <span class="input-group-text" id="basic-addon3">분류</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="type"
-                           aria-describedby="basic-addon1" autocomplete="off"value=${type} required>
+                           aria-describedby="basic-addon1" autocomplete="off"value=<%=aPackage.getType()%> required>
                 </div>
             </div>
             <div class="form-group">
@@ -89,7 +84,7 @@
                         <span class="input-group-text" id="basic-addon4">회사</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="company"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${company} required>
+                           aria-describedby="basic-addon1" autocomplete="off" value=<%=aPackage.getCompany()%> required>
                 </div>
             </div>
             <div class="form-group">
@@ -98,7 +93,7 @@
                         <span class="input-group-text" id="basic-addon5">설명</span>
                     </div>
                     <textarea class="form-control" rows="3" name="explanation" aria-describedby="basic-addon7"
-                              autocomplete="off" required>${explanation}</textarea>
+                              autocomplete="off" required><%=aPackage.getExplanation()%></textarea>
                 </div>
             </div>
             <div class="row justify-content-center">

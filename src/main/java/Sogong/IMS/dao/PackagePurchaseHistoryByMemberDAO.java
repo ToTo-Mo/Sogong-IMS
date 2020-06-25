@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
@@ -20,11 +21,10 @@ public class PackagePurchaseHistoryByMemberDAO {
     }
 
 
-    public boolean enroll(PackagePurchaseHistoryByMember packagePurchaseHistoryByMember){
+    public boolean enroll(PackagePurchaseHistoryByMember packagePurchaseHistoryByMember) throws SQLException {
+        Connection conn = null;
         try {
-            System.out.println("dao");
             final DateTimeFormatter DB_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            Connection conn = null;
             PreparedStatement stmt = null;
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
@@ -38,12 +38,12 @@ public class PackagePurchaseHistoryByMemberDAO {
             stmt.setInt(5, packagePurchaseHistoryByMember.getTotalPrice());
             stmt.setString(6, packagePurchaseHistoryByMember.getState());
             stmt.setString(7, packagePurchaseHistoryByMember.getPaymentMethod());
-            System.out.println(stmt.toString());
             stmt.execute();
+            conn.close();
             return true;
         }
         catch (Exception e){
-            e.printStackTrace();
+            conn.close();
             return false;
         }
     }

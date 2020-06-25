@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 public class PackageDeleteAction implements Action {
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 //        boolean result = PackageDAO.getInstance().delete(new Package(request.getParameter("packageName"), Integer.parseInt(request.getParameter("packagePrice").trim()), request.getParameter("packageCompany"), request.getParameter("packageRegistant")));
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
@@ -30,18 +31,13 @@ public class PackageDeleteAction implements Action {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        PrintWriter printWriter = response.getWriter();
+        if(PackageDAO.getInstance().delete(Integer.parseInt(packageID)) == true)
+            printWriter.print("<script>alert('성공적으로 삭제되었습니다')</script>");
+        else
+            printWriter.print("<script>alert('삭제에 실패했습니다.')</script>");
 
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/packageManage"); // 넘길 페이지 주소
-        try {
-            dispatcher.include(request, response);
-            PrintWriter printWriter = response.getWriter();
-            if(PackageDAO.getInstance().delete(Integer.parseInt(packageID)) == true)
-                printWriter.print("<script>alert('성공적으로 삭제되었습니다')</script>");
-            else
-                printWriter.print("<script>alert('삭제에 실패했습니다.')</script>");
-        } catch (ServletException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        printWriter.print(String.format("<script>location.replace('%s')</script>",request.getServletPath()));
+
     }
 }

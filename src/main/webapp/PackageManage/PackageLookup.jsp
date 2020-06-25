@@ -1,4 +1,5 @@
-<%--
+<%@ page import="Sogong.IMS.model.Package" %>
+<%@ page import="Sogong.IMS.dao.PackageDAO" %><%--
   Created by IntelliJ IDEA.
   User: djh20
   Date: 2020-05-15
@@ -64,7 +65,25 @@
             </tr>
             </thead>
             <tbody>
-            ${lookup}
+            <%
+                Package[] lookupResult = request.getAttribute("lookupResult") != null ? (Package[]) request.getAttribute("lookupResult") : null;
+                if(lookupResult != null) {
+                for(Package aPackage : lookupResult){
+                    pageContext.setAttribute("aPackage", aPackage);
+                    %>
+                <tr>
+                    <td>${aPackage.packageID}</td>
+                    <td>${aPackage.packageName}</td>
+                    <td>${aPackage.type}</td>
+                    <td>${aPackage.company}</td>
+                    <td>${aPackage.price}</td>
+                    <td>${aPackage.registrantID}</td>
+                    <td>${aPackage.explanation}</td>
+                    <td><button type='button' class='btn btn-secondary btn-sm' onclick='modifyPopup(${aPackage.packageID})'>수정</button></td>
+                    <td><a class='btn btn-secondary btn-sm' href='delete.do/${aPackage.packageID}'>삭제</a></td>
+                </tr>
+                <%}}
+                %>
             </tbody>
         </table>
     </div>

@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 public class PackageModifyAction implements Action {
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
         try {
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("UTF-8");

@@ -28,8 +28,8 @@ public class LoginController extends HttpServlet {
     //TODO 홈화면 만들면 홈화면으로 돌아가는 방식으로 수정
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURI();
-
         String preUrl = request.getHeader("Referer");
+
         try {
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("UTF-8");
@@ -54,6 +54,6 @@ public class LoginController extends HttpServlet {
             else
                 request.getSession().removeAttribute("member");
         }
-        printWriter.print("<script>window.location.href ='" + preUrl +"'</script>");
+        printWriter.print(String.format("<script>location.replace('%s')</script>",preUrl.split("/")[3]));
     }
 }

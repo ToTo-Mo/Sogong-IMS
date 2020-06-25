@@ -19,7 +19,6 @@
     }
   </style>
   <%@ include file="../index.jsp" %>
-<%--    <p>상품패키지 관리화면</p>--%>
 
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 contents">
     <%@ include file="PackageLookup.jsp" %>

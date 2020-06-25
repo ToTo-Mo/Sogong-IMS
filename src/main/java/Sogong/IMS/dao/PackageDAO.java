@@ -45,7 +45,6 @@ public class PackageDAO {
             if (iter.hasNext())
                 query.append(" and ");
         }
-        System.out.println(query.toString());
         ResultSet resultSet = statement.executeQuery(query.toString());
         ArrayList<Package> packages = new ArrayList<>();
         while(resultSet.next()){
@@ -56,9 +55,9 @@ public class PackageDAO {
         return packages.toArray(new Package[packages.size()]);
     }
 
-    public boolean enroll(Package aPackage){
+    public boolean enroll(Package aPackage) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = null;
             PreparedStatement stmt = null;
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
@@ -73,18 +72,19 @@ public class PackageDAO {
             stmt.setString(4, aPackage.getCompany());
             stmt.setString(5, aPackage.getType());
             stmt.setString(6, aPackage.getExplanation());
-            System.out.println(stmt.toString());
             stmt.execute();
+            conn.close();
             return true;
         }
         catch (Exception e){
+            conn.close();
             return false;
         }
     }
 
-    public boolean delete(int packageID) {
+    public boolean delete(int packageID) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = null;
             PreparedStatement stmt = null;
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
@@ -92,17 +92,19 @@ public class PackageDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, packageID);
             stmt.execute();
+            conn.close();
             return true;
         }
         catch(Exception e){
+            conn.close();
             return false;
         }
 
     }
 
-    public boolean modify(Package aPakcage) {
+    public boolean modify(Package aPakcage) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = null;
             PreparedStatement stmt = null;
             Context context = new InitialContext();
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
@@ -117,9 +119,11 @@ public class PackageDAO {
             stmt.setString(6, aPakcage.getExplanation());
             stmt.setString(7, aPakcage.getPackageID());
             stmt.execute();
+            conn.close();
             return true;
         }
         catch(Exception e){
+            conn.close();
             return false;
         }
 

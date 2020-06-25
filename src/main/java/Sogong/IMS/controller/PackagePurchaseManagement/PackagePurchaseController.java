@@ -1,6 +1,7 @@
 package Sogong.IMS.controller.PackagePurchaseManagement;
 
 import Sogong.IMS.controller.Action;
+import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
 import lombok.SneakyThrows;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 @WebServlet("/packagePurchase/*")
@@ -19,11 +21,14 @@ public class PackagePurchaseController extends HttpServlet {
     @SneakyThrows
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String url = req.getRequestURI();
         String servletPath = req.getServletPath();
         String path = url.substring(servletPath.length()).split("/")[1];
         Action action = actionList.get(path);
         action.execute(req, resp);
+
+
     }
 
     @Override
@@ -31,8 +36,5 @@ public class PackagePurchaseController extends HttpServlet {
         actionList = new HashMap<>();
         actionList.put("purchase.do",new PackagePurchaseAction());
         actionList.put("lookup.do",new PackagePurchaseLookupAction());
-    }
-    public boolean hasAuthority(Member member, String authorityName){
-        return false;
     }
 }

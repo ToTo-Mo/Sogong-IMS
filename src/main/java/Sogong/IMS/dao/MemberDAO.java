@@ -47,9 +47,6 @@ public class MemberDAO {
             }
             Vector<Member> members = new Vector<>();
             ResultSet resultset = st.executeQuery(stringBuilder.toString());
-            while(resultset.next()) {
-                System.out.println(resultset.getString(1));
-            }
             return members;
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -200,8 +197,12 @@ public class MemberDAO {
              String email= resultSet.getString("email");
              String memberType= resultSet.getString("memberType");
              String department= resultSet.getString("department");
-             return new Member(memberID,memberPW,name,phoneNumber,address,email,memberType,department);
+             Member member =Member.builder().memberID(memberID).memberPW(memberPW).name(name).phoneNumber(phoneNumber).address(address)
+                    .email(email).memberType(memberType).department(department).build();
+            conn.close();
+             return member;
         }
+        conn.close();
         return null;
     }
 }

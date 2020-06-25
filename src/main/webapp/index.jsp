@@ -96,7 +96,13 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/packageManage">
+                                판매 상품 관리
+                            </a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/packageSalesPerformance">
                                 판매 상품 실적 집계
                             </a>
                         </li>

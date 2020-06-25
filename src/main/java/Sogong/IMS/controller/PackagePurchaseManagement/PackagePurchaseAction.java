@@ -8,6 +8,7 @@ import Sogong.IMS.model.Package;
 import Sogong.IMS.model.PackagePurchaseHistoryByMember;
 import Sogong.IMS.model.PackagePurchaseHistoryByNonMember;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,12 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class PackagePurchaseAction implements Action {
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, NamingException {
         try {
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("UTF-8");
