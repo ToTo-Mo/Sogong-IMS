@@ -13,6 +13,14 @@
     <meta charset="utf-8">
   </head>
   <body>
+  <div class="row">
+
+    <!-- 화면 이름 -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">판매 상품 관리</h1>
+    </div>
+
+  </div>
   <style>
     .contents{
       margin: 2vh 0 0 2vw;

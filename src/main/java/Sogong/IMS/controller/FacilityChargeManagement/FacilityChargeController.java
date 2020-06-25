@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
+import lombok.SneakyThrows;
 
 @WebServlet("/facilityChargeMangeView")
 public class FacilityChargeController extends HttpServlet {
@@ -29,6 +30,7 @@ public class FacilityChargeController extends HttpServlet {
         list.put("/delete.do", new FacilityChargeDeleteAction());
     }
 
+    @SneakyThrows
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response){
         String url = request.getRequestURI();

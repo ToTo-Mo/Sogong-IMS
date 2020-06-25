@@ -53,7 +53,7 @@ public class PaymentHistoryDAO {
         return false;
     }
     
-    public PaymentHistory[] lookup(HashMap<String,String> condition)
+    public PaymentHistory[] lookup(HashMap<String,Object> condition)
     {
         
         try 

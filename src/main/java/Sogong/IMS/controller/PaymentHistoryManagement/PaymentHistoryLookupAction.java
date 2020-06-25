@@ -1,6 +1,8 @@
 package Sogong.IMS.controller.PaymentHistoryManagement;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.PaymentHistoryDAO;
+import Sogong.IMS.model.AuthorityGroup;
 import Sogong.IMS.model.PaymentHistory;
 
 public class PaymentHistoryLookupAction implements Action {
@@ -36,13 +39,13 @@ public class PaymentHistoryLookupAction implements Action {
                 condition.put("memberID", memberID);
 
                 if(payDAO.lookup(condition).length <= 0){
-                    for(String s : authorities){
-                        isOk = payDAO.enroll(PaymentHistory.builder()
-                                                .authorityGroup(AuthorityGroup.builder()
-                                                .authorityGroupID(Integer.parseInt(s)).build())
-                                                                    
-                                                .memberID(memberID).build());
-                    }
+//                    for(String s : authorities){
+//                        isOk = payDAO.enroll(PaymentHistory.builder()
+//                                                .authorityGroup(AuthorityGroup.builder()
+//                                                .authorityGroupID(Integer.parseInt(s)).build())
+//
+//                                                .memberID(memberID).build());
+//                    }
 
                     if(isOk){
                         out.println("<script>alert('성공적으로 등록되었습니다.')</script>");

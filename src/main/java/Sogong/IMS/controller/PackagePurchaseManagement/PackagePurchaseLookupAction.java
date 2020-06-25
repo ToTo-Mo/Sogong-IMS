@@ -17,62 +17,56 @@ import java.util.HashMap;
 
 public class PackagePurchaseLookupAction implements Action {
     @Override
-    public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, NamingException, ClassNotFoundException {
+    public void excute(HttpServletRequest request, HttpServletResponse response){
         try {
             request.setCharacterEncoding("utf-8");
-        } catch (UnsupportedEncodingException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        HashMap<String,Object> condtions = new HashMap<>();
-        String[] condtionNames = {"packageName", "type"};
-        for(String condition : condtionNames){
-            String value = request.getParameter(condition);
-            if(value != "")
-                condtions.put(condition, value);
-        }
-        if((request.getParameter("packageMinPrice") != "") || (request.getParameter("packageMaxPrice") != "")){
-            int priceRange[] ={1,2};
-            priceRange[0] = request.getParameter("packageMinPrice") == "" ? 0 : Integer.parseInt(request.getParameter("packageMinPrice"));
-            priceRange[1] = request.getParameter("packageMaxPrice") == "" ? 99999999 : Integer.parseInt(request.getParameter("packageMaxPrice"));
-            condtions.put("price", priceRange);
-        }
-        Package[] lookupResult = PackageDAO.getInstance().lookup(condtions);
-        StringBuilder stringBuilder = new StringBuilder();
-        for(Package tmp : lookupResult){
-            stringBuilder.append("<tr>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getPackageID());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getPackageName());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getType());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getCompany());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getPrice());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append(tmp.getExplanation());
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick='infoPopup("+ tmp.getPackageID() + ")'>구매</button>");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("</tr>\n");
-        }
-        request.setAttribute("lookup", stringBuilder.toString());
-        ServletContext context = request.getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/packagePurchase"); // 넘길 페이지 주소
-        try {
+            HashMap<String,Object> condtions = new HashMap<>();
+            String[] condtionNames = {"packageName", "type"};
+            for(String condition : condtionNames){
+                String value = request.getParameter(condition);
+                if(value != "")
+                    condtions.put(condition, value);
+            }
+            if((request.getParameter("packageMinPrice") != "") || (request.getParameter("packageMaxPrice") != "")){
+                int priceRange[] ={1,2};
+                priceRange[0] = request.getParameter("packageMinPrice") == "" ? 0 : Integer.parseInt(request.getParameter("packageMinPrice"));
+                priceRange[1] = request.getParameter("packageMaxPrice") == "" ? 99999999 : Integer.parseInt(request.getParameter("packageMaxPrice"));
+                condtions.put("price", priceRange);
+            }
+            Package[] lookupResult = PackageDAO.getInstance().lookup(condtions);
+            StringBuilder stringBuilder = new StringBuilder();
+            for(Package tmp : lookupResult){
+                stringBuilder.append("<tr>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append(tmp.getPackageID());
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append(tmp.getPackageName());
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append(tmp.getType());
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append(tmp.getCompany());
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append(tmp.getPrice());
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append(tmp.getExplanation());
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append("<button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick='infoPopup("+ tmp.getPackageID() + ")'>구매</button>");
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("<td>");
+                stringBuilder.append("</td>\n");
+                stringBuilder.append("</tr>\n");
+            }
+            request.setAttribute("lookup", stringBuilder.toString());
+            ServletContext context = request.getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher("/packagePurchase"); // 넘길 페이지 주소
             dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            // TODO Auto-generated catch block
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
