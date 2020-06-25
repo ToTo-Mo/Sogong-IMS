@@ -351,4 +351,31 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/workspaceModify/*</url-pattern>
 </servlet-mapping>
 <!-- 사업장 관리 끝 -->
+<!--    시설관리 시작-->
+    <servlet>
+        <servlet-name>facilityManage</servlet-name>
+        <jsp-file>/facilityManage/FacilityManage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityManage</servlet-name>
+        <url-pattern>/facilityManage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityEnroll</servlet-name>
+        <jsp-file>/facilityManage/FacilityEnroll.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityEnroll</servlet-name>
+        <url-pattern>/facilityEnroll/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityModify</servlet-name>
+        <jsp-file>/facilityManage/FacilityModify.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityModify</servlet-name>
+        <url-pattern>/facilityModify/*</url-pattern>
+    </servlet-mapping>
+<!--    시설관리 끝-->
+
 </web-app> 

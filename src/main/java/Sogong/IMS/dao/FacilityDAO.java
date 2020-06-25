@@ -39,7 +39,7 @@ public class FacilityDAO {
             // DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "INSERT INTO `Facility`(`facilityID`, `resistrantID`, 'workspaceID', 'facilityName') VALUES (?,?,?,)";
+            String sql = "INSERT INTO `Facility`(`facilityID`, `registrantID`, `workspaceID`, `facilityName`) VALUES (?,?,?,?)";
             stmt = conn.prepareStatement(sql);
 
             // 시설 번호, 담당자, 사업장 번호, 시설 이름을 Value에 각각 지정
@@ -57,7 +57,7 @@ public class FacilityDAO {
         return false;
     }
 
-    public Facility[] lookup(HashMap<String, Object> condtions) throws SQLException, NamingException {// DB연결
+    public Facility[] lookup(HashMap<String, Object> conditions) throws SQLException, NamingException {// DB연결
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
@@ -65,21 +65,31 @@ public class FacilityDAO {
 		Context context = new InitialContext();
 		// DB Connection
 		conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-		
-		
-		String sql = "SELECT * FROM Facility";
-		stmt = conn.prepareStatement(sql);
-		ResultSet rs = stmt.executeQuery(sql);
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("SELECT * FROM Facility");
+		if(conditions.size() >0)
+		    stringBuilder.append(" where ");
+		Iterator<String> iter = conditions.keySet().iterator();
+        while(iter.hasNext()){
+            String key = iter.next();            //테이블의 속성명
+            Object value = conditions.get(key);
+            if (value instanceof String || value instanceof Integer)
+                stringBuilder.append(String.format("`%s` LIKE '%%%s%%'", key, (String) value));
+            if (iter.hasNext())
+                stringBuilder.append(" and ");
+        }
+		stmt = conn.prepareStatement(stringBuilder.toString());
+		ResultSet rs = stmt.executeQuery();
 		
 		ArrayList<Facility> list = new ArrayList<>();
-
         while (rs.next()) {
         	
-        	String facilityID = rs.getString("facilitiyID");
+        	String facilityID = rs.getString("facilityID");
             String registrantID = rs.getString("registrantID");
             String workspaceID= rs.getString("workspaceID");
     	    String facilityName = rs.getString("facilityName");
-
+            System.out.println(facilityName);
             list.add(
                 new Facility(facilityID, registrantID, workspaceID, facilityName)
             );
@@ -90,48 +100,45 @@ public class FacilityDAO {
     }
 
     public boolean modify(Facility facility) throws SQLException, NamingException {
-    	Connection conn = null;
-		PreparedStatement stmt = null;
-
-		// META-INF아래 context.xml
-		Context context = new InitialContext();
-		// DB Connection
-		conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-		
-		
-		String sql = "UPDATE `sogongdo`.`Facility` SET `FacilityID` = ?, `registrantID` = ?, `WorkspaceID` = ?, `facilityName` = ? WHERE `FacilityID` = ?;";
-
-        stmt = conn.prepareStatement(sql);
-
-        stmt.setString(1,facility.getFacilityID());
-        stmt.setString(2,facility.getRegistrantID());
-        stmt.setString(3,facility.getWorkspaceID());
-        stmt.setString(4,facility.getFacilityName());
-        stmt.setString(5,facility.getFacilityID());
-
-        return true;
+        try{
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            // META-INF아래 context.xml
+            Context context = new InitialContext();
+            // DB Connection
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+            String sql = "UPDATE `sogongdo`.`Facility` SET `facilityID` = ?, `registrantID` = ?, `workspaceID` = ?, `facilityName` = ? WHERE `facilityID` = ?;";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,facility.getFacilityID());
+            stmt.setString(2,facility.getRegistrantID());
+            stmt.setString(3,facility.getWorkspaceID());
+            stmt.setString(4,facility.getFacilityName());
+            stmt.setString(5,facility.getFacilityID());
+            stmt.execute();
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public boolean delete(int i) {
-		// DB연결
-		Connection conn = null;
-		PreparedStatement stmt = null;
+    public boolean delete(String facilityID) {
+        try{
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            Context context;
 
-		// META-INF아래 context.xml
-		Context context;
-
-		String sql = "delete from Facility where FacilityID=?";
-		try {
-			context = new InitialContext();
-			conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, i);
-			return true;
-		} catch (NamingException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return false;
+            String sql = "delete from Facility where facilityID=?";
+            context = new InitialContext();
+            conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, facilityID);
+            stmt.execute();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }
