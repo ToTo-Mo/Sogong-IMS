@@ -26,8 +26,8 @@ public class FacilityChargeEnrollAction implements Action{
             FacilityChargeDAO fcDAO = new FacilityChargeDAO();
 
             String resistrantID = request.getParameter("resistrantID");
-            String workspaceID = request.getParameter("inputWorkspaceID");
-            String facilityID = request.getParameter("inputFacilityID");
+            String workspaceID = request.getParameter("workspaceID");
+            String facilityID = request.getParameter("facilityID");
             String chargeName = request.getParameter("inputChargeName");
             int charge = Integer.parseInt(request.getParameter("inputCharge"));
             float discountRate = Float.parseFloat(request.getParameter("inputDiscountRate"));

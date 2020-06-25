@@ -127,9 +127,9 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-secondary mr-2"
-                                            onclick="modifyPopup('<%=fc.getWorkspaceID(), fc.getFacilityID(), fc.getChargeName()%>')"></button>
+                                            onclick="modifyPopup('<%=fc.getWorkspaceID()%>`, `<%=fc.getFacilityID()%>`, `<%=fc.getChargeName()%>')"></button>
                                     <button type="button" class="btn btn-secondary mr-2"
-                                            onclick="deleteRow('<%=fc.getWorkspaceID(), fc.getFacilityID(), fc.getChargeName()%>')"></button>
+                                            onclick="deleteRow('<%=fc.getWorkspaceID()%>`, `<%=fc.getFacilityID()%>`, `<%=fc.getChargeName()%>')"></button>
                                 </div>
                             </td>
                         </tr>

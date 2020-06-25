@@ -17,12 +17,20 @@ To change this template use File | Settings | File Templates.
     <title></title>
 </head>
 
+<script>
+    var workspaceID = sessionStorage.getItem("workspaceID");
+    var facilityID = sessionStorage.getItem("facilityID");
+</script>
+
 <body>
 
 <!-- row : 행으로 구분된 영역, justify : 가운데 정렬-->
 <div class="row col-auto justify-content-center mt-5">
     <!-- 입력 양식 -->
     <form action="${pageContext.request.servletPath}/enroll.do" method="POST">
+
+        <input type="hidden" name="workspaceID" value="${workspaceID}">
+        <input type="hidden" name="facilityID" value="${facilityID}">
 
         <div class="form-group">
 
