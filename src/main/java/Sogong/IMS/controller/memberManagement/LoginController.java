@@ -44,6 +44,6 @@ public class LoginController extends HttpServlet {
             else
                 request.getSession().removeAttribute("member");
         }
-        printWriter.print(String.format("<script>location.replace('/')</script>",preUrl.split("/")[3]));
+        printWriter.print(String.format("<script>location.replace('%s')</script>",preUrl));
     }
 }
