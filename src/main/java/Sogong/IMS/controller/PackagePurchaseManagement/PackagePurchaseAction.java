@@ -34,7 +34,8 @@ public class PackagePurchaseAction implements Action {
                 if(member == null)
                     printWriter.print("<script>alert('비정상적인 접근입니다')</script>");
                 else{
-                    result = PackagePurchaseHistoryByMemberDAO.getInstance().enroll(new PackagePurchaseHistoryByMember(aPakcage, LocalDateTime.now(), totalPrice,Integer.parseInt(request.getParameter("numPurchase")),"구매완료","무통장입금",member));
+                    result = PackagePurchaseHistoryByMemberDAO.getInstance().enroll(new PackagePurchaseHistoryByMember(aPakcage, LocalDateTime.now(), totalPrice,Integer.parseInt(request.getParameter("numPurchase")),
+                            "구매완료",request.getParameter("paymentMethod"),member));
                     if(result == true)
                         printWriter.print("<script>alert('성공적으로 구매하였습니다')</script>");
                     else
@@ -43,8 +44,8 @@ public class PackagePurchaseAction implements Action {
             }
             else{
                 if(request.getParameter("buyerName") != null){
-                    result = PackagePurchaseHistoryByNonMemberDAO.getInstance().enroll(new PackagePurchaseHistoryByNonMember(aPakcage,LocalDateTime.now(),totalPrice,Integer.parseInt(request.getParameter("numPurchase")),"구매완료","무통장입금",
-                            request.getParameter("buyerName"), request.getParameter("buyerEmail"), request.getParameter("buyerPhoneNumber")));
+                    result = PackagePurchaseHistoryByNonMemberDAO.getInstance().enroll(new PackagePurchaseHistoryByNonMember(aPakcage,LocalDateTime.now(),totalPrice,Integer.parseInt(request.getParameter("numPurchase")),
+                            "구매완료",request.getParameter("paymentMethod"), request.getParameter("buyerName"), request.getParameter("buyerEmail"), request.getParameter("buyerPhoneNumber")));
                     if(result == true)
                         printWriter.print("<script>alert('성공적으로 구매하였습니다')</script>");
                     else

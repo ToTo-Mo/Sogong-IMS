@@ -38,6 +38,14 @@
                 <div class="form-inline">
 
                     <%-- 하나의 입력 필드 입니다. --%>
+                     <div class="input-group mb-3 mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">예약취소번호</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="입력" name="inputAccomodationBookCancleHistoryID"
+                               aria-describedby="basic-addon1" autocomplete="off">
+                    </div>
+
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">예약번호</span>
@@ -102,7 +110,7 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= acc.getAccomodationBookCancleHistoryID()%>')">수정</button>
-                                    <button type="button" class="btn btn-secondary">삭제</button>
+                                    <button type="button" class="btn btn-secondary"onclick="deleteRow('<%= acc.getAccomodationBookCancleHistoryID()%>')">삭제</button>
                                 </div>
                             </td>
                         </tr>
@@ -166,4 +174,19 @@
             child.resizeTo(wid, hei);
         };
     }
+
+     function deleteRow(accomodationBookCancleHistoryID) {
+
+        var $form = $("<form></form>");
+        $form.attr("action","${pageContext.request.contextPath}/accomodationBookCancleHistoryManage/delete.do");
+        $form.attr("method","post");
+
+        var $input = $("<input>");
+        $input.attr("name","inputAccomodationBookCancleHistoryID");
+        $input.attr("value",accomodationBookCancleHistoryID)
+
+        $form.append($input);
+        $('body').append($form);
+        $form.submit();
+    };
 </script>

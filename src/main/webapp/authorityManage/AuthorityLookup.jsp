@@ -1,5 +1,4 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Sogong.IMS.model.Example" %>
 <%@ page import="Sogong.IMS.model.Member" %>
 <%@ page import="Sogong.IMS.model.MemberAuthorityGroup" %>
 <%@ page import="java.util.Iterator" %>

@@ -125,12 +125,11 @@ public class MemberDAO {
             Context context = new InitialContext();
             con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "Delete FROM `member` WHERE memberID = ?";
+            String sql = "Delete FROM `member` WHERE `memberID`=?";
             stmt = con.prepareStatement(sql);
-
-            stmt.setString(1,  memberID);
-            stmt.execute();
-
+            stmt.setString(1, memberID);
+            
+            stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -144,25 +143,23 @@ public class MemberDAO {
     public boolean modify(Member member) {
         try {
             Connection con = null;
-            PreparedStatement stmt = null;
+            PreparedStatement st = null;
 
             Context context = new InitialContext();
             con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            String sql = "UPDATE `member` SET `memberID`=?,`memberPW`=?,`name`=?,`phoneNumber`=?,`address`=?,`email`=?,`memberType`=?,`department`=? WHERE `memberID`=?";
-            stmt = con.prepareStatement(sql);
-
-            stmt.setString(1, member.getMemberID());
-            stmt.setString(2, member.getMemberPW());
-            stmt.setString(3, member.getName());
-            stmt.setString(4, member.getPhoneNumber());
-            stmt.setString(5, member.getAddress());
-            stmt.setString(6, member.getEmail());
-            stmt.setString(7, member.getMemberType());
-            stmt.setString(8, member.getDepartment());
-            stmt.setString(9, member.getMemberID());
-
-            return stmt.execute();
+            st = con.prepareStatement("UPDATE `member` SET `memberPW`=?,`name`=?,`phoneNumber`=?,`address`=?,`email`=?,`memberType`=?,`department`=? WHERE `memberID`=?");
+            st.setString(1, member.getMemberPW());
+            st.setString(2, member.getName());
+            st.setString(3, member.getPhoneNumber());
+            st.setString(4, member.getAddress());
+            st.setString(5, member.getEmail());
+            st.setString(6, member.getMemberType());
+            st.setString(7, member.getDepartment());
+            st.setString(8, member.getMemberID());
+            
+            st.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {

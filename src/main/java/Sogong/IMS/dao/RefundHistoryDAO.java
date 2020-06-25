@@ -52,7 +52,7 @@ public class RefundHistoryDAO {
 
         return false;
     }
-    public RefundHistory[] lookup(HashMap<String,String> condition)
+    public RefundHistory[] lookup(HashMap<String, Object> condition)
     {
         try 
         {

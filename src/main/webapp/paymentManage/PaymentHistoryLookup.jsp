@@ -51,15 +51,6 @@
                     <%-- 하나의 입력 필드 입니다. --%>
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">숙박시설명</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputAccomodationID"
-                               aria-describedby="basic-addon1" autocomplete="off">
-                    </div>
-
-                    <%-- 하나의 입력 필드 입니다. --%>
-                    <div class="input-group mb-3 mr-3">
-                        <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">결제수단</span>
                         </div>
                         <input type="text" class="form-control" placeholder="입력" name="inputPaymentMethod"
@@ -82,7 +73,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">등록자</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="registrantName"
+                        <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
                                aria-describedby="basic-addon2" autocomplete="off">
                     </div>
 
@@ -113,7 +104,7 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartPaymentTime"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputPaymentTime"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
@@ -126,7 +117,7 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartCheckOut"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckOut"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
@@ -139,7 +130,7 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartCheckIn"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckIn"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
@@ -151,7 +142,7 @@
             </form>
             <%-- 조회 필드 끝 --%>
 
-        </div>]
+        </div>
         
             <div class="row">
 
@@ -177,27 +168,27 @@
 
                         <tbody>
                         <%
-                            ArrayList<PaymentHistory> payment = (ArrayList<PaymentHistory>) request.getAttribute("paymentHistory");
+                            ArrayList<PaymentHistory> paymentHistories = (ArrayList<PaymentHistory>) request.getAttribute("paymentHistories");
 
-                            if (paymentHistory != null) {
-                                for (PaymentHistory p : payment) {
+                            if (paymentHistories != null) {
+                                for (PaymentHistory payment : paymentHistories) {
                         %>
 
                         <tr>
                             <td>-</td>
-                            <td><%= p.getPaymentID() %>
+                            <td><%= payment.getPaymentHistoryID() %>
                             </td>
-                            <td><%= p.getAccomodationBookHistoryID() %>
+                            <td><%= payment.getAccomodationBookHistoryID() %>
                             </td>
-                            <td><%= p.getPrice() %>
+                            <td><%= payment.getPrice() %>
                             </td>
-                            <td><%= p.getRegistrantID() %>
+                            <td><%= payment.getRegistrantID() %>
                             </td>
 
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= m.getMemberID()%>')">수정</button>
-                                    <button type="button" class="btn btn-secondary" onclick="deleteRow('<%= m.getMemberID()%>')">삭제</button>
+                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= payment.getPaymentHistoryID()%>')">수정</button>
+                                    <button type="button" class="btn btn-secondary" onclick="deleteRow('<%= payment.getPaymentHistoryID()%>')">삭제</button>
                                 </div>
                             </td>
                         </tr>
@@ -212,15 +203,6 @@
             <%-- 테이블 끝 --%>
         </div>
 </div>
-
-        <%-- 추가 버튼  justify-content-end는 요소들을 오른쪽 정렬하겠다는 의미 입니다. --%>
-        <div class="row justify-content-end">
-            <div class="col-auto">
-                <div class="input-group mb-3 mr-3">
-                    <button type="button" class="btn btn-secondary bg-dark" onclick="enrollPopup()">추가</button>
-                </div>
-            </div>
-        </div>
 
 </div>
 
@@ -253,19 +235,4 @@
 
     });
 
-    function enrollPopup() {
-        var url = "/paymentEnroll"
-        var name = "enroll popup"
-        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
-
-        var child = window.open(url, name, option);
-        child.focus();
-
-        child.onload = function () {
-            var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
-            child.resizeTo(wid, hei);
-        };
-    }
 </script>

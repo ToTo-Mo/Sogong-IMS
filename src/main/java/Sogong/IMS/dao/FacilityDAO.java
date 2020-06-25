@@ -1,5 +1,6 @@
 package Sogong.IMS.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,15 +57,81 @@ public class FacilityDAO {
         return false;
     }
 
-    public Facility[] lookup(HashMap<String, String> condition) {
-        return null;
+    public Facility[] lookup(HashMap<String, Object> condtions) throws SQLException, NamingException {// DB연결
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		// META-INF아래 context.xml
+		Context context = new InitialContext();
+		// DB Connection
+		conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+		
+		
+		String sql = "SELECT * FROM Facility";
+		stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		ArrayList<Facility> list = new ArrayList<>();
+
+        while (rs.next()) {
+        	
+        	String facilityID = rs.getString("facilitiyID");
+            String registrantID = rs.getString("registrantID");
+            String workspaceID= rs.getString("workspaceID");
+    	    String facilityName = rs.getString("facilityName");
+
+            list.add(
+                new Facility(facilityID, registrantID, workspaceID, facilityName)
+            );
+
+        }
+
+        return list.toArray(new Facility[list.size()]);
     }
 
-    public boolean modify(Facility facility) {
-        return false;
+    public boolean modify(Facility facility) throws SQLException, NamingException {
+    	Connection conn = null;
+		PreparedStatement stmt = null;
+
+		// META-INF아래 context.xml
+		Context context = new InitialContext();
+		// DB Connection
+		conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+		
+		
+		String sql = "UPDATE `sogongdo`.`Facility` SET `FacilityID` = ?, `registrantID` = ?, `WorkspaceID` = ?, `facilityName` = ? WHERE `FacilityID` = ?;";
+
+        stmt = conn.prepareStatement(sql);
+
+        stmt.setString(1,facility.getFacilityID());
+        stmt.setString(2,facility.getRegistrantID());
+        stmt.setString(3,facility.getWorkspaceID());
+        stmt.setString(4,facility.getFacilityName());
+        stmt.setString(5,facility.getFacilityID());
+
+        return true;
     }
 
-    public boolean delete(Facility facility) {
-        return false;
+    public boolean delete(int i) {
+		// DB연결
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		// META-INF아래 context.xml
+		Context context;
+
+		String sql = "delete from Facility where FacilityID=?";
+		try {
+			context = new InitialContext();
+			conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, i);
+			return true;
+		} catch (NamingException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
     }
 }

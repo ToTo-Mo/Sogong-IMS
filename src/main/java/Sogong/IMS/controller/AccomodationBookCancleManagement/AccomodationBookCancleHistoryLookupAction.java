@@ -32,8 +32,9 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
        
 
         //1. 값이 없다면 null로 지정됩니다.
-        String inputAccomodationBookHistoryID = StringUtils.defaultIfBlank(request.getParameter("inputAccomodationBookHistoryID"), null);
-        String inputRegister = StringUtils.defaultIfBlank(request.getParameter("inputRegister"), null);
+        String accomodationBookCancleHistoryID = StringUtils.defaultIfBlank(request.getParameter("inputAccomodationBookCancleHistoryID"), null);
+        String accomodationBookHistoryID = StringUtils.defaultIfBlank(request.getParameter("inputAccomodationBookHistoryID"), null);
+        String register = StringUtils.defaultIfBlank(request.getParameter("inputRegister"), null);
    
 
        
@@ -51,11 +52,13 @@ public class AccomodationBookCancleHistoryLookupAction implements Action {
         HashMap<String,Object> condition = new HashMap<>();
         
         // 3. 값이 있는 항목에 대해서만 조건 검색에 추가합니다.
-        if(inputAccomodationBookHistoryID != null) condition.put("inputAccomodationBookHistoryID", inputAccomodationBookHistoryID);
+        if(accomodationBookCancleHistoryID != null) condition.put("accomodationBookCancleHistoryID", accomodationBookCancleHistoryID);
 
-        if(inputRegister != null) condition.put("inputRegister", inputRegister);
+        if(accomodationBookHistoryID != null) condition.put("accomodationBookHistoryID", accomodationBookHistoryID);
 
-        //if(createDate != null) condition.put("createDate", createDate);
+        if(register != null) condition.put("register", register);
+
+        
 
         // 4. 결과를 가져옵니다. 출력의 편의성을 위해 Example[]에서 ArrayList로 변환했습니다.
         ArrayList<AccomodationBookCancleHistory> accomodationBookCancleHistories = new ArrayList<>(Arrays.asList(new AccomodationBookCancleHistoryDAO().lookup(condition)));

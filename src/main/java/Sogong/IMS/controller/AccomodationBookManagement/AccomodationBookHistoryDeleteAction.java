@@ -24,41 +24,16 @@ public class AccomodationBookHistoryDeleteAction implements Action {
             PrintWriter out = response.getWriter();
 
             String accomodationBookHistoryID = request.getParameter("inputAccomodationBookHistoryID");
-            int numOfPeople = Integer.parseInt(request.getParameter("inputNumOfPeople"));
-            String name = request.getParameter("inputName");
-            String phoneNum  = request.getParameter("inputPhoneNum");
-            LocalDate bookDate  = LocalDate.parse(request.getParameter("inputBookDate"), DateTimeFormatter.ISO_DATE); //yyyy-mm-dd
-            String bookState  = request.getParameter("inputBookState");
-            int paymentPrice = Integer.parseInt(request.getParameter("inputPaymentPrice"));
-            LocalDateTime checkInTime = LocalDateTime.parse(request.getParameter("inputCheckInTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            LocalDateTime checkOutTime = LocalDateTime.parse(request.getParameter("inputCheckOutTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            String enteringState = request.getParameter("inputEnteringState");
-            String memberID = request.getParameter("inputMemberID");
-            String registrantID = request.getParameter("inputRegistrantID");
-            String accomodationID = request.getParameter("inputAccomodationID");
-            int roomNum = Integer.parseInt(request.getParameter("inputRoomNum"));
             
             new AccomodationBookHistoryDAO().delete(
                     AccomodationBookHistory.builder()
                     .accomodationBookHistoryID(accomodationBookHistoryID)
-                    .numOfPeople(numOfPeople)
-                    .name(name)
-                    .phoneNum(phoneNum)
-                    .bookDate(bookDate)
-                    .bookState(bookState)
-                    .paymentPrice(paymentPrice)
-                    .checkInTime(checkInTime)
-                    .checkOutTime(checkOutTime)
-                    .enteringState(enteringState)
-                    .memberID(memberID)
-                    .registrantID(registrantID)
-                    .accomodationID(accomodationID)
-                    .roomNum(roomNum)
+                  
                             .build());
 
             out.println("<script>alert('성공적으로 삭제되었습니다.')</script>");
-            out.println("<script>self.close()</script>");
-            out.flush();
+            out.print(String.format("<script>location.replace('%s')</script>",request.getServletPath()));
+
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
