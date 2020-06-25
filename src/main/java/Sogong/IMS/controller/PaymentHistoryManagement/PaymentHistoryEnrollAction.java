@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.Patch;
 
 import com.mysql.cj.util.StringUtils;
 
@@ -27,18 +26,19 @@ public class PaymentHistoryEnrollAction implements Action {
 
             PrintWriter out = response.getWriter();
            
-            String accomodationBookHistoryID = request.getParameter("inputAccomodationID");
+            String paymentID = request.getParameter("inputAccomodationID");
             int price = Integer.parseInt(request.getParameter("inputPrice"));
             LocalDateTime paymentTime  = LocalDateTime.parse(request.getParameter("inputPaymentTime"));
             String paymentMethod  = request.getParameter("inputPaymentMethod");
 
             new PaymentHistoryDAO().enroll(
                     PaymentHistory.builder()
-                    .accomodationBookHistoryID(accomodationBookHistoryID)
+                    .paymentHistoryID(paymentID)
                     .price(price)
                     .paymentMethod(paymentMethod)
                     .paymentTime(paymentTime)
                             .build());
+
 
             out.println("<script>alert('성공적으로 등록되었습니다.')</script>");
             out.println("<script>self.close()</script>");

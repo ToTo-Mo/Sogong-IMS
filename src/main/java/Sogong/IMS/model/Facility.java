@@ -1,16 +1,13 @@
 package Sogong.IMS.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 
 public class Facility {
 
@@ -19,4 +16,10 @@ public class Facility {
     private String workspaceID;
     private String facilityName;
 
+    public Facility(String facilityID, String registrantID, String workspaceID, String facilityName){
+        this.facilityID = facilityID;
+        this.registrantID = registrantID;
+        this.workspaceID = workspaceID;
+        this.facilityName = facilityName;
+    }
 }

@@ -33,7 +33,7 @@
 
         <div class="row col-auto justify-content-center mt-5">
 
-            <form action="${pageContext.request.contextPath}/Member/enroll.do" id="form" method="POST">
+            <form action="${pageContext.request.contextPath}/memberManage/enroll.do" id="form" method="POST">
 
                 <!-- ID 필수 입력 input tag 안에 required가 있습니다.-->
                 <div class="form-group">

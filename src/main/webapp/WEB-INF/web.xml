@@ -210,7 +210,15 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/refundHistoryManage</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>refundHistoryEnroll</servlet-name>
+    <jsp-file>/refundManage/refundHistoryEnroll.jsp</jsp-file>
+</servlet>
 
+<servlet-mapping>
+    <servlet-name>refundHistoryEnroll</servlet-name>
+    <url-pattern>/refundHistoryEnroll</url-pattern>
+</servlet-mapping>
 <!-- 환불 내역 관리 끝-->
 
 <!--    상품 관리 시작-->
@@ -313,6 +321,24 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 <servlet-mapping>
     <servlet-name>workspaceManage</servlet-name>
     <url-pattern>/workspaceManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>workspaceEnroll</servlet-name>
+    <jsp-file>/workspaceManage/WorkspaceEnroll.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>workspaceEnroll</servlet-name>
+    <url-pattern>/workspaceEnroll</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>workspaceModify</servlet-name>
+    <jsp-file>/workspaceManage/WorkspaceModify.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>workspaceModify</servlet-name>
+    <url-pattern>/workspaceModify/*</url-pattern>
 </servlet-mapping>
 <!-- 사업장 관리 끝 -->
 </web-app> 

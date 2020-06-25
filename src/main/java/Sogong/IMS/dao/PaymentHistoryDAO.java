@@ -67,8 +67,7 @@ public class PaymentHistoryDAO {
 
             StringBuilder sqlBuilder = new StringBuilder();
 
-            sqlBuilder.append("SELECT * FROM ")
-                        .append("`paymentHistory` ");
+            sqlBuilder.append("SELECT * FROM (SELECT A.name, PH.`price`, AH.`checkInTime` , AH.`checkOutTime`,PH.`paymentTime`, PH.`paymentMethod`, PH.`registantID` FROM `paymenthistory` as PH JOIN `accomodationbookhistory` as AH ON PH.`accomodationBookHistoryID` = AH.`accomodationBookHistoryID` JOIN `accomodation` as A ON AH.`accomodationID` = A.`accomodationID`) as RESULT");
 
             // 조건 검색
             if (condition.size()>0) 
