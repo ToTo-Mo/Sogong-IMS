@@ -40,47 +40,70 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.contextPath}/paymentHistoryManage/enroll.do" id="form" method="POST">
+        <form action="${pageContext.request.contextPath}/refundHistoryManage/enroll.do" id="form" method="POST">
 
             <!-- 결제 금액 -->
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">결제 금액</span>
+                        <span class="input-group-text" id="basic-addon1">결제번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputPrice" id="inputPrice"
+                    <input type="text" class="form-control" placeholder="입력" name="inputPaymentID" id="inputPrice"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
 
-            <!-- 결제시간 -->
+            <!-- 환불번호 -->
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">결제시간</span>
+                        <span class="input-group-text" id="basic-addon1">환불번호</span>
                     </div>
-                   <input type='text' class="form-control" name="inputPaymentTime" id='inputPaymentTime' value="" aria-describedby="basic-addon4" autocomplete="off"/>
-                </div>
-            </div>
-            
-            <!-- 결제 수단 -->
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">결제수단</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputPaymentMethod" id="inputPaymentMethod"
+                    <input type="text" class="form-control" placeholder="입력" name="inputPaymentID" id="inputPrice"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
 
-            <!-- 예약번호 -->
+            <!-- 환불시간 -->
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">예약번호</span>
+                        <span class="input-group-text" id="basic-addon1">환불시간</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputAccomodationID" id="inputAccomodationID"
+                    <input type='text' class="form-control" name="inputrefundTime" id='inputrefundTime'value=""
+                               aria-describedby="basic-addon4" autocomplete="off" />
+                </div>
+            </div>
+
+            <!-- 환불수단 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">환불수단</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputMemberID" id="inputPaymentMethod"
+                           aria-describedby="basic-addon1" autocomplete="off" required>
+                </div>
+            </div>
+
+            <!-- 환불금액 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">환불금액</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputMemberID" id="inputMemberID"
+                           aria-describedby="basic-addon1" autocomplete="off" required>
+                </div>
+            </div>
+
+            <!-- 환불사유 -->
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">환불사유</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="inputMemberID" id="inputAccomodationID"
                            aria-describedby="basic-addon1" autocomplete="off" required>
                 </div>
             </div>
@@ -108,7 +131,8 @@
         let date = today.getDate();
         date = date >= 10 ? date : '0' + date;
 
-    $('input[id="inputPaymentTime"]').val(year +"-"+ month +"-"+date);
+    $('input[id="inputTime"]').val(year +"-"+ month +"-"+date);
+        
     </script>   
 </body>
 </html>
