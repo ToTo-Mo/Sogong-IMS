@@ -55,13 +55,6 @@ public class AuthorityController extends HttpServlet {
             String servletPath = request.getServletPath();
             String path = url.substring(servletPath.length()).split("/")[1];
 
-
-            String id = "apple";
-            String password = "eppla";
-
-            Member member = MemberDAO.getInstance().login(id, password);
-            request.getSession().setAttribute("member", member);
-
             if (request.getSession().getAttribute("member") != null
                     && hasAuthority((Member) request.getSession().getAttribute("member"), authorityList.get(path))) {
                 Action action = list.get(path);

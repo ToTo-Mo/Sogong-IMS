@@ -99,10 +99,10 @@ public class FacilityChargeDAO {
 
             while(rs.next()) {
 
-                facilityCharges.add(
-                    FacilityCharge.builder()
-                    .workspaceID((Workspace)rs.getObject("workspaceID"))
-                    .facilityID(rs.getObject("facilityID")))
+                // facilityCharges.add(
+                //     FacilityCharge.builder()
+                //     .workspaceID((Workspace)rs.getObject("workspaceID"))
+                //     .facilityID(rs.getObject("facilityID")))
             }
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
