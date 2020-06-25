@@ -5,11 +5,13 @@
   Time: 오전 8:27
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <html>
+
 <head>
 
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" property='stylesheet' rel='stylesheet' type="text/css" media="screen"/>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" property='stylesheet' rel='stylesheet'
+        type="text/css" media="screen" />
 
     <title>Title</title>
 </head>
@@ -28,8 +30,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fieldChargeName">요금명</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="${param.existingChargeName}" name="inputChargeName"
-                           aria-describedby="fieldChargeName" autocomplete="off">
+                    <input type="text" class="form-control" placeholder="${param.existingChargeName}"
+                        name="inputChargeName" aria-describedby="fieldChargeName" autocomplete="off">
                 </div>
 
                 <!-- 요금 필드 -->
@@ -38,7 +40,7 @@
                         <span class="input-group-text" id="fieldCharge">요금</span>
                     </div>
                     <input type="text" class="form-control" placeholder="${param.existingCharge}" name="inputCharge"
-                           aria-describedby="fieldCharge" autocomplete="off">
+                        aria-describedby="fieldCharge" autocomplete="off">
                 </div>
 
                 <!-- 할인여부 선택 -->
@@ -58,8 +60,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fieldDiscountRate">할인율</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="${param.existingDiscountRate} (소수점으로 입력)" name="inputDiscountRate"
-                           aria-describedby="fieldDiscountRate" autocomplete="off">
+                    <input type="text" class="form-control" placeholder="${param.existingDiscountRate} (소수점으로 입력)"
+                        name="inputDiscountRate" aria-describedby="fieldDiscountRate" autocomplete="off">
                 </div>
             </div>
 
@@ -78,4 +80,5 @@
     </div>
 
 </body>
+
 </html>

@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
+import lombok.SneakyThrows;
 
-@WebServlet("/facilityChargeMangeView")
+@WebServlet("/facilityChargeMange/*")
 public class FacilityChargeController extends HttpServlet {
 
     private static final long serialVersionUID = 8559171819500212874L;
@@ -23,19 +24,20 @@ public class FacilityChargeController extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         list = new HashMap<>();
 
-        list.put("/enroll.do", new FacilityChargeEnrollAction());
-        list.put("/lookup.do", new FacilityChargeLookupAction());
-        list.put("/modify.do", new FacilityChargeModifyAction());
-        list.put("/delete.do", new FacilityChargeDeleteAction());
+        list.put("enroll.do", new FacilityChargeEnrollAction());
+        list.put("lookup.do", new FacilityChargeLookupAction());
+        list.put("modify.do", new FacilityChargeModifyAction());
+        list.put("delete.do", new FacilityChargeDeleteAction());
     }
 
+    @SneakyThrows
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response){
         String url = request.getRequestURI();
-        String contextPath = request.getContextPath();
+        String servletPath = request.getServletPath();
+        String path = url.substring(servletPath.length()).split("/")[1];
 
-        String path = url.substring(contextPath.length());
-
+        
         Action action = list.get(path);
         action.excute(request, response);
     }

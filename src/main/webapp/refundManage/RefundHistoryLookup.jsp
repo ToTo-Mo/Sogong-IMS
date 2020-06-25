@@ -138,17 +138,13 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartPaymentTime"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputPaymentTime"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
                         <div class="input-group-prepend">
                             <span class="input-group-text">~</span>
                         </div>
-
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputEndPaymentTime"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
 
 
@@ -158,17 +154,13 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartRefundTime"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputRefundTime"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
                         <div class="input-group-prepend">
                             <span class="input-group-text">~</span>
                         </div>
-
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputEndRefundTime"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
 
                     <div class="input-group col-3  mb-3 mr-3">
@@ -177,17 +169,13 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartCheckOut"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckOut"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
                         <div class="input-group-prepend">
                             <span class="input-group-text">~</span>
                         </div>
-
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputEndCheckOut"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
 
 
@@ -197,17 +185,13 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputStartCheckIn"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckIn"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
                         <div class="input-group-prepend">
                             <span class="input-group-text">~</span>
                         </div>
-
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputEndCheckIn"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
                     <%-- 조회 버튼 --%>
                     <div class="input-group mb-3 mr-3">
@@ -240,7 +224,7 @@
 
     $(function () {
 
-        $('input[name="inputDateTimeRange"]').daterangepicker({
+        $('input[id="inputDateTimeRange"]').daterangepicker({
             autoUpdateInput: false,
             timePicker: true,
             timePicker24Hour: true,
@@ -250,19 +234,19 @@
             }
         });
 
-        $('input[name="inputDateTimeRange"]').on('apply.daterangepicker', function (ev, picker) {
+        $('input[id="inputDateTimeRange"]').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('YYYY/MM/DD hh:mm') + '-' + picker.endDate.format('YYYY/MM/DD hh:mm'));
         });
 
 
-        $('input[name="inputDateTimeRange"]').on('cancel.daterangepicker', function (ev, picker) {
+        $('input[id="inputDateTimeRange"]').on('cancel.daterangepicker', function (ev, picker) {
             $(this).val('');
         });
 
     });
 
     function enrollPopup() {
-        var url = "/paymentEnroll"
+        var url = "/refundEnroll"
         var name = "enroll popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
 

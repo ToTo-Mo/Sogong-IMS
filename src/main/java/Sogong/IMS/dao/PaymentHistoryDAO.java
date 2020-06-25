@@ -53,7 +53,7 @@ public class PaymentHistoryDAO {
         return false;
     }
     
-    public PaymentHistory[] lookup(HashMap<String,String> condition)
+    public PaymentHistory[] lookup(HashMap<String,Object> condition)
     {
         
         try 
@@ -64,8 +64,6 @@ public class PaymentHistoryDAO {
 
             Context context = new InitialContext();
             conn = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
-
-            // conn = DriverManager.getConnection("jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC", "admin", "tejava");
 
             StringBuilder sqlBuilder = new StringBuilder();
 

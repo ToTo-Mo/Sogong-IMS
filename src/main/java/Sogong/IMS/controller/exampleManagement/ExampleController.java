@@ -3,6 +3,7 @@ package Sogong.IMS.controller.exampleManagement;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
+import lombok.SneakyThrows;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -36,6 +37,7 @@ public class ExampleController extends HttpServlet {
     }
 
     // get이나 post 요청에 대한 처리를 수행합니다.
+    @SneakyThrows
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) {
         try {
