@@ -132,6 +132,14 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-name>accomodationBookHistoryEnroll</servlet-name>
     <url-pattern>/accomodationBookHistoryEnroll</url-pattern>
 </servlet-mapping>
+<servlet>
+    <servlet-name>refundHistoryManage</servlet-name>
+    <jsp-file>/refundManage/RefundHistoryManage.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>refundHistoryManage</servlet-name>
+    <url-pattern>/refundHistoryManage</url-pattern>
+</servlet-mapping>
 
 <servlet>
     <servlet-name>accomodationBookHistoryModify</servlet-name>

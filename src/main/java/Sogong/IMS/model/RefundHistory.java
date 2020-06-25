@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 public class RefundHistory {
     private String refundHistoryID;
-    private String PaymentHistoryID;
+    private String paymentHistoryID;
     private String registrantID;
     private String resonsRefund;
     private int refundPrice;
