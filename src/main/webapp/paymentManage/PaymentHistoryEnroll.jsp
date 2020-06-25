@@ -70,9 +70,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">체크인</span>
                     </div>
-                    <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckIn"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
+                    <input type='text' class="form-control" id='inputDateTime' />
                 </div>
             </div>
             <!-- 체크아웃 -->
@@ -81,9 +79,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">체크아웃</span>
                     </div>
-                    <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckOut"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
+                    <input type='text' class="form-control" id='inputDateTime' />
                 </div>
             </div>
 
@@ -93,9 +89,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">결제시간</span>
                     </div>
-                    <input type="text" class="form-control" id="inputDateTimeRange" name="inputPaymentTime"
-                               value=""
-                               aria-describedby="basic-addon4" autocomplete="off"/>
+                   <input type='text' class="form-control" id='inputDateTime' />
                 </div>
             </div>
             <!-- 결제 수단 -->
@@ -146,7 +140,7 @@
     <script>
         $(function () {
 
-            $('input[id="inputDateTimeRange"]').daterangepicker({
+           /* $('input[id="inputDateTime"]').datetimepicker({
                 autoUpdateInput: false,
                 timePicker: true,
                 timePicker24Hour: true,
@@ -156,15 +150,17 @@
                 }
             });
 
-            $('input[id="inputDateTimeRange"]').on('apply.daterangepicker', function (ev, picker) {
+            $('input[id="inputDateTime"]').on('apply.datetimepicker', function (ev, picker) {
                 $(this).val(picker.startDate.format('YYYY/MM/DD hh:mm') + '-' + picker.endDate.format('YYYY/MM/DD hh:mm'));
             });
 
 
-            $('input[id="inputDateTimeRange"]').on('cancel.daterangepicker', function (ev, picker) {
+            $('input[id="inputDateTime"]').on('cancel.datetimepicker', function (ev, picker) {
                 $(this).val('');
             });
-
+                */
+            $('input[id="inputDateTime"]').datetimepicker();
+             
         });  
     </script>   
 </body>
