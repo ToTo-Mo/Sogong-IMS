@@ -128,7 +128,6 @@ public class MemberDAO {
             String sql = "Delete FROM `member` WHERE `memberID`=?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, memberID);
-            
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -173,8 +172,10 @@ public class MemberDAO {
         Connection conn = null;
         PreparedStatement stmt = null;
         Context context = new InitialContext();
-        conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
+
+        conn = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
         String sql = "select * from sogongdo.member where memberID = ? and memberPW = ?";
+
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, id);
         stmt.setString(2, pw);
