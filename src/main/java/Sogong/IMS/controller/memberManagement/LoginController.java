@@ -20,7 +20,6 @@ public class LoginController extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURI();
         String preUrl = request.getHeader("Referer");
-
         try {
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("UTF-8");
@@ -34,7 +33,7 @@ public class LoginController extends HttpServlet {
         if(url.equals("/login")){
             Member member = MemberDAO.getInstance().login(request.getParameter("id"),request.getParameter("pw"));
             if(member != null)
-                request.getSession().putValue("member", member);
+                request.getSession().setAttribute("member", member);
             else
                 printWriter.print("<script>alert('로그인에 실패했습니다')</script>");
         }
