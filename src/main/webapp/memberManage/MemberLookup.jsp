@@ -7,8 +7,36 @@
 <html>
 <head>
     <title>회원조회</title>
+    <script>
+        function modify(memberID) {
+        var url = "${pageContext.request.contextPath}/memberManagement/" +memberID;
+        var name = "modify popup"
+        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
+        var child = window.open(url, name, option);
+
+        child.onload = function () {
+            var wid = child.document.body.offsetWidth + 50;
+            var hei = child.document.body.offsetHeight + 200;        //30 과 40은 넉넉하게 하려는 임의의 값임
+            child.resizeTo(wid, hei);
+        };
+        }
+        function remove(memberID) {
+            var $form = $("<form></form>");
+        $form.attr("action","${pageContext.request.contextPath}/memberManagement/delete.do");
+        $form.attr("method","post");
+
+        var $input = $("<input>");
+        $input.attr("name","inputMemberID");
+        $input.attr("value",memberID)
+
+        $form.append($input);
+        $('body').append($form);
+        $form.submit();
+        }
+    </script>
 </head>
 <body>
+    1234
     <div class="container-fluid">
         <!-- 작업 화면 -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -92,7 +120,8 @@
                             <%
                                 ArrayList<Member> members = (ArrayList<Member>) request.getAttribute("members");
                                 if (members != null) {
-                                    for (Member m : members) {%>
+                                    for (Member m : members) {
+                            %>
     
                             <tr>
                                 <td>-</td>
@@ -110,8 +139,8 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary mr-2">수정</button>
-                                        <button type="button" class="btn btn-secondary">삭제</button>
+                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify('<%= m.getName() %>')" >수정</button>
+                                        <button type="button" class="btn btn-secondary" onclick = "remove('<%= m.getName() %>')">삭제</button>
                                     </div>
                                 </td>
                             </tr>
@@ -130,4 +159,5 @@
     </div>
 
 </body>
+
 </html>

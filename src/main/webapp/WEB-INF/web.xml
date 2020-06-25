@@ -25,16 +25,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <url-pattern>/index</url-pattern>
 </servlet-mapping>
 
-<servlet>
-    <servlet-name>packageManage</servlet-name>
-    <jsp-file>/PackageManage.jsp</jsp-file>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>packageManage</servlet-name>
-    <url-pattern>/PackageManage</url-pattern>
-</servlet-mapping>
-
 <!-- 회원 관리 -->
 <servlet>
     <servlet-name>memberManage</servlet-name>
@@ -212,5 +202,97 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 
 <!-- 환불 내역 관리 끝-->
+
+<!--    상품 관리 시작-->
+    <servlet-mapping>
+        <servlet-name>packageManage</servlet-name>
+        <url-pattern>/packageManage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packageManage</servlet-name>
+        <jsp-file>/PackageManage/PackageManage.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>packageEnroll</servlet-name>
+        <url-pattern>/packageEnroll</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packageEnroll</servlet-name>
+        <jsp-file>/PackageManage/PackageEnroll.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>packageModify</servlet-name>
+        <url-pattern>/packageModify/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packageModify</servlet-name>
+        <jsp-file>/PackageManage/PackageModify.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>packagePurchase</servlet-name>
+        <url-pattern>/packagePurchase</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packagePurchase</servlet-name>
+        <jsp-file>/PackagePurchaseManage/PackagePurchase.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>packageInfo</servlet-name>
+        <url-pattern>/packageInfo/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packageInfo</servlet-name>
+        <jsp-file>/PackagePurchaseManage/PackageInfo.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>packagePurchaseNonMember</servlet-name>
+        <url-pattern>/packagePurchaseNonMember</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packagePurchaseNonMember</servlet-name>
+        <jsp-file>/PackagePurchaseManage/PackagePurchaseNonMember.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>packageSalesPerformance</servlet-name>
+        <url-pattern>/packageSalesPerformance</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>packageSalesPerformance</servlet-name>
+        <jsp-file>/PackageSalesManage/PackageSalesPerformance.jsp
+        </jsp-file>
+    </servlet>
+<!--    상품관리 끝-->
+<!-- 시설 요금 및 할인율 관리 시작-->
+<servlet>
+    <servlet-name>facilityChargeManage</servlet-name>
+    <jsp-file>/facilitychargeManage/FacilityChargeManage.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>facilityChargeManage</servlet-name>
+    <url-pattern>/facilityChargeManage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>facilityChargeEnroll</servlet-name>
+    <jsp-file>/facilitychargeManage/FacilityChargeEnroll.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>facilityChargeEnroll</servlet-name>
+    <url-pattern>/facilityChargeEnroll</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>facilityChargeModify</servlet-name>
+    <jsp-file>/facilitychargeManage/FacilityChargeModify.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+    <servlet-name>facilityChargeModify</servlet-name>
+    <url-pattern>/facilityChargeModify</url-pattern>
+</servlet-mapping>
+<!-- 시설 요금 및 할인율 관리 끝-->
 
 </web-app> 

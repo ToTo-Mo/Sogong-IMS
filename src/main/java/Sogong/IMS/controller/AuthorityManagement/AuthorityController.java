@@ -1,9 +1,11 @@
-package Sogong.IMS.controller.authorityManagement;
+package Sogong.IMS.controller.AuthorityManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
+import Sogong.IMS.dao.MemberDAO;
 import Sogong.IMS.model.Member;
 
 @WebServlet("/authorityManage/*")
@@ -37,60 +40,31 @@ public class AuthorityController extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) {
         try {
+            request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+
+            HashMap<String, String> authorityList = new HashMap<>();
+            authorityList.put("enroll.do", "관리자");
+            authorityList.put("modify.do", "관리자");
+            authorityList.put("delete.do", "관리자");
+            authorityList.put("lookup.do", "관리자");
 
             String url = request.getRequestURI();
             String servletPath = request.getServletPath();
-
             String path = url.substring(servletPath.length()).split("/")[1];
 
-            HttpSession session = request.getSession();
-            PrintWriter out = response.getWriter();
-
-            Member member = (Member) session.getAttribute("member");
-
-            if (!hasAuthority(member, "관리자")) {
-                switch (path) {
-                    case "enroll.do":
-                        if (!hasAuthority(member, "권한_등록")) {
-                            path = null;
-                            out.println("<script>alert('등록 권한이 없습니다.');</script>");
-                            out.flush();
-                            return;
-                        }
-                        break;
-                    case "lookup.do":
-                        if (!hasAuthority(member, "권한_조회")) {
-                            path = null;
-                            out.println("<script>alert('조회 권한이 없습니다.'); location.href='" + servletPath + "';</script>");
-                            out.flush();
-                            return;
-                        }
-                        break;
-                    case "modify.do":
-                        if (!hasAuthority(member, "권한_수정")) {
-                            path = null;
-                            out.println("<script>alert('수정 권한이 없습니다.'); location.href='" + servletPath + "';</script>");
-                            out.flush();
-                            return;
-                        }
-                        break;
-                    case "delete.do":
-                        if (!hasAuthority(member, "권한_삭제")) {
-                            path = null;
-                            out.println("<script>alert('삭제 권한이 없습니다.'); location.href='" + servletPath + "';</script>");
-                            out.flush();
-                            return;
-                        }
-                        break;
-                }
-            }
-
-            if (list.get(path) != null) {
+            if (request.getSession().getAttribute("member") != null
+                    && hasAuthority((Member) request.getSession().getAttribute("member"), authorityList.get(path))) {
                 Action action = list.get(path);
                 action.excute(request, response);
+            } else {
+                out.print(String.format("<script>alert('권한이 없습니다'); location.replace('%s');</script>",
+                        request.getServletPath()));
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

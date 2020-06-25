@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.model.Member;
+import lombok.SneakyThrows;
+
 @WebServlet({ "/accomodationBookHistoryManage/*", "/accomodationBookHistoryEnroll/*" })
 public class AccomodationBookManagementController extends HttpServlet {
     private static final long serialVersionUID = 8559000000000000002L;
@@ -32,6 +34,7 @@ public class AccomodationBookManagementController extends HttpServlet {
     }
 
     // get이나 post 요청에 대한 처리를 수행합니다.
+    @SneakyThrows
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) {
       

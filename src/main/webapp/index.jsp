@@ -29,12 +29,10 @@
 <body class="pt-5">
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">소공도 통합관리 시스템</a>
-        <ul class="navbar-nav px-3">
+        <ul class="navbar-nav">
             <li class="nav-item text-nowrap">
-                <div class="row">
-                    <div class="col-md-5"></div>
-                    <%@ include file="loginForm2.jsp" %>
-                </div>
+                <!-- 로그인 -->
+                <%@ include file="Login.jsp" %>
             </li>
         </ul>
     </nav>
@@ -80,7 +78,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/facilityChargeManage">
                                 시설 요금 및 할인율 관리
                             </a>
                         </li>
@@ -110,7 +108,13 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/packageManage">
+                                판매 상품 관리
+                            </a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/packageSalesPerformance">
                                 판매 상품 실적 집계
                             </a>
                         </li>

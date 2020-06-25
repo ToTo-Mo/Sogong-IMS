@@ -31,6 +31,7 @@ public class MyInfoController extends HttpServlet{
 		list.put("/lookup.do", new MemberLookupAction());
 	}
 	
+	@SneakyThrows
 	protected void sevice(HttpServletRequest rq, HttpServletResponse rs) throws IOException, SQLException, NamingException {
 		String url = rq.getRequestURI();
 		String contextPath = rq.getContextPath();

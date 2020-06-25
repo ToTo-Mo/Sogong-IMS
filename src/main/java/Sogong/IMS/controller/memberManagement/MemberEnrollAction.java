@@ -27,6 +27,10 @@ public class MemberEnrollAction implements Action {
 						 .memberPW(rq.getParameter("inputPW"))
 						 .name(rq.getParameter("inputName"))
 						 .phoneNumber(rq.getParameter("inputPhoneNumber"))
+						 .address(rq.getParameter("inputAddress"))
+						 .email(rq.getParameter("inputEmail"))
+						 .memberType(rq.getParameter("inputType"))
+						 .department(rq.getParameter("inputDepartment"))
 						 .build();
 
 		PrintWriter printWriter;
