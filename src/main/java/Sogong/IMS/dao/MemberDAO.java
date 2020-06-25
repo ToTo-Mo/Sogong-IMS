@@ -29,33 +29,6 @@ public class MemberDAO {
         return memberDAO;
     }
 
-    public Vector<Member> select(HashMap<String, Object> condition) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("");
-            Statement st = con.createStatement();
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("");
-            if(condition.size() > 0) {
-                if((condition.get("memberID") != null) || (condition.get("name") != null)) {
-                    stringBuilder.append("where");
-                    String memberID = condition.get("memberID") == null ? "" : (String)condition.get("memberID");
-                    String name = condition.get("name") == null ? "" : (String)condition.get("name");
-                    stringBuilder.append("memberID : " + memberID + "and name : " + name);
-                }
-            }
-            Vector<Member> members = new Vector<>();
-            ResultSet resultset = st.executeQuery(stringBuilder.toString());
-            while(resultset.next()) {
-                System.out.println(resultset.getString(1));
-            }
-            return members;
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public boolean enroll(Member m) {
         try {
             Connection con = null;
@@ -97,7 +70,7 @@ public class MemberDAO {
             con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("SELECT * FROM ").append("`example`");
+            stringBuilder.append("SELECT * FROM ").append("`member`");
 
             if(condition.size() > 0) {
                 stringBuilder.append("WHERE ");
@@ -111,7 +84,9 @@ public class MemberDAO {
                     if(val instanceof String) {
                         stringBuilder.append(String.format("`%s` LIKE '%%%s%%' ", columnName, (String)val));
                     }
-                    if(it.hasNext()) stringBuilder.append("AND ");
+
+                    if(it.hasNext()) 
+                        stringBuilder.append("AND ");
                 }
             }
             String sql = stringBuilder.toString();
@@ -121,7 +96,12 @@ public class MemberDAO {
             ArrayList<Member> memList = new ArrayList<>();
 
             while(rs.next()) {
+
+
+
             }
+
+
             return memList.toArray(new Member[memList.size()]);
         } catch (SQLException e) {
             e.printStackTrace();

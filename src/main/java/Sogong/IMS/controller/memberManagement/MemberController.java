@@ -1,10 +1,7 @@
 package Sogong.IMS.controller.memberManagement;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,13 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
-import lombok.SneakyThrows;
 
 @WebServlet("/memberManage/*")
 public class MemberController extends HttpServlet{
 	HashMap<String, Action> list = null;
 	
-	@SneakyThrows
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		list = new HashMap<>();
@@ -31,7 +26,8 @@ public class MemberController extends HttpServlet{
 		list.put("lookup.do", new MemberLookupAction());
 	}
 	
-	protected void sevice(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, NamingException {
+	@Override
+	public void service(HttpServletRequest request, HttpServletResponse response){
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
 

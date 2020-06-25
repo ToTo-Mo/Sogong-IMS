@@ -108,15 +108,6 @@
                                 </td>
                                 <td><%= m.getEmail() %>
                                 </td>
-
-                                <%
-                                String member = "";
-                                ArrayList<Member> mb = (ArrayList<Member>) request.getAttribute("members");
-                            	%>
-
-                            <td><%=members%>
-                            </td>
-
                                 <td>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-secondary mr-2">수정</button>

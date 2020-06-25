@@ -2,6 +2,8 @@ package Sogong.IMS.controller.memberManagement;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +11,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.MemberDAO;
@@ -24,57 +28,19 @@ public class MemberLookupAction implements Action{
 			e.printStackTrace();
 		}
 		
-		String[] conditionNames = {"memberID", "memberPW", "name", "phoneNumber", "address", "email", "memberType", "department"};
+		String[] conditionNames = {"memberID", "name"};
 		HashMap<String, Object> conditions = new HashMap<>();
 		
 		for(String condition : conditionNames) {
-			String value = rq.getParameter(condition);
+			String value = StringUtils.defaultIfBlank(rq.getParameter(condition), null);
 			
-			if(value != "") conditions.put(condition, value);
+			if(value != null)
+				conditions.put(condition, value);
 		}
 		
-		if((rq.getParameter("memberID") != "") || (rq.getParameter("name") != "")) {
-			
-		}
-		
-		Member[] lookupResult = MemberDAO.getInstance().lookup(conditions);
-		StringBuilder stringBuilder = new StringBuilder();
-		for(Member tmp : lookupResult) {
-			stringBuilder.append("<form method=\"post\">\n");
-			stringBuilder.append("<tr name='memberData'>\n");
-			stringBuilder.append("<td>");
-		    stringBuilder.append("<input type=\"text\" name=\"memberID\" class=\"data\" readonly value=");
-            stringBuilder.append(tmp.getMemberID() + ">\n");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<input type=\"text\" name=\"memberPW\" class=\"data\" readonly value=");
-            stringBuilder.append(tmp.getMemberPW() + ">\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<input type=\"text\" name=\"name\" class=\"data\" readonly value=");
-            stringBuilder.append(tmp.getName() + ">\n");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<input type=\"text\" name=\"phoneNumber\" class=\"data\" readonly value=");
-            stringBuilder.append(tmp.getPhoneNumber() + ">\n");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<input type=\"text\" name=\"address\" class=\"data\" readonly value=");
-            stringBuilder.append(tmp.getAddress() + ">\n");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<input type=\"text\" name=\"email\" class=\"data\" readonly value=");
-            stringBuilder.append(tmp.getEmail() + ">\n");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"button\" name=\"modify\">수정</button>");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("<td>");
-            stringBuilder.append("<button type=\"submit\" name=\"delete\"> 삭제 </button>");
-            stringBuilder.append("</td>\n");
-            stringBuilder.append("</tr>\n");
-            stringBuilder.append("</form>\n");
-		}
-		rq.setAttribute("lookup", stringBuilder.toString());
+		ArrayList<Member> members = new ArrayList<>(Arrays.asList(MemberDAO.getInstance().lookup(conditions)));
+
+		rq.setAttribute("members", members);
 		ServletContext context = rq.getServletContext();
 		RequestDispatcher dispatcher = context.getRequestDispatcher("/memberManage");
 		
