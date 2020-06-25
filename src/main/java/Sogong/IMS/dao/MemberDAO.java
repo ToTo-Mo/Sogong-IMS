@@ -37,7 +37,9 @@ public class MemberDAO {
             Context context = new InitialContext();
             con = ((DataSource) context.lookup("\"java:comp/env/jdbc/mysql\"")).getConnection();
 
-            String sql = "ISERT INTO `member` VALUES (?,?)";
+            
+
+            String sql = "INSERT INTO `member` VALUES (?,?)";
             st = con.prepareStatement(sql);
 
             st.setString(1, m.getMemberID());
