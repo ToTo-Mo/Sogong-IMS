@@ -9,7 +9,8 @@
     <title>회원조회</title>
     <script>
         function modify(memberID) {
-        var url = "${pageContext.request.contextPath}/memberManagement/" +memberID;
+        var url = "${pageContext.request.contextPath}/memberManage/Membermodify?id=" +memberID;
+        console.log(url);
         var name = "modify popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
         var child = window.open(url, name, option);
@@ -21,8 +22,9 @@
         };
         }
         function remove(memberID) {
+            console.log(1234);
             var $form = $("<form></form>");
-        $form.attr("action","${pageContext.request.contextPath}/memberManagement/delete.do");
+        $form.attr("action","${pageContext.request.contextPath}/memberManage/delete.do");
         $form.attr("method","post");
 
         var $input = $("<input>");
@@ -32,6 +34,10 @@
         $form.append($input);
         $('body').append($form);
         $form.submit();
+        }
+        function test() {
+            alert("123");
+            console.log("123");
         }
     </script>
 </head>
@@ -139,8 +145,8 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify('<%= m.getName() %>')" >수정</button>
-                                        <button type="button" class="btn btn-secondary" onclick = "remove('<%= m.getName() %>')">삭제</button>
+                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify(test())" >수정</button>
+                                        <button type="button" class="btn btn-secondary" onclick = "remove('<%= m.getMemberID() %>')">삭제</button>
                                     </div>
                                 </td>
                             </tr>

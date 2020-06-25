@@ -150,7 +150,7 @@ public class MemberDAO {
             con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             st = con.prepareStatement("DELETE FROM `member` WHERE `memberID`=?");
-            st.setString(1, m.getMemberID());
+            st.setString(1, member.getMemberID());
             
             return st.execute();
         } catch (SQLException e) {
