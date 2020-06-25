@@ -119,7 +119,7 @@ public class WorkspacePropertyDAO {
 			String sql = "Delete FROM `workspaceproperty` WHERE corporateRegistrationNumber = ?";
 			st = con.prepareStatement(sql);
 			
-			st.setString(1, workspaceproperty.getCorporateRegistrantNumber());
+			st.setString(1, workspaceproperty.getCorporateRegistrationNumber());
 			st.executeUpdate();
 			
             return true;
