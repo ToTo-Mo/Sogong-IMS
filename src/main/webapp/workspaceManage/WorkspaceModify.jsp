@@ -64,11 +64,11 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-3">
+                <div class="col-4">
                     <button type="submit" class="btn btn-secondary bg-dark">수정</button>
                 </div>
                 <div class="col-1"></div>
-                <div class="col-3">
+                <div class="col-4">
                     <button type="button" class="btn btn-secondary bg-dark" onclick='self.close()'>취소</button>
                 </div>
             </div>
