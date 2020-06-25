@@ -214,7 +214,7 @@
 
     $(function () {
 
-        $('input[id="inputDateTimeRange"]').datetimepicker({
+        $('input[id="inputDateTimeRange"]').daterangepicker({
             autoUpdateInput: false,
             timePicker: true,
             timePicker24Hour: true,
@@ -234,21 +234,5 @@
         });
 
     });
-
-    /*function enrollPopup() {
-        var url = "/paymentEnroll"
-        var name = "enroll popup"
-        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
-
-        var child = window.open(url, name, option);
-        child.focus();
-
-        child.onload = function () {
-            var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
-            child.resizeTo(wid, hei);
-        };
-    }*/
 
 </script>

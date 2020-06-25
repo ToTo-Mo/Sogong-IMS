@@ -61,6 +61,7 @@ public class PaymentHistoryLookupAction implements Action {
         if(checkOut != null) condition.put("checkOut", checkOut);
 
         if(checkIn != null) condition.put("checkIn", checkIn);
+        
         // 4. 결과를 가져옵니다. 출력의 편의성을 위해 Example[]에서 ArrayList로 변환했습니다.
         ArrayList<PaymentHistory> paymentHistories = new ArrayList<>(Arrays.asList(new PaymentHistoryDAO().lookup(condition)));
     

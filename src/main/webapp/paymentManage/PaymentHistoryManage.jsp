@@ -32,7 +32,7 @@
 
         child.onload = function () {
             var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
+            var hei = child.document.body.offsetHeight + 100;        //30 과 40은 넉넉하게 하려는 임의의 값임
 
             child.resizeTo(wid, hei);
         };
