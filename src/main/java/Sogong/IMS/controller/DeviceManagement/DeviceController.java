@@ -14,10 +14,8 @@ import Sogong.IMS.dao.MemberAuthorityGroupDAO;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
 
-@WebServlet("/facilityDeviceMangeView")
+@WebServlet("/facilityDeviceManage/*")
 public class DeviceController extends HttpServlet {
-
-
     private static final long serialVersionUID = 8559171819500212874L;
 
     HashMap<String, Action> list = null;

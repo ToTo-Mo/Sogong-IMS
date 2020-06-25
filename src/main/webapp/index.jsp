@@ -72,8 +72,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/facilityPropertyManage">
                                 시설 속성 관리
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/facilityDeviceManage">
+                                시설 장비 관리
                             </a>
                         </li>
 

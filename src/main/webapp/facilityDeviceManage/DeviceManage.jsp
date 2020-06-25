@@ -30,7 +30,7 @@
     <div class="row ml-2">
       <%-- 화면 이름 --%>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">시설 관리</h1>
+        <h1 class="h2">시설 장비 관리</h1>
       </div>
     </div>
   </main>
@@ -49,7 +49,7 @@
 
   <script>
     function enrollPopup() {
-      var url = "${pageContext.request.contextPath}/facilityEnroll"
+      var url = "${pageContext.request.contextPath}/facilityDeviceEnroll"
       var name = "enroll popup"
       var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
       var child = window.open(url, name, option);

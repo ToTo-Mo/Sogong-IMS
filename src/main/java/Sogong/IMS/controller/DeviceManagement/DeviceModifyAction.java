@@ -13,30 +13,22 @@ import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Device;
 
 public class DeviceModifyAction implements Action {
-	public void execute(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, SQLException, NamingException {
-	        try {
-	            request.setCharacterEncoding("utf-8");
-	            response.setCharacterEncoding("UTF-8");
-	            response.setContentType("text/html; charset=UTF-8");
-	        } catch (Exception e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-	        Device device = new Device(request.getParameter("DeviceID"),"test", request.getParameter("registrantID"),request.getParameter("workspaceID"),request.getParameter("instruction")
-	                ,Integer.parseInt(request.getParameter("intructionCost")));
-	        PrintWriter printWriter = response.getWriter();
-	        if(DeviceDAO.getInstance().modify(device) == true)
-	            printWriter.print("<script>alert('성공적으로 수정되었습니다')</script>");
-	        else
-	            printWriter.print("<script>alert('수정에 실패했습니다.')</script>");
-	        printWriter.print("<script>self.close()</script>");
-
-	    }
-
 		@Override
 		public void excute(HttpServletRequest request, HttpServletResponse response) {
-			// TODO Auto-generated method stub
-
+			try {
+				request.setCharacterEncoding("utf-8");
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=UTF-8");
+				Device device = new Device(request.getParameter("deviceID"),request.getParameter("facilityPropertyID"), request.getParameter("registrantID"),request.getParameter("deviceName"),request.getParameter("instruction")
+						,Integer.parseInt(request.getParameter("instructionCost")));
+				PrintWriter printWriter = response.getWriter();
+				if(DeviceDAO.getInstance().modify(device) == true)
+					printWriter.print("<script>alert('성공적으로 수정되었습니다')</script>");
+				else
+					printWriter.print("<script>alert('수정에 실패했습니다.')</script>");
+				printWriter.print("<script>self.close()</script>");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 }

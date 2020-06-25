@@ -1,6 +1,7 @@
 <%@ page import="Sogong.IMS.model.Package" %>
 <%@ page import="Sogong.IMS.dao.PackageDAO" %>
-<%@ page import="Sogong.IMS.model.Facility" %><%--
+<%@ page import="Sogong.IMS.model.Facility" %>
+<%@ page import="Sogong.IMS.model.Device" %><%--
   Created by IntelliJ IDEA.
   User: djh20
   Date: 2020-05-15
@@ -13,15 +14,15 @@
     <div class="form-inline">
         <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
             <div class="input-group-prepend">
-                <span class="input-group-text">시설 번호</span>
+                <span class="input-group-text">장비 번호</span>
             </div>
-            <input type="text" class="form-control"aria-describedby="basic-addon3" name="facilityID">
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="facilityName">
         </div>
         <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
             <div class="input-group-prepend">
-                <span class="input-group-text">시설명</span>
+                <span class="input-group-text">시설 속성 번호</span>
             </div>
-            <input type="text" class="form-control"aria-describedby="basic-addon3" name="facilityName">
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="facilityID">
         </div>
         <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
             <div class="input-group-prepend">
@@ -31,7 +32,14 @@
         </div>
         <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
             <div class="input-group-prepend">
-                <span class="input-group-text">소속 관광지ID</span>
+                <span class="input-group-text">장비명</span>
+            </div>
+            <input type="text" class="form-control"aria-describedby="basic-addon3" name="workspaceID">
+        </div>
+
+        <div class="input-group mb-sm-n3 col-2 mb-3 mr-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">도입처</span>
             </div>
             <input type="text" class="form-control"aria-describedby="basic-addon3" name="workspaceID">
         </div>
@@ -44,28 +52,32 @@
         <table class="table table-striped table-sm">
             <thead>
             <tr>
-                <th width="20%">시설 번호</th>
-                <th width="30%">시설 명</th>
-                <th width="20%">등록자ID</th>
-                <th width="20%">소속 관광지ID</th>
+                <th width="15%">장비 번호</th>
+                <th width="15%">시설 속성 번호</th>
+                <th width="15%">등록자ID</th>
+                <th width="15%">장비명</th>
+                <th width="15%">도입처</th>
+                <th width="15%">도입 비용</th>
                 <th width="5%"></th>
                 <th width="5%"></th>
             </tr>
             </thead>
             <tbody>
             <%
-                Facility[] lookupResult = request.getAttribute("lookupResult") != null ? (Facility[]) request.getAttribute("lookupResult") : null;
+                Device[] lookupResult = request.getAttribute("lookupResult") != null ? (Device[]) request.getAttribute("lookupResult") : null;
                 if(lookupResult != null) {
-                for(Facility facility : lookupResult){
-                    pageContext.setAttribute("facility", facility);
+                for(Device device : lookupResult){
+                    pageContext.setAttribute("device", device);
                     %>
                 <tr>
-                    <td>${facility.facilityID}</td>
-                    <td>${facility.facilityName}</td>
-                    <td>${facility.registrantID}</td>
-                    <td>${facility.workspaceID}</td>
-                    <td><button type='button' class='btn btn-secondary btn-sm' onclick="modifyPopup('${facility.facilityID}')">수정</button></td>
-                    <td><a class='btn btn-secondary btn-sm' href='delete.do/${facility.facilityID}'>삭제</a></td>
+                    <td>${device.deviceID}</td>
+                    <td>${device.facilityPropertyID}</td>
+                    <td>${device.registrantID}</td>
+                    <td>${device.deviceName}</td>
+                    <td>${device.instruction}</td>
+                    <td>${device.instructionCost}</td>
+                    <td><button type='button' class='btn btn-secondary btn-sm' onclick="modifyPopup('${device.deviceID}')">수정</button></td>
+                    <td><a class='btn btn-secondary btn-sm' href='delete.do/${device.deviceID}'>삭제</a></td>
                 </tr>
                 <%}}
                 %>
@@ -75,8 +87,8 @@
 </div>
 
 <script>
-    function modifyPopup(facilityID) {
-        var url = "${pageContext.request.contextPath}/facilityModify/" +facilityID;
+    function modifyPopup(deviceID) {
+        var url = "${pageContext.request.contextPath}/facilityDeviceModify/" +deviceID;
         var name = "modify popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
         var child = window.open(url, name, option);

@@ -376,6 +376,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
         <servlet-name>facilityModify</servlet-name>
         <url-pattern>/facilityModify/*</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>facilityPropertyManage</servlet-name>
         <jsp-file>/facilityPropertyManage/FacilityPropertyManage.jsp</jsp-file>
@@ -399,6 +400,31 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-mapping>
         <servlet-name>facilityPropertyModify</servlet-name>
         <url-pattern>/facilityPropertyModify/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>facilityDeviceManage</servlet-name>
+        <jsp-file>/facilityDeviceManage/DeviceManage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityDeviceManage</servlet-name>
+        <url-pattern>/facilityDeviceManage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityDeviceEnroll</servlet-name>
+        <jsp-file>/facilityDeviceManage/DeviceEnroll.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityDeviceEnroll</servlet-name>
+        <url-pattern>/facilityDeviceEnroll/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityDeviceModify</servlet-name>
+        <jsp-file>/facilityDeviceManage/DeviceModify.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityDeviceModify</servlet-name>
+        <url-pattern>/facilityDeviceModify/*</url-pattern>
     </servlet-mapping>
 <!--    시설관리 끝-->
 

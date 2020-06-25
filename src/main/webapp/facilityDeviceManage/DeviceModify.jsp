@@ -3,6 +3,8 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="Sogong.IMS.model.Facility" %>
 <%@ page import="Sogong.IMS.dao.FacilityDAO" %>
+<%@ page import="Sogong.IMS.model.Device" %>
+<%@ page import="Sogong.IMS.dao.DeviceDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -29,39 +31,38 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-    <title>시설 수정</title>
+    <title>시설 장비 수정</title>
 </head>
 <%
     String url = request.getRequestURI();
     String servletPath = request.getServletPath();
-    String facilityID = url.substring(servletPath.length()).split("/")[1];
-    System.out.println(facilityID);
+    String deviceID = url.substring(servletPath.length()).split("/")[1];
     HashMap<String,Object> conditions = new HashMap<>();
-    conditions.put("facilityID", facilityID);
-    Facility facility = FacilityDAO.getInstance().lookup(conditions)[0];
-    pageContext.setAttribute("facility", facility);
+    conditions.put("deviceID", deviceID);
+    Device device = DeviceDAO.getInstance().lookup(conditions)[0];
+    pageContext.setAttribute("device", device);
 %>
 
 <body>
 <div class="container">
     <div class="row col-auto justify-content-center mt-5">
-        <form action="${pageContext.request.contextPath}/facilityManage/modify.do" method="POST" name="form">
+        <form action="${pageContext.request.contextPath}/facilityDeviceManage/modify.do" method="POST" name="form">
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">시설 번호</span>
+                        <span class="input-group-text" id="basic-addon1">장비 번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="facilityID"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${facility.facilityID} readonly required>
+                    <input type="text" class="form-control" placeholder="입력" name="deviceID"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${device.deviceID} required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon2">시설명</span>
+                        <span class="input-group-text" id="basic-addon2">시설 속성 번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="facilityName"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${facility.facilityName} required>
+                    <input type="text" class="form-control" placeholder="입력" name="facilityPropertyID"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${device.facilityPropertyID} required>
                 </div>
             </div>
             <div class="form-group">
@@ -70,18 +71,37 @@
                         <span class="input-group-text" id="basic-addon3">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="registrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${facility.registrantID} required>
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${device.registrantID} required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon4">소속 관광지ID</span>
+                        <span class="input-group-text" id="basic-addon4">장비명</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="workspaceID"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${facility.workspaceID} required>
+                    <input type="text" class="form-control" placeholder="입력" name="deviceName"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${device.deviceName} required>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" >도입처</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="입력" name="instruction"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${device.instruction} required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" >도입 가격</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="입력" name="instructionCost"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${device.instructionCost} required>
+                </div>
+            </div>
+
             <div class="row justify-content-center">
                 <div class="col-3">
                     <button type="submit" class="btn btn-secondary bg-dark">수정</button>

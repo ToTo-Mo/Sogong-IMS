@@ -9,14 +9,14 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class Device {
-    String facilityPropertyID;
     String deviceID;
+    String facilityPropertyID;
     String registrantID;
     String deviceName;
     String instruction;
     int instructionCost;
 
-    public Device(String facilityPropertyID, String deviceID, String registrantID, String deviceName, String instruction, int instructionCost){
+    public Device(String deviceID,String facilityPropertyID , String registrantID, String deviceName, String instruction, int instructionCost){
         this.facilityPropertyID = facilityPropertyID;
         this.deviceID = deviceID;
         this.registrantID = registrantID;
