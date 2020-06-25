@@ -22,7 +22,7 @@ public class MemberModifyAction implements Action {
 		}
 
 		Member members = new Member(rq.getParameter("memberID"), rq.getParameter("memberPW"), rq.getParameter("name"),
-				rq.getParameter("phoneName"), rq.getParameter("address"), rq.getParameter("emain"),
+				rq.getParameter("phoneNumber"), rq.getParameter("address"), rq.getParameter("email"),
 				rq.getParameter("memberType"), rq.getParameter("department"), null);
 		PrintWriter printWriter;
 		try {
