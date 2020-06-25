@@ -82,7 +82,7 @@
                                 for (Workspace workspace : workspaces) {%>
 
                         <tr>
-                            <td><%=count++%></td>
+                            <td><%=++count%></td>
                             <td><%= workspace.getWorkspaceName() %></td>
 
                             <td>

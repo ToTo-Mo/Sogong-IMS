@@ -317,7 +317,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
 <servlet>
     <servlet-name>workspaceEnroll</servlet-name>
-    <jsp-file>/workspaceManage/workspaceEnroll.jsp</jsp-file>
+    <jsp-file>/workspaceManage/WorkspaceEnroll.jsp</jsp-file>
 </servlet>
 <servlet-mapping>
     <servlet-name>workspaceEnroll</servlet-name>

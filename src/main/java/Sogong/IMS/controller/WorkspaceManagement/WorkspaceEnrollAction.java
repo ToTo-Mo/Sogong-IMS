@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.WorkspaceDAO;
+import Sogong.IMS.model.Member;
 import Sogong.IMS.model.Workspace;
 
 public class WorkspaceEnrollAction implements Action {
@@ -19,7 +20,9 @@ public class WorkspaceEnrollAction implements Action {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=UTF-8");
             
-            Workspace workspace = new Workspace(request.getParameter("workspaceID"), request.getParameter("workspaceName"),"");
+
+            Member member = (Member) request.getSession().getAttribute("member");
+            Workspace workspace = new Workspace(request.getParameter("workspaceID"), request.getParameter("workspaceName"),member.getMemberID());
 
             PrintWriter printWriter = response.getWriter();
 
