@@ -7,5 +7,5 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public interface Action {
-    public void excute(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, NamingException, ClassNotFoundException;
+    public void excute(HttpServletRequest request, HttpServletResponse response);
 }
