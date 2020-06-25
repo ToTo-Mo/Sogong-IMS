@@ -13,40 +13,28 @@ import Sogong.IMS.dao.FacilityPropertyDAO;
 import Sogong.IMS.controller.Action;
 
 public class FacilityPropertyDeleteAction implements Action {
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html; charset=utf-8");
-        ServletContext context = request.getServletContext();
-        String url = request.getRequestURI();
-        String servletPath = request.getServletPath();
-        String packageID = url.substring(servletPath.length()).split("/")[2];
+    @Override
+    public void excute(HttpServletRequest request, HttpServletResponse response) {
         try {
+            request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html; charset=utf-8");
+            ServletContext context = request.getServletContext();
+            String url = request.getRequestURI();
+            String servletPath = request.getServletPath();
+            String facilityPropertyID = url.substring(servletPath.length()).split("/")[2];
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=UTF-8");
+            RequestDispatcher dispatcher = context.getRequestDispatcher("/facilityPropertyManage"); // 넘길 페이지 주소
+            dispatcher.include(request, response);
+            PrintWriter printWriter = response.getWriter();
+            if(FacilityPropertyDAO.getInstance().delete(facilityPropertyID) == true)
+                printWriter.print("<script>alert('성공적으로 삭제되었습니다')</script>");
+            else
+                printWriter.print("<script>alert('삭제에 실패했습니다.')</script>");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/packageManage"); // 넘길 페이지 주소
-        try {
-            dispatcher.include(request, response);
-            PrintWriter printWriter = response.getWriter();
-            if(FacilityPropertyDAO.getInstance().delete(Integer.parseInt(packageID)) == true)
-                printWriter.print("<script>alert('성공적으로 삭제되었습니다')</script>");
-            else
-                printWriter.print("<script>alert('삭제에 실패했습니다.')</script>");
-        } catch (ServletException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void excute(HttpServletRequest request, HttpServletResponse response) {
-        // TODO Auto-generated method stub
-
     }
 }

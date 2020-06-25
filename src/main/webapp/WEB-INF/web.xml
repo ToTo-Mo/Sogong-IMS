@@ -366,6 +366,30 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
         <servlet-name>facilityModify</servlet-name>
         <url-pattern>/facilityModify/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityPropertyManage</servlet-name>
+        <jsp-file>/facilityPropertyManage/FacilityPropertyManage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityPropertyManage</servlet-name>
+        <url-pattern>/facilityPropertyManage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityPropertyEnroll</servlet-name>
+        <jsp-file>/facilityPropertyManage/FacilityPropertyEnroll.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityPropertyEnroll</servlet-name>
+        <url-pattern>/facilityPropertyEnroll/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>facilityPropertyModify</servlet-name>
+        <jsp-file>/facilityPropertyManage/FacilityPropertyModify.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>facilityPropertyModify</servlet-name>
+        <url-pattern>/facilityPropertyModify/*</url-pattern>
+    </servlet-mapping>
 <!--    시설관리 끝-->
 
 </web-app> 

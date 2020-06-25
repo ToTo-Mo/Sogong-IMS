@@ -3,6 +3,8 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="Sogong.IMS.model.Facility" %>
 <%@ page import="Sogong.IMS.dao.FacilityDAO" %>
+<%@ page import="Sogong.IMS.model.FacilityProperty" %>
+<%@ page import="Sogong.IMS.dao.FacilityPropertyDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -34,34 +36,33 @@
 <%
     String url = request.getRequestURI();
     String servletPath = request.getServletPath();
-    String facilityID = url.substring(servletPath.length()).split("/")[1];
-    System.out.println(facilityID);
+    String facilityPropertyID = url.substring(servletPath.length()).split("/")[1];
     HashMap<String,Object> conditions = new HashMap<>();
-    conditions.put("facilityID", facilityID);
-    Facility facility = FacilityDAO.getInstance().lookup(conditions)[0];
-    pageContext.setAttribute("facility", facility);
+    conditions.put("facilityPropertyID", facilityPropertyID);
+    FacilityProperty facilityProperty = FacilityPropertyDAO.getInstance().lookup(conditions)[0];
+    pageContext.setAttribute("facilityProperty", facilityProperty);
 %>
 
 <body>
 <div class="container">
     <div class="row col-auto justify-content-center mt-5">
-        <form action="${pageContext.request.contextPath}/facilityManage/modify.do" method="POST" name="form">
+        <form action="${pageContext.request.contextPath}/facilityPropertyManage/modify.do" method="POST" name="form">
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">시설 번호</span>
+                        <span class="input-group-text" id="basic-addon1">시설 속성 번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="facilityID"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${facility.facilityID} readonly required>
+                    <input type="text" class="form-control" placeholder="입력" name="facilityPropertyID"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${facilityProperty.facilityPropertyID} readonly required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon2">시설명</span>
+                        <span class="input-group-text" id="basic-addon2">시설 번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="facilityName"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${facility.facilityName} required>
+                    <input type="text" class="form-control" placeholder="입력" name="facilityID"
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${facilityProperty.facilityID} required>
                 </div>
             </div>
             <div class="form-group">
@@ -70,16 +71,34 @@
                         <span class="input-group-text" id="basic-addon3">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="registrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${facility.registrantID} required>
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value=${facilityProperty.registrantID} required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon4">소속 관광지ID</span>
+                        <span class="input-group-text" id="basic-addon4">갸관일</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="workspaceID"
-                           aria-describedby="basic-addon1" autocomplete="off" value=${facility.workspaceID} required>
+                    <input type="date" class="form-control" placeholder="입력" name="openingDate"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${facilityProperty.openingDate} required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" >면적</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="입력" name="facilityScale"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${facilityProperty.facilityScale} required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" >시설 비용</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="입력" name="facilityCost"
+                           aria-describedby="basic-addon1" autocomplete="off" value=${facilityProperty.facilityCost} required>
                 </div>
             </div>
             <div class="row justify-content-center">

@@ -1,6 +1,7 @@
 package Sogong.IMS.model;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,11 @@ public class FacilityProperty {
     String facilityPropertyID;
     String facilityID;
     String registrantID;
-    Date openingDate;
+    LocalDate openingDate;
     int facilityScale;
     int facilityCost;
     
-    public FacilityProperty(String facilityPropertyID, String facilityID, String registrantID, Date openingDate, int facilityScale, int facilityCost){
+    public FacilityProperty(String facilityPropertyID, String facilityID, String registrantID, LocalDate openingDate, int facilityScale, int facilityCost){
         this.facilityPropertyID = facilityPropertyID;
         this.facilityID = facilityID;
         this.registrantID = registrantID;
@@ -27,8 +28,5 @@ public class FacilityProperty {
         this.facilityCost = facilityCost;
     }
 
-    public Date getOpeningDate(){
-        return openingDate;
-    }
     
 }

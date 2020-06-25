@@ -52,9 +52,8 @@ public class FacilityDAO {
             return true;
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
+            return false;
         }
-
-        return false;
     }
 
     public Facility[] lookup(HashMap<String, Object> conditions) throws SQLException, NamingException {// DB연결
@@ -119,8 +118,8 @@ public class FacilityDAO {
         }
         catch (Exception e){
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public boolean delete(String facilityID) {
@@ -138,7 +137,7 @@ public class FacilityDAO {
             return true;
         }catch (Exception e){
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }

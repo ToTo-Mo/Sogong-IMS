@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Sogong.IMS.dao.FacilityDAO;
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Facility;
+import Sogong.IMS.model.Member;
 
 public class FacilityEnrollAction implements Action {
     @Override
@@ -20,7 +21,7 @@ public class FacilityEnrollAction implements Action {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=UTF-8");
 
-            Facility facility = new Facility(request.getParameter("facilityID"), request.getParameter("registrantID"),request.getParameter("workspaceID")
+            Facility facility = new Facility(request.getParameter("facilityID"), ((Member)request.getSession().getAttribute("member")).getMemberID(),request.getParameter("workspaceID")
                     ,request.getParameter("facilityName"));
             PrintWriter printWriter = response.getWriter();
             if(FacilityDAO.getInstance().enroll(facility) == true)
@@ -29,7 +30,6 @@ public class FacilityEnrollAction implements Action {
                 printWriter.print("<script>alert('등록에 실패했습니다.')</script>");
             printWriter.print("<script>self.close()</script>");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
