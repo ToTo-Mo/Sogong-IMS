@@ -150,14 +150,9 @@ public class MemberDAO {
             Context context = new InitialContext();
             con = ((DataSource)context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
-            st = con.prepareStatement("DELETE FROM `member` WHERE `memberID`=? AND `memberPW`=? AND `name`=? AND `phoneNumber`=? AND `address`=? AND `email`=?");
+            st = con.prepareStatement("DELETE FROM `member` WHERE `memberID`=?");
             st.setString(1, m.getMemberID());
-            st.setString(2, m.getMemberPW());
-            st.setString(3, m.getName());
-            st.setString(4, m.getPhoneNumber());
-            st.setString(5, m.getAddress());
-            st.setString(6, m.getEmail());
-
+            
             return st.execute();
         } catch (SQLException e) {
             e.printStackTrace();
