@@ -8,8 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FacilityCharge {
-    private String workspaceID;
-    private String facilityID;
+    private Workspace workspaceID;
+    private Facility facilityID;
     private String chargeName;
     private int charge;
     private boolean isDiscount;

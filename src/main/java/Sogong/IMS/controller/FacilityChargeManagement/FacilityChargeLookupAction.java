@@ -22,7 +22,6 @@ public class FacilityChargeLookupAction implements Action{
         try {
             request.setCharacterEncoding("utf-8");
             response.setContentType("text/html; charset=utf-8");
-            PrintWriter out = response.getWriter();
 
             String workspaceID = request.getParameter("inputWorkspaceID");
             String facilityID =request.getParameter("inputFacilityID");
@@ -54,8 +53,6 @@ public class FacilityChargeLookupAction implements Action{
                 e.printStackTrace();
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

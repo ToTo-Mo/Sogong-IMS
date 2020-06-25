@@ -5,7 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import Sogong.IMS.controller.Action;
 import Sogong.IMS.dao.FacilityChargeDAO;
+import Sogong.IMS.model.Facility;
 import Sogong.IMS.model.FacilityCharge;
+import Sogong.IMS.model.Workspace;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -25,9 +28,9 @@ public class FacilityChargeEnrollAction implements Action{
             FacilityChargeDAO fcDAO = new FacilityChargeDAO();
 
             String resistrantID = request.getParameter("resistrantID");
-            String workspaceID = StringUtils.defaultString(request.getParameter("inputWorkspaceID"), null);
-            String facilityID = StringUtils.defaultIfBlank(request.getParameter("inputFacilityID"), null);
-            String chargeName = StringUtils.defaultIfBlank(request.getParameter("inputChargeName"), null);
+            String workspaceID = request.getParameter("inputWorkspaceID");
+            String facilityID = request.getParameter("inputFacilityID");
+            String chargeName = request.getParameter("inputChargeName");
             int charge = Integer.parseInt(request.getParameter("inputCharge"));
             float discountRate = Float.parseFloat(request.getParameter("inputDiscountRate"));
 
@@ -50,14 +53,21 @@ public class FacilityChargeEnrollAction implements Action{
                 condition.put("facilityID", facilityID);
                 condition.put("chargeName", chargeName);
 
+                // 등록 전 관광지명, 시설명, 요금명으로 이미 요금이 존재 하는지 조회
                 FacilityCharge[] result = fcDAO.lookup(condition);
 
                 if (result ==  null) {
 
                     FacilityCharge facilityCharge = new FacilityCharge();
 
-                    facilityCharge.setWorkspaceID(workspaceID);
-                    facilityCharge.setFacilityID(facilityID);
+                    Workspace workspace = new Workspace();
+                    Facility facility = new Facility();
+
+                    workspace.setWorkspaceID(workspaceID);
+                    facility.setFacilityID(facilityID);
+
+                    facilityCharge.setWorkspaceID(workspace);
+                    facilityCharge.setFacilityID(facility);
                     facilityCharge.setChargeName(chargeName);
                     facilityCharge.setCharge(charge);
                     facilityCharge.setDiscount(isDiscount);

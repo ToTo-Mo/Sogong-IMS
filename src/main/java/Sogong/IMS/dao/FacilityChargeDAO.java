@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -13,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import Sogong.IMS.model.FacilityCharge;
+import Sogong.IMS.model.Workspace;
 
 public class FacilityChargeDAO {
     public boolean enroll(FacilityCharge facilityCharge) {
@@ -32,8 +34,8 @@ public class FacilityChargeDAO {
             stmt = conn.prepareStatement(sql);
 
             // 시설ID, 요금명, 요금, 할인여부, 할인율, 등록자ID를 각 인덱스 파라미터에 등록
-            stmt.setString(1, facilityCharge.getFacilityID());
-            stmt.setString(2, facilityCharge.getWorkspaceID());
+            stmt.setString(1, facilityCharge.getFacilityID().getFacilityID());
+            stmt.setString(2, facilityCharge.getWorkspaceID().getWorkspaceID());
             stmt.setString(3, facilityCharge.getChargeName());
             stmt.setInt(4, facilityCharge.getCharge());
             stmt.setBoolean(5, facilityCharge.isDiscount());
@@ -61,14 +63,12 @@ public class FacilityChargeDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            // META-INF아래 context.xml
             Context context  = new InitialContext();
-            // DB Connection
             conn = ((DataSource) context.lookup("java:comp/env/jdbc/mysql")).getConnection();
 
             StringBuilder sqlBuilder = new StringBuilder();
 
-            sqlBuilder.append("SELECT * FROM facilitycharge");
+            sqlBuilder.append("SELECT * FROM `facilitycharge` ");
 
             if (condition.size() > 0) {
                 sqlBuilder.append("WHERE ");
@@ -77,10 +77,29 @@ public class FacilityChargeDAO {
                 // iter는 테이블 속성명이 들어있다.
                 Iterator<String> iter = condition.keySet().iterator();
 
+                // 반복자를 사용해 condition에 들어있는 key:value 값을 이용하여 sql문을 작성
                 while(iter.hasNext()) {
                     String columnName = iter.next();            // 테이블의 속성명
                     Object value = condition.get(columnName);   // 그 속성의 값
+
+                    if (value instanceof String || value instanceof Integer) {
+                        sqlBuilder.append(String.format("`%s` LIKE `%%s%%` ", columnName, (String)value));
+                    }
+
+                    if (iter.hasNext())
+                        sqlBuilder.append("AND ");
                 }
+            }
+
+            String sql = sqlBuilder.toString();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            ArrayList<FacilityCharge> facilityCharges = new ArrayList<>();
+
+            while(rs.next()) {
+
+                facilityCharges.add(FacilityCharge.builder().workspaceID((Workspace)rs.getObject("workspaceID")).facilityID(rs.getObject("facilityID")))
             }
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
@@ -106,8 +125,8 @@ public class FacilityChargeDAO {
             stmt.setInt(2, facilityCharge.getCharge());
             stmt.setBoolean(3, facilityCharge.isDiscount());
             stmt.setFloat(4, facilityCharge.getDiscountRate());
-            stmt.setString(5, facilityCharge.getWorkspaceID());
-            stmt.setString(6, facilityCharge.getFacilityID());
+            stmt.setString(5, facilityCharge.getWorkspaceID().getWorkspaceID());
+            stmt.setString(6, facilityCharge.getFacilityID().getFacilityID());
             stmt.setString(7, prevChargeName);
 
             stmt.executeUpdate();
@@ -134,8 +153,8 @@ public class FacilityChargeDAO {
 
             stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, facilityCharge.getFacilityID());
-            stmt.setString(2, facilityCharge.getWorkspaceID());
+            stmt.setString(1, facilityCharge.getFacilityID().getFacilityID());
+            stmt.setString(2, facilityCharge.getWorkspaceID().getWorkspaceID());
             stmt.setString(3, facilityCharge.getChargeName());
 
             stmt.executeUpdate();

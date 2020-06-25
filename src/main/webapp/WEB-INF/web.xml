@@ -175,8 +175,10 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
     <servlet-name>facilityChargeModify</servlet-name>
     <jsp-file>/facilitychargeManage/FacilitychargeModify.jsp</jsp-file>
 </servlet>
-    <servlet-mapping>
-        <servlet-name>facilityChargeModify</servlet-name>
-        <url-pattern>/facilityChargeModify</url-pattern>
-    </servlet-mapping>
+<servlet-mapping>
+    <servlet-name>facilityChargeModify</servlet-name>
+    <url-pattern>/facilityChargeModify</url-pattern>
+</servlet-mapping>
+<!-- 시설 요금 및 할인율 관리 끝-->
+
 </web-app> 
