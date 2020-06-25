@@ -96,7 +96,6 @@ public class FacilityChargeDAO {
             ArrayList<FacilityCharge> facilityCharges = new ArrayList<>();
 
             while(rs.next()) {
-
                 facilityCharges.add(
                    FacilityCharge.builder()
                         .workspaceID(rs.getString("workspaceID"))

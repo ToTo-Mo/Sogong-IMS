@@ -16,7 +16,6 @@ public class RefundHistoryEnrollAction implements Action {
    
     @Override
     public void excute(HttpServletRequest request, HttpServletResponse response) {
-        // TODO Auto-generated method stub
 
         try {
             request.setCharacterEncoding("utf-8");

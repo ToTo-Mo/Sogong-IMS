@@ -51,15 +51,6 @@
                     <%-- 하나의 입력 필드 입니다. --%>
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">숙박시설명</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputAccomodationID"
-                               aria-describedby="basic-addon1" autocomplete="off">
-                    </div>
-
-                    <%-- 하나의 입력 필드 입니다. --%>
-                    <div class="input-group mb-3 mr-3">
-                        <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">결제수단</span>
                         </div>
                         <input type="text" class="form-control" placeholder="입력" name="inputPaymentMethod"
@@ -91,7 +82,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">등록자</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="registrantName"
+                        <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
                                aria-describedby="basic-addon2" autocomplete="off">
                     </div>
 
@@ -142,9 +133,7 @@
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">~</span>
-                        </div>
+                     
                     </div>
 
 
@@ -158,9 +147,6 @@
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">~</span>
-                        </div>
                     </div>
 
                     <div class="input-group col-3  mb-3 mr-3">
@@ -173,9 +159,6 @@
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">~</span>
-                        </div>
                     </div>
 
 
@@ -189,9 +172,6 @@
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">~</span>
-                        </div>
                     </div>
                     <%-- 조회 버튼 --%>
                     <div class="input-group mb-3 mr-3">
@@ -200,18 +180,75 @@
                 </div>
             </form>
             <%-- 조회 필드 끝 --%>
-
         </div>
 
+        <div class="row">
 
+            <%-- 테이블 --%>
+            <!-- 테이블에 스크롤 기능을 추가하기 위해 div태그를 추가합니다. -->
+            <div style="width: 100%; height : 600px; overflow: auto">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <%-- 테이블 속성 필드의 간격을 조절하고 싶으시면 style 태그를 이용하여야 합니다.
+                              width의 합은 100%가 되도록 해주세요.--%>
+                        <tr>
+                            <th style="width : 8%">결제번호</th>
+                            <th style="width : 8%">환불번호</th>
+                            <th style="width : 8%">결제금액</th>
+                            <th style="width : 8%">환불금액</th>
+                            <th style="width : 8%">체크인</th>
+                            <th style="width : 8%">체크아웃</th>
+                            <th style="width : 8%">결제시간</th>
+                            <th style="width : 8%">환불시간</th>
+                            <th style="width : 6%">결제수단</th>
+                            <th style="width : 6%">환불수단</th>
+                            <th style="width : 8%">환불사유</th>
+                            <th style="width : 8%">등록자</th>
+                            <th style="width : 8%">고객이름</th>
+                        </tr>
+                        </thead>
 
-        <%-- 추가 버튼  justify-content-end는 요소들을 오른쪽 정렬하겠다는 의미 입니다. --%>
-        <div class="row justify-content-end">
-            <div class="col-auto">
-                <div class="input-group mb-3 mr-3">
-                    <button type="button" class="btn btn-secondary bg-dark" onclick="enrollPopup()">추가</button>
+                        <tbody>
+                        <%
+                            ArrayList<RefundHistory> refundHistories = (ArrayList<RefundHistory>) request.getAttribute("refundHistories");
+
+                            if (refundHistories != null) {
+                                for (RefundHistory refund : refundHistories) {
+                        %>
+                        <tr>
+                            <td>-</td>
+                            <td><%= refund.getPaymentHistoryID() %>
+                            </td>
+                            <td><%= refund.getRefundHistoryID() %>
+                            </td>
+                            <td><%= refund.getRefundPrice() %>
+                            </td>
+                            <td><%= refund.getRefundTime() %>
+                            </td>
+                            <td><%= refund.getRefundMethod() %>
+                            </td>
+                            <td><%= refund.getResonsRefund() %>
+                            </td>
+                            <td><%= refund.getRegistrantID() %>
+                            </td>
+
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= refund.getRefundHistoryID()%>')">수정</button>
+                                    <button type="button" class="btn btn-secondary" onclick="deleteRow('<%= refund.getRefundHistoryID()%>')">삭제</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <%
+                                }
+                            }
+                        %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            <%-- 테이블 끝 --%>
         </div>
 
 </div>
@@ -238,26 +275,10 @@
             $(this).val(picker.startDate.format('YYYY/MM/DD hh:mm') + '-' + picker.endDate.format('YYYY/MM/DD hh:mm'));
         });
 
-
         $('input[id="inputDateTimeRange"]').on('cancel.daterangepicker', function (ev, picker) {
             $(this).val('');
         });
 
     });
 
-    function enrollPopup() {
-        var url = "/refundEnroll"
-        var name = "enroll popup"
-        var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
-
-        var child = window.open(url, name, option);
-        child.focus();
-
-        child.onload = function () {
-            var wid = child.document.body.offsetWidth + 30;
-            var hei = child.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
-            child.resizeTo(wid, hei);
-        };
-    }
 </script>

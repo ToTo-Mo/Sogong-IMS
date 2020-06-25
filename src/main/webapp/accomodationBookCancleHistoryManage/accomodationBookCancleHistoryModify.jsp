@@ -3,7 +3,8 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="Sogong.IMS.model.AccomodationBookCancleHistory" %>
 <%@ page import="Sogong.IMS.dao.AccomodationBookCancleHistoryDAO" %>
-
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="Sogong.IMS.model.Member" %>
 <!DOCTYPE html>
 <html>
 
@@ -55,7 +56,7 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/accomodationBookCancleHistoryManage/modify.do method="POST">
+        <form action="${pageContext.request.contextPath}/accomodationBookCancleHistoryManage/modify.do" method="POST">
 
             <!-- 일반 텍스트 -->
             <div class="form-group">
@@ -104,10 +105,13 @@
             <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">등록자</span>
+                    <%
+                        String registrantID = ((Member)session.getAttribute("member")).getMemberID();
+                    %>
+                        <span class="input-group-text" id="basic-addon1">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=acc.getRegistrantID()%>>
+                           aria-describedby="basic-addon1" autocomplete="off" required value ="<%=registrantID%>" >
                 </div>
             </div>
 

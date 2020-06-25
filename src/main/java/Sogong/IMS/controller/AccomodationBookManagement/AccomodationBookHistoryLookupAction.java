@@ -40,15 +40,6 @@ public class AccomodationBookHistoryLookupAction implements Action {
 
        
 
-        // LocalDate[] createDate = null;
-
-        // if(dateRange != null){
-        //     createDate = new LocalDate[2];
-
-        //     createDate[0] = LocalDate.parse(dateRange.split("~")[0]);   // 시작일
-        //     createDate[1] = LocalDate.parse(dateRange.split("~")[1]);   // 종료일
-        // }
-
         // 2. 조건 검색을 위한 HashMap으로 String은 table의 column명, Object는 그 자료형이 됩니다.
         HashMap<String,Object> condition = new HashMap<>();
         

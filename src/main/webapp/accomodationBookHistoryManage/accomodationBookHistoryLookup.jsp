@@ -133,7 +133,7 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-secondary mr-2" onclick="modifyPopup('<%= acc.getAccomodationBookHistoryID()%>')">수정</button>
-                                    <button type="button" class="btn btn-secondary">삭제</button>
+                                    <button type="button" class="btn btn-secondary" onclick="deleteRow('<%= acc.getAccomodationBookHistoryID()%>')">삭제</button>
                                 </div>
                             </td>
                         </tr>
@@ -197,4 +197,19 @@
             child.resizeTo(wid, hei);
         };
     }
+
+    function deleteRow(accomodationBookHistoryID) {
+
+        var $form = $("<form></form>");
+        $form.attr("action","${pageContext.request.contextPath}/accomodationBookHistoryManage/delete.do");
+        $form.attr("method","post");
+
+        var $input = $("<input>");
+        $input.attr("name","inputAccomodationBookHistoryID");
+        $input.attr("value",accomodationBookHistoryID)
+
+        $form.append($input);
+        $('body').append($form);
+        $form.submit();
+    };
 </script>

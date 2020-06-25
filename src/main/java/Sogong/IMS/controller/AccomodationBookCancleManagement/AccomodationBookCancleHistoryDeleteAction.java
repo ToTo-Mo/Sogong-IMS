@@ -23,24 +23,16 @@ public class AccomodationBookCancleHistoryDeleteAction implements Action {
             PrintWriter out = response.getWriter();
 
             String accomodationBookCancleHistoryID = request.getParameter("inputAccomodationBookCancleHistoryID");
-            LocalDate cancleDate  = LocalDate.parse(request.getParameter("inputCancleDate"), DateTimeFormatter.ISO_DATE); //yyyy-mm-dd
-            String cancleReason  = request.getParameter("inputCancleReason");
-            String registrantID = request.getParameter("inputRegistrantID");
-            String accomodationBookHistoryID = request.getParameter("inputAccomodationBookHistoryID");
-    
+         
             
             new AccomodationBookCancleHistoryDAO().delete(
                 AccomodationBookCancleHistory.builder()
                     .accomodationBookCancleHistoryID(accomodationBookCancleHistoryID)
-                    .cancleDate(cancleDate)
-                    .cancleReason(cancleReason)
-                    .registrantID(registrantID)
-                    .accomodationBookHistoryID(accomodationBookHistoryID)
                             .build());
 
             out.println("<script>alert('성공적으로 삭제되었습니다.')</script>");
-            out.println("<script>self.close()</script>");
-            out.flush();
+            out.print(String.format("<script>location.replace('%s')</script>",request.getServletPath()));
+           
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

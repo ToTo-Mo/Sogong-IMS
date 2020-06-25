@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="Sogong.IMS.model.Member" %>
 <!DOCTYPE html>
 <html>
 
@@ -86,13 +87,16 @@
             </div>
 
              <!-- 일반 텍스트 -->
-            <div class="form-group">
+              <div class="form-group">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">등록자</span>
+                    <%
+                        String registrantID = ((Member)session.getAttribute("member")).getMemberID();
+                    %>
+                        <span class="input-group-text" id="basic-addon1">등록자ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
-                           aria-describedby="basic-addon1" autocomplete="off" required>
+                           aria-describedby="basic-addon1" autocomplete="off" required value ="<%=registrantID%>" >
                 </div>
             </div>
 

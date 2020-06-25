@@ -8,7 +8,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <title>Page Title</title>
+    <title>소공도 통합관리 시스템</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datepicker.css">
 
@@ -28,7 +28,7 @@
 
 <body class="pt-5">
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">소공도 통합관리 시스템</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">소공도 통합관리 시스템</a>
         <ul class="navbar-nav">
             <li class="nav-item text-nowrap">
                 <!-- 로그인 -->
@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/workspaceManage">
                                 사업장 관리
                             </a>
                         </li>
@@ -118,12 +118,6 @@
                                 판매 상품 실적 집계
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/exampleManage">
-                                예제 관리
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -131,19 +125,5 @@
     </div>
 
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
-
-    <!-- 등록 팝업창 -->
-    <script>
-        // Add active class to the current button (highlight it)
-        var btns = document.getElementsByClassName("nav-link");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-        }
-    </script>
 </body>
-
 </html>
