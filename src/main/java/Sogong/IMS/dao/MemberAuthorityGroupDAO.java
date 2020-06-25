@@ -146,7 +146,6 @@ public class MemberAuthorityGroupDAO {
                     memberAuthorityGroups.get(memberID).getMemberAuthorityGroups().add(
                             new MemberAuthorityGroup(rs.getInt("memberAuthorityGroupID"), authorityGroup, memberID));
                 }
-
             }
 
             Member[] members = memberAuthorityGroups.values().toArray(new Member[memberAuthorityGroups.size()]);

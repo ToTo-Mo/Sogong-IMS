@@ -35,6 +35,44 @@
             child.resizeTo(wid, hei);
         };
     }
+
+    function enrollAndSubmit(data){
+        var form = document.createElement("form");
+        var name = document.createElement("input");
+        name.setAttribute("name", "name");
+        name.setAttribute("value", data.name);
+        var memberID = document.createElement("input");
+        memberID.setAttribute("name", "memberID");
+        memberID.setAttribute("value", data.memberID);
+        var memberPW = document.createElement("input");
+        name.setAttribute("name", "memberPW");
+        name.setAttribute("value", data.memberPW);
+        var phoneNumber = document.createElement("input");
+        phoneNumber.setAttribute("name", "phoneNumber");
+        phoneNumber.setAttribute("value", data.phoneNumber);
+        var address = document.createElement("input");
+        address.setAttribute("name", "address");
+        address.setAttribute("value", data.address);
+        var button = document.createElement("input");
+        button.setAttribute("name", "enroll");
+        button.setAttribute("value", "enroll");
+        form.appendChild(name);
+        form.appendChild(memberID);
+        form.appendChild(memberPW);
+        form.appendChild(phoneNumber);
+        form.appendChild(address);
+        form.appendChild(email);
+        form.appendChild(button);
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function modifyPopup() {
+        var wid = child.document.body.offsetWidth + 30;
+        var hei = chile.document.body.offsetHeight + 40;
+
+        child.resizeTo(wid, hei);
+    }
 </script>
 </body>
 </html>

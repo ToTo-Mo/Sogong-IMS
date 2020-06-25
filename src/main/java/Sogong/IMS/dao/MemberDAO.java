@@ -37,7 +37,7 @@ public class MemberDAO {
             Context context = new InitialContext();
             con = ((DataSource) context.lookup("\"java:comp/env/jdbc/mysql\"")).getConnection();
 
-            String sql = "ISERT INTO `member` VALUES (?,?)";
+            String sql = "INSERT INTO `member` VALUES (?,?)";
             st = con.prepareStatement(sql);
 
             st.setString(1, m.getMemberID());
@@ -96,9 +96,17 @@ public class MemberDAO {
             ArrayList<Member> memList = new ArrayList<>();
 
             while(rs.next()) {
-
-
-
+            	String name = rs.getString(1);
+            	String memberID = rs.getString(2);
+            	String memberPW = rs.getString(3);
+            	String phoneNumber = rs.getString(4);
+            	String address = rs.getString(5);
+            	String email = rs.getString(6);
+            	String memberType = rs.getString(7);
+            	String department = rs.getString(8);
+            	
+            	Member m = new Member(name, memberID, memberPW, phoneNumber, address, email, memberType, department, null);
+            	memList.add(m);
             }
 
 
