@@ -71,7 +71,7 @@
     <div class="row col-auto justify-content-center mt-5">
 
         <!-- 입력 양식 -->
-        <form action="${pageContext.request.servletPath}/enroll.do" method="POST">
+        <form action="${pageContext.request.contextPath}/memberManage/modify.do" method="POST">
 
             <!-- ID 필수 입력 input tag 안에 required가 있습니다.-->
             <div class="form-group">
@@ -80,7 +80,7 @@
                         <span class="input-group-text" id="basic-addon1">회원ID</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="memberID"
-                           aria-describedby="basic-addon1" autocomplete="off" required value=<%=member.getMemberID()%>>
+                           aria-describedby="basic-addon1" autocomplete="off" readonly value="<%=member.getMemberID()%>">
                 </div>
             </div>
 
@@ -91,7 +91,7 @@
                         <span class="input-group-text" id="basic-addon2">회원PW</span>
                     </div>
                     <input type="password" class="form-control" placeholder="입력" name="memberPW"
-                           aria-describedby="basic-addon2" autocomplete="off" readonly value=<%=member.getMemberPW()%>>
+                           aria-describedby="basic-addon2" autocomplete="off" readonly value="<%=member.getMemberPW()%>">
                 </div>
             </div>
 
@@ -102,7 +102,7 @@
                         <span class="input-group-text" id="basic-addon3">성명</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="name"
-                           aria-describedby="basic-addon3" autocomplete="off" required value=<%=member.getName()%>>
+                           aria-describedby="basic-addon3" autocomplete="off" required value="<%=member.getName()%>">
                 </div>
             </div>
 
@@ -113,7 +113,7 @@
                         <span class="input-group-text" id="basic-addon4">전화번호</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="phoneNumber"
-                           aria-describedby="basic-addon4" autocomplete="off" value=<%=member.getPhoneNumber()%>>
+                           aria-describedby="basic-addon4" autocomplete="off" value="<%=member.getPhoneNumber()%>">
                 </div>
             </div>
 
@@ -124,7 +124,7 @@
                         <span class="input-group-text" id="basic-addon5">주소</span>
                     </div>
                     <input type="text" class="form-control" placeholder="입력" name="address"
-                           aria-describedby="basic-addon5" autocomplete="off" value=<%=member.getAddress()%>>
+                           aria-describedby="basic-addon5" autocomplete="off" value="<%=member.getAddress()%>">
                 </div>
             </div>
 

@@ -23,8 +23,8 @@ public class MemberEnrollAction implements Action {
 
 		// 아직 덜 추가된 부분이 있으니 나머지는 memberEnroll.jsp 에서 input태그의 name을 보시고 작성해주시면 됩니다.
 		Member member = Member.builder()
-						 .memberID(rq.getParameter("inputID"))
-						 .memberPW(rq.getParameter("inputPW"))
+						 .memberID(rq.getParameter("inputId"))
+						 .memberPW(rq.getParameter("inputPassword"))
 						 .name(rq.getParameter("inputName"))
 						 .phoneNumber(rq.getParameter("inputPhoneNumber"))
 						 .address(rq.getParameter("inputAddress"))
@@ -41,8 +41,9 @@ public class MemberEnrollAction implements Action {
 				printWriter.print("<script>alert('성공적으로 등록되었습니다')</script>");
 			} else {
 				printWriter.print("<script>alert('등록에 실패했습니다.')</script>");
-				printWriter.print("<script>self.close()</script>");
 			}
+			printWriter.print("<script>self.close()</script>");
+			printWriter.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
