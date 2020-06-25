@@ -7,9 +7,10 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class FacilityCharge {
-    private Workspace workspaceID;
-    private Facility facilityID;
+    private String workspaceID;
+    private String facilityID;
     private String chargeName;
     private int charge;
     private boolean isDiscount;

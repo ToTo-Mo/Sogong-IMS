@@ -16,12 +16,22 @@
     <title>Title</title>
 </head>
 
+<script>
+    var workspaceID = sessionStorage.getItem("workspaceID");
+    var facilityID = sessionStorage.getItem("facilityID");
+    var prevChargeName = sessionStorage.getItem("chargeName");
+</script>
+
 <body>
 
     <!-- row : 행으로 구분된 영역, justify : 가운데 정렬-->
     <div class="row col-auto justify-content-center mt-5">
         <!-- 입력 양식 -->
         <form action="${pageContext.request.servletPath}/modify.do" method="POST">
+
+            <input type="hidden" name="workspaceID" value="${workspaceID}">
+            <input type="hidden" name="facilityID" value="${facilityID}">
+            <input type="hidden" name="prevChargeName" value="${prevChargeName}">
 
             <div class="form-group">
 
@@ -30,7 +40,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fieldChargeName">요금명</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="${param.existingChargeName}"
+                    <input type="text" class="form-control" placeholder="${}"
                         name="inputChargeName" aria-describedby="fieldChargeName" autocomplete="off">
                 </div>
 
@@ -39,7 +49,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fieldCharge">요금</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="${param.existingCharge}" name="inputCharge"
+                    <input type="text" class="form-control" placeholder="" name="inputCharge"
                         aria-describedby="fieldCharge" autocomplete="off">
                 </div>
 
@@ -60,7 +70,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fieldDiscountRate">할인율</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="${param.existingDiscountRate} (소수점으로 입력)"
+                    <input type="text" class="form-control" placeholder=""
                         name="inputDiscountRate" aria-describedby="fieldDiscountRate" autocomplete="off">
                 </div>
             </div>

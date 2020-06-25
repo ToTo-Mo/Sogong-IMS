@@ -14,7 +14,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import Sogong.IMS.model.FacilityCharge;
-import Sogong.IMS.model.Workspace;
 
 public class FacilityChargeDAO {
     public boolean enroll(FacilityCharge facilityCharge) {
@@ -34,8 +33,8 @@ public class FacilityChargeDAO {
             stmt = conn.prepareStatement(sql);
 
             // 시설ID, 요금명, 요금, 할인여부, 할인율, 등록자ID를 각 인덱스 파라미터에 등록
-            stmt.setString(1, facilityCharge.getFacilityID().getFacilityID());
-            stmt.setString(2, facilityCharge.getWorkspaceID().getWorkspaceID());
+            stmt.setString(1, facilityCharge.getFacilityID());
+            stmt.setString(2, facilityCharge.getWorkspaceID());
             stmt.setString(3, facilityCharge.getChargeName());
             stmt.setInt(4, facilityCharge.getCharge());
             stmt.setBoolean(5, facilityCharge.isDiscount());
@@ -52,7 +51,6 @@ public class FacilityChargeDAO {
         return false;
     }
 
-    // TODO lookup 메소드 구현 필요
     // 관광지명, 시설명을 조건으로 해당 시설의 요금 조회
     // 추가적으로 요금명, 등록자를 추가하여 조회 가능
     public FacilityCharge[] lookup(HashMap<String, Object> condition) {
@@ -100,10 +98,20 @@ public class FacilityChargeDAO {
             while(rs.next()) {
 
                 facilityCharges.add(
-                    FacilityCharge.builder()
-                    .workspaceID((Workspace)rs.getObject("workspaceID"))
-                    .facilityID(rs.getObject("facilityID")))
+                   FacilityCharge.builder()
+                        .workspaceID(rs.getString("workspaceID"))
+                        .facilityID(rs.getString("facilityID"))
+                        .chargeName(rs.getString("chargeName"))
+                        .charge(rs.getInt("charge"))
+                        .isDiscount(rs.getBoolean("isDiscount"))
+                        .discountRate(rs.getFloat("discountRate"))
+                        .resistrantID(rs.getString("resistrantID"))
+                        .build()
+                   );
             }
+
+            return facilityCharges.toArray(new FacilityCharge[facilityCharges.size()]);
+
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
@@ -128,8 +136,8 @@ public class FacilityChargeDAO {
             stmt.setInt(2, facilityCharge.getCharge());
             stmt.setBoolean(3, facilityCharge.isDiscount());
             stmt.setFloat(4, facilityCharge.getDiscountRate());
-            stmt.setString(5, facilityCharge.getWorkspaceID().getWorkspaceID());
-            stmt.setString(6, facilityCharge.getFacilityID().getFacilityID());
+            stmt.setString(5, facilityCharge.getWorkspaceID());
+            stmt.setString(6, facilityCharge.getFacilityID());
             stmt.setString(7, prevChargeName);
 
             stmt.executeUpdate();
@@ -156,8 +164,8 @@ public class FacilityChargeDAO {
 
             stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, facilityCharge.getFacilityID().getFacilityID());
-            stmt.setString(2, facilityCharge.getWorkspaceID().getWorkspaceID());
+            stmt.setString(1, facilityCharge.getFacilityID());
+            stmt.setString(2, facilityCharge.getWorkspaceID());
             stmt.setString(3, facilityCharge.getChargeName());
 
             stmt.executeUpdate();

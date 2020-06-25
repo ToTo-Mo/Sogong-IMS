@@ -23,7 +23,6 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">시설 요금 및 할인율 관리</h1>
             </div>
-
         </div>
 
         <div class="row mb-3">
@@ -35,24 +34,22 @@
                 <div class="form-inline">
 
 
-                    <!-- 관광지 선택 -->
+                    <!-- 관광ID 입력필드 -->
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="selectedWorkspace">관광지</label>
+                            <span class="input-group-text" id="fieldWorkspaceID">관광지</span>
                         </div>
-                        <select class="custom-select" id="selectedWorkspace">
-                            <option selected>관광지 선택</option>
-                        </select>
+                        <input type="text" class="form-control" placeholder="관광지ID" name="inputWorkspaceID"
+                               aria-describedby="fieldWorkspaceID" autocomplete="off">
                     </div>
 
-                    <!-- 시설 선택 -->
+                    <!-- 시설ID 입력필드 -->
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="selectedFacility">시설</label>
+                            <span class="input-group-text" id="fieldFacilityID">시설</span>
                         </div>
-                        <select class="custom-select" id="selectedFacility">
-                            <option selected>시설 선택</option>
-                        </select>
+                        <input type="text" class="form-control" placeholder="시설ID" name="inputFacilityID"
+                               aria-describedby="fieldFacilityID" autocomplete="off">
                     </div>
                 </div>
 
@@ -70,10 +67,10 @@
                     <!-- 등록자 입력필드 -->
                     <div class="input-group mb-3 mr-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="fieldResistrant">등록자</span>
+                            <span class="input-group-text" id="fieldResistrantID">등록자ID</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="등록자" name="inputResistrant"
-                               aria-describedby="fieldResistrant" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="등록자ID" name="inputResistrantID"
+                               aria-describedby="fieldResistrantID" autocomplete="off">
                     </div>
 
                     <!-- 조회 버튼 -->
@@ -86,70 +83,66 @@
         </div>
 
         <div class="row">
+            <%-- 테이블 --%>
+            <!-- 테이블에 스크롤 기능을 추가하기 위해 div태그를 추가합니다. -->
+            <div style="width: 100%; height : 600px; overflow: auto">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <%-- 테이블 속성 필드의 간격을 조절하고 싶으시면 style 태그를 이용하여야 합니다.
+                              width의 합은 100%가 되도록 해주세요.--%>
+                        <tr>
+                            <th style="width : 5%">#</th>
+                            <th style="width : 50%">요금명</th>
+                            <th style="width : 20%">요금</th>
+                            <th style="width : 5%">할인여부</th>
+                            <th style="width : 10%">할인율</th>
+                            <th style="width : 10%">등록자</th>
+                        </tr>
+                        </thead>
 
-            <div class="row">
+                        <tbody>
+                        <%
+                            ArrayList<FacilityCharge> facilityCharges = (ArrayList<FacilityCharge>) request.getAttribute("facilityCharge");
 
-                <%-- 테이블 --%>
-                <!-- 테이블에 스크롤 기능을 추가하기 위해 div태그를 추가합니다. -->
-                <div style="width: 100%; height : 600px; overflow: auto">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                            <%-- 테이블 속성 필드의 간격을 조절하고 싶으시면 style 태그를 이용하여야 합니다.
-                                  width의 합은 100%가 되도록 해주세요.--%>
-                            <tr>
-                                <th style="width : 5%">#</th>
-                                <th style="width : 50%">요금명</th>
-                                <th style="width : 20%">요금</th>
-                                <th style="width : 5%">할인여부</th>
-                                <th style="width : 10%">할인율</th>
-                                <th style="width : 10%">등록자</th>
-                            </tr>
-                            </thead>
+                            if (facilityCharges != null) {
+                                int cnt = 0;
+                                for (FacilityCharge fc : facilityCharges) {
+                                    cnt++;
+                        %>
+                        <tr>
+                            <td><%=cnt%>
+                            </td>
+                            <td><%=fc.getChargeName() %>
+                            </td>
+                            <td><%=fc.getCharge() %>
+                            </td>
+                            <td><%=fc.isDiscount() %>
+                            </td>
+                            <td><%=fc.getDiscountRate() %>
+                            </td>
+                            <td><%=fc.getResistrantID() %>
+                            </td>
 
-                            <tbody>
-                            <%
-                                ArrayList<FacilityCharge> facilityCharges = (ArrayList<FacilityCharge>) request.getAttribute("facilityCharge");
-
-                                if (facilityCharges != null) {
-                                    int cnt = 0;
-                                    for (FacilityCharge fc : facilityCharges) {
-                                        cnt++;
-                            %>
-                            <tr>
-                                <td><%=cnt%>
-                                </td>
-                                <td><%=fc.getChargeName() %>
-                                </td>
-                                <td><%=fc.getCharge() %>
-                                </td>
-                                <td><%=fc.isDiscount() %>
-                                </td>
-                                <td><%=fc.getDiscountRate() %>
-                                </td>
-                                <td><%=fc.getResistrantID() %>
-                                </td>
-
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary mr-2"
-                                                onclick="modifyPopup()"></button>
-                                        <button type="button" class="btn btn-secondary mr-2"
-                                                onclick="deleteRow()"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <%
-                                    }
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-secondary mr-2"
+                                            onclick="modifyPopup('<%=fc.getWorkspaceID(), fc.getFacilityID(), fc.getChargeName()%>')"></button>
+                                    <button type="button" class="btn btn-secondary mr-2"
+                                            onclick="deleteRow('<%=fc.getWorkspaceID(), fc.getFacilityID(), fc.getChargeName()%>')"></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <%
                                 }
-                            %>
+                            }
+                        %>
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-                <%-- 테이블 끝 --%>
             </div>
+            <%-- 테이블 끝 --%>
         </div>
     </main>
 </div>
@@ -162,15 +155,15 @@
         form.setAttribute("method", "post");
 
         var inputWorkspaceID = document.createElement("input");
-        inputWorkspaceID.setAttribute("name", "workspaceID");
+        inputWorkspaceID.setAttribute("name", "inputWorkspaceID");
         inputWorkspaceID.setAttribute("value", workspaceID);
 
         var inputFacilityID = document.createElement("input");
-        inputFacilityID.setAttribute("name", "facilityID");
+        inputFacilityID.setAttribute("name", "inputFacilityID");
         inputFacilityID.setAttribute("value", facilityID);
 
         var inputChargeName = document.createElement("input");
-        inputChargeName.setAttribute("name", "chargeName");
+        inputChargeName.setAttribute("name", "inputChargeName");
         inputChargeName.setAttribute("value", chargeName);
 
         form.appendChild(inputWorkspaceID);
@@ -183,6 +176,10 @@
     }
 
     function modifyPopup(workspaceID, facilityID, chargeName) {
+        sessionStorage.setItem("workspaceID", workspaceID);
+        sessionStorage.setItem("facilityID", facilityID);
+        sessionStorage.setItem("chargeName", chargeName);
+
         var url = "${pageContext.request.contextPath}/facilityChargeModify";
         var name = "modify popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
