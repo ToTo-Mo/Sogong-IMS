@@ -9,7 +9,7 @@
     <title>회원조회</title>
     <script>
         function modify(memberID) {
-        var url = "${pageContext.request.contextPath}/memberManage/Membermodify?id=" +memberID;
+            var url = "${pageContext.request.contextPath}/memberModify/" +memberID;
         console.log(url);
         var name = "modify popup"
         var option = "scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=400,height=600,left=100,top=100"
@@ -145,7 +145,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify(test())" >수정</button>
+                                        <button type="button" class="btn btn-secondary mr-2" onclick = "modify('<%= m.getMemberID() %>')" >수정</button>
                                         <button type="button" class="btn btn-secondary" onclick = "remove('<%= m.getMemberID() %>')">삭제</button>
                                     </div>
                                 </td>

@@ -79,7 +79,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">회원ID</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputId"
+                    <input type="text" class="form-control" placeholder="입력" name="memberID"
                            aria-describedby="basic-addon1" autocomplete="off" required value=<%=member.getMemberID()%>>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon2">회원PW</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="입력" name="inputPassword"
+                    <input type="password" class="form-control" placeholder="입력" name="memberPW"
                            aria-describedby="basic-addon2" autocomplete="off" readonly value=<%=member.getMemberPW()%>>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">성명</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputName"
+                    <input type="text" class="form-control" placeholder="입력" name="name"
                            aria-describedby="basic-addon3" autocomplete="off" required value=<%=member.getName()%>>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon4">전화번호</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputPhoneNumber"
+                    <input type="text" class="form-control" placeholder="입력" name="phoneNumber"
                            aria-describedby="basic-addon4" autocomplete="off" value=<%=member.getPhoneNumber()%>>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon5">주소</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputAddress"
+                    <input type="text" class="form-control" placeholder="입력" name="address"
                            aria-describedby="basic-addon5" autocomplete="off" value=<%=member.getAddress()%>>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon6">이메일</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputEmail"
+                    <input type="text" class="form-control" placeholder="입력" name="email"
                            aria-describedby="basic-addon6" autocomplete="off" value=<%=member.getEmail()%>>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon7">Type</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputType"
+                    <input type="text" class="form-control" placeholder="입력" name="memberType"
                            aria-describedby="basic-addon7" autocomplete="off" required value=<%=member.getMemberType()%>>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon8">부서</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="입력" name="inputDepartment"
+                    <input type="text" class="form-control" placeholder="입력" name="department"
                            aria-describedby="basic-addon8" autocomplete="off" value=<%=member.getDepartment()%>>
                 </div>
             </div>
