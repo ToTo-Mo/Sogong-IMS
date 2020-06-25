@@ -42,10 +42,11 @@ public class WorkspacePropertyDAO {
             stmt.setString(3, workspaceproperty.getWorkspaceAddress());
             stmt.setString(4, workspaceproperty.getPhoneNum());
             stmt.setString(5, workspaceproperty.getTypeOfBusiness());
-            stmt.setInt(5, workspaceproperty.getWorkspaceMemberCount());
-            stmt.setString(6, workspaceproperty.getWorkspaceStatus());
-            stmt.setString(9, workspaceproperty.getWorkspaceName());
-
+            stmt.setInt(6, workspaceproperty.getWorkspaceMemberCount());
+            stmt.setString(7, workspaceproperty.getWorkspaceStatus());
+            stmt.setString(8, workspaceproperty.getRegistrantID());
+            stmt.setString(9, workspaceproperty.getWorkspaceID());
+            stmt.setString(10, workspaceproperty.getWorkspaceName());
 
             stmt.executeUpdate();
 
@@ -81,8 +82,10 @@ public class WorkspacePropertyDAO {
             stmt.setString(4, workspaceproperty.getTypeOfBusiness());
             stmt.setInt(5, workspaceproperty.getWorkspaceMemberCount());
             stmt.setString(6, workspaceproperty.getWorkspaceStatus());
-            stmt.setString(7, workspaceproperty.getWorkspaceID());
-            stmt.setString(8, workspaceproperty.getWorkspaceName());
+            stmt.setString(7, workspaceproperty.getRegistrantID());
+            stmt.setString(8, workspaceproperty.getWorkspaceID());
+            stmt.setString(9, workspaceproperty.getWorkspaceName());
+            stmt.setString(10, workspaceproperty.getCorporateRegistrationNumber());
             
 
             /*
