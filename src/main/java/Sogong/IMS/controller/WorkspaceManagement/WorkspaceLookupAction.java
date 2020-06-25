@@ -30,8 +30,7 @@ public class WorkspaceLookupAction implements Action {
             e1.printStackTrace();
         }
 
-        String authorityName = StringUtils.defaultIfBlank(request.getParameter("authorityName"), null);
-
+        
         String[] conditionNames = {"workspaceName"};
         HashMap<String,Object> conditions = new HashMap<>();
 
