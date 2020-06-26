@@ -3,13 +3,6 @@
 <%@ page import="Sogong.IMS.model.Member" %>
 <%@ page import="java.util.Iterator" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: bum44
-  Date: 2020-06-01
-  Time: 오후 5:34
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="container-fluid">
@@ -53,7 +46,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">결제수단</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputPaymentMethod"
+                        <input type="text" class="form-control" placeholder="입력" name="paymentMethod"
                                aria-describedby="basic-addon2" autocomplete="off">
                     </div>
 
@@ -63,7 +56,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">고객이름</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputCustomerName"
+                        <input type="text" class="form-control" placeholder="입력" name="customerName"
                                aria-describedby="basic-addon2" autocomplete="off">
                     </div>
                     
@@ -73,7 +66,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2">등록자</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="입력" name="inputRegistrantID"
+                        <input type="text" class="form-control" placeholder="입력" name="registrantID"
                                aria-describedby="basic-addon2" autocomplete="off">
                     </div>
 
@@ -87,14 +80,14 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" name="inputStartPaymentPrice" value=""
+                        <input type="text" class="form-control" name="startPaymentPrice" value=""
                                aria-describedby="basic-addon5">
 
                         <div class="input-group-prepend">
                             <span class="input-group-text">~</span>
                         </div>
 
-                        <input type="text" class="form-control" name="inputEndPaymentPrice" value="">
+                        <input type="text" class="form-control" name="endPaymentPrice" value="">
                     </div>
 
 
@@ -104,7 +97,7 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputPaymentTime"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="paymentTime"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
@@ -117,7 +110,7 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckOut"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="checkOut"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
 
@@ -130,7 +123,7 @@
                         </div>
 
                         <%--  name 태그 값은 예시닌간 다르게 사용하셔도 됩니다.   예 : inputInitPrice --%>
-                        <input type="text" class="form-control" id="inputDateTimeRange" name="inputCheckIn"
+                        <input type="text" class="form-control" id="inputDateTimeRange" name="checkIn"
                                value=""
                                aria-describedby="basic-addon4" autocomplete="off"/>
                     </div>
@@ -171,17 +164,19 @@
                             ArrayList<PaymentHistory> paymentHistories = (ArrayList<PaymentHistory>) request.getAttribute("paymentHistories");
 
                             if (paymentHistories != null) {
+                                int count = 0;
                                 for (PaymentHistory payment : paymentHistories) {
                         %>
 
                         <tr>
-                            <td>-</td>
+                            <td><%=++count%></td>
                             <td><%= payment.getPaymentHistoryID() %>
                             </td>
                             <td><%= payment.getAccomodationBookHistoryID() %>
                             </td>
                             <td><%= payment.getPrice() %>
                             </td>
+                            </td><%= payment.getCheckIn()%></td>
                             <td><%= payment.getRegistrantID() %>
                             </td>
 
