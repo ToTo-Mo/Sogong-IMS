@@ -103,7 +103,7 @@
 
                         <tbody>
                         <%
-                            ArrayList<FacilityCharge> facilityCharges = (ArrayList<FacilityCharge>) request.getAttribute("facilityCharge");
+                            ArrayList<FacilityCharge> facilityCharges = (ArrayList<FacilityCharge>) request.getAttribute("facilityCharges");
 
                             if (facilityCharges != null) {
                                 int cnt = 0;
@@ -127,9 +127,9 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-secondary mr-2"
-                                            onclick="modifyPopup('<%=fc.getWorkspaceID()%>`, `<%=fc.getFacilityID()%>`, `<%=fc.getChargeName()%>')"></button>
+                                            onclick="modifyPopup('<%=fc.getWorkspaceID()%>', '<%=fc.getFacilityID()%>', '<%=fc.getChargeName()%>')">수정</button>
                                     <button type="button" class="btn btn-secondary mr-2"
-                                            onclick="deleteRow('<%=fc.getWorkspaceID()%>`, `<%=fc.getFacilityID()%>`, `<%=fc.getChargeName()%>')"></button>
+                                            onclick="deleteRow('<%=fc.getWorkspaceID()%>', '<%=fc.getFacilityID()%>', '<%=fc.getChargeName()%>')">삭제</button>
                                 </div>
                             </td>
                         </tr>

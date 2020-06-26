@@ -175,6 +175,7 @@
                         <select class="custom-select" aria-describedby="basic-addon8" name="inputAccomodationID">
                             <option value="통나무펜션" selected>통나무펜션</option>
                             <option value="인빈관">인빈관</option>
+                            
                         </select>
                 </div>
           </div>

@@ -13,7 +13,7 @@ import Sogong.IMS.controller.Action;
 import Sogong.IMS.model.Member;
 import lombok.SneakyThrows;
 
-@WebServlet("/facilityChargeMange/*")
+@WebServlet("/facilityChargeManage/*")
 public class FacilityChargeController extends HttpServlet {
 
     private static final long serialVersionUID = 8559171819500212874L;
@@ -37,7 +37,6 @@ public class FacilityChargeController extends HttpServlet {
         String servletPath = request.getServletPath();
         String path = url.substring(servletPath.length()).split("/")[1];
 
-        
         Action action = list.get(path);
         action.excute(request, response);
     }
