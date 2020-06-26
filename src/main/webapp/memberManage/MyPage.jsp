@@ -170,7 +170,7 @@
 <script>
     function remove(memberID) {
         var $form = $("<form></form>");
-        $form.attr("action", "${pageContext.request.contextPath}/myInfo/delete.do");
+        $form.attr("action", "${pageContext.request.contextPath}/memberManage/myInfo/delete.do");
         $form.attr("method", "post");
 
         var $input = $("<input>");
