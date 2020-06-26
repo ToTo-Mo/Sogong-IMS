@@ -29,8 +29,8 @@ To change this template use File | Settings | File Templates.
     <!-- 입력 양식 -->
     <form action="${pageContext.request.servletPath}/enroll.do" method="POST">
 
-        <input type="hidden" name="workspaceID" value="${workspaceID}">
-        <input type="hidden" name="facilityID" value="${facilityID}">
+        <input type="hidden" name="workspaceID" value="$('workspaceID')">
+        <input type="hidden" name="facilityID" value="$('facilityID')">
 
         <div class="form-group">
 

@@ -29,9 +29,9 @@
         <!-- 입력 양식 -->
         <form action="${pageContext.request.servletPath}/modify.do" method="POST">
 
-            <input type="hidden" name="workspaceID" value="${workspaceID}">
-            <input type="hidden" name="facilityID" value="${facilityID}">
-            <input type="hidden" name="prevChargeName" value="${prevChargeName}">
+            <input type="hidden" name="workspaceID" value="$('workspaceID')">
+            <input type="hidden" name="facilityID" value="$('facilityID')">
+            <input type="hidden" name="prevChargeName" value="$('prevChargeName')">
 
             <div class="form-group">
 
@@ -40,7 +40,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fieldChargeName">요금명</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="${}"
+                    <input type="text" class="form-control" placeholder=""
                         name="inputChargeName" aria-describedby="fieldChargeName" autocomplete="off">
                 </div>
 

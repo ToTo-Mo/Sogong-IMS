@@ -45,7 +45,7 @@
 <!-- &zeroDateTimeBehavior=convertToNull -->
 
     <Resource maxWaitMillis="-1"
-            maxIdle="10"
+            maxIdle="20"
             maxTotal="200"
             password="tejava"
             username="admin"
