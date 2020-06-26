@@ -96,7 +96,7 @@
                         <%-- 테이블 속성 필드의 간격을 조절하고 싶으시면 style 태그를 이용하여야 합니다.
                               width의 합은 100%가 되도록 해주세요.--%>
                         <tr>
-                            <th style="width : 10%">#</th>
+                            <th style="width : 10%">no.</th>
                             <th style="width : 10%">부서</th>
                             <th style="width : 10%">ID</th>
                             <th style="width : 10%">유형</th>
@@ -110,16 +110,14 @@
                             ArrayList<Member> members = (ArrayList<Member>) request.getAttribute("members");
 
                             if (members != null) {
+                                int count = 0;
                                 for (Member m : members) {%>
 
                         <tr>
-                            <td>-</td>
-                            <td><%= m.getDepartment() %>
-                            </td>
-                            <td><%= m.getMemberID() %>
-                            </td>
-                            <td><%= m.getMemberType() %>
-                            </td>
+                            <td><%=++count%></td>
+                            <td><%= m.getDepartment() %></td>
+                            <td><%= m.getMemberID() %></td>
+                            <td><%= m.getMemberType() %></td>
 
                             <%
                                 String authorityGroups = "";
@@ -132,8 +130,7 @@
                                 }
                             %>
 
-                            <td><%=authorityGroups%>
-                            </td>
+                            <td><%=authorityGroups%></td>
 
                             <td>
                                 <div class="btn-group" role="group">
