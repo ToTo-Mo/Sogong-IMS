@@ -44,9 +44,9 @@
 
 <!-- &zeroDateTimeBehavior=convertToNull -->
 
-    <Resource maxWaitMillis="60"
-            maxIdle="10"
-            maxTotal="100"
+    <Resource maxWaitMillis="-1"
+            maxIdle="20"
+            maxTotal="200"
             password="tejava"
             username="admin"
             url="jdbc:mysql://totomo.iptime.org:3306/sogongdo?serverTimezone=UTC"
