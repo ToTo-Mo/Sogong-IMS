@@ -35,6 +35,10 @@ public class FacilityChargeController extends HttpServlet {
     @SneakyThrows
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         String url = request.getRequestURI();
         String servletPath = request.getServletPath();
         String path = url.substring(servletPath.length()).split("/")[1];
